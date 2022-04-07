@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
-import LanguageSwitcher from './LanguageSwitcher';
+// import LanguageSwitcher from './LanguageSwitcher';
 import HeaderSearch from './Search';
-import HeaderNotifications from './Notifications';
+// import HeaderNotifications from './Notifications';
 
 function HeaderButtons() {
   return (
@@ -17,7 +17,7 @@ function HeaderButtons() {
         }}
         component="span"
       >
-        <HeaderNotifications />
+        {/* <HeaderNotifications /> */}
       </Box>
       <Box
         component="span"
@@ -25,7 +25,7 @@ function HeaderButtons() {
           display: { xs: 'none', sm: 'inline-block' }
         }}
       >
-        <LanguageSwitcher />
+        {/* <LanguageSwitcher /> */}
       </Box>
     </Box>
   );

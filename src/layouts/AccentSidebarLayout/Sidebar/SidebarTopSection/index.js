@@ -16,11 +16,11 @@ import {
   styled
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
+// import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import UnfoldMoreTwoToneIcon from '@mui/icons-material/UnfoldMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+// import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -177,7 +177,7 @@ function SidebarTopSection() {
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Profile')} />
           </ListItem>
-          <ListItem
+          {/* <ListItem
             onClick={() => {
               handleClose();
             }}
@@ -202,7 +202,7 @@ function SidebarTopSection() {
           >
             <AccountTreeTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Projects')} />
-          </ListItem>
+          </ListItem> */}
         </List>
         <Divider />
         <Box m={1}>

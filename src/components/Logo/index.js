@@ -1,6 +1,6 @@
-import { Box, styled, Tooltip } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 const LogoWrapper = styled(Link)(
   ({ theme }) => `
@@ -77,28 +77,8 @@ const LogoTextWrapper = styled(Box)(
 `
 );
 
-const VersionBadge = styled(Box)(
-  ({ theme }) => `
-        background: ${theme.palette.success.main};
-        color: ${theme.palette.success.contrastText};
-        padding: ${theme.spacing(0.4, 1)};
-        border-radius: ${theme.general.borderRadiusSm};
-        text-align: center;
-        display: inline-block;
-        line-height: 1;
-        font-size: ${theme.typography.pxToRem(11)};
-`
-);
-
-const LogoText = styled(Box)(
-  ({ theme }) => `
-        font-size: ${theme.typography.pxToRem(15)};
-        font-weight: ${theme.typography.fontWeightBold};
-`
-);
-
 function Logo() {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   return (
     <LogoWrapper to="/overview">
@@ -114,10 +94,8 @@ function Logo() {
         }}
       >
         <LogoTextWrapper>
-          <Tooltip title={`${t('CallSurway')}`} arrow placement="right">
-            <VersionBadge>1</VersionBadge>
-          </Tooltip>
-          <LogoText>Callsurway</LogoText>
+          {/* <Tooltip title={`${t('Call Survey')}`} arrow placement="right"> */}
+          {/* </Tooltip> */}
         </LogoTextWrapper>
       </Box>
     </LogoWrapper>

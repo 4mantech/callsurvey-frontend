@@ -16,11 +16,11 @@ import {
   styled
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
+// import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+// import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 
 const IconButtonPrimary = styled(IconButton)(
   ({ theme }) => `
@@ -172,7 +172,7 @@ function Userbox() {
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Profile')} />
           </ListItem>
-          <ListItem
+          {/* <ListItem
             button
             onClick={() => {
               handleClose();
@@ -184,8 +184,8 @@ function Userbox() {
           >
             <InboxTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Inbox')} />
-          </ListItem>
-          <ListItem
+          </ListItem> */}
+          {/* <ListItem
             button
             onClick={() => {
               handleClose();
@@ -197,9 +197,9 @@ function Userbox() {
           >
             <AccountTreeTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Projects')} />
-          </ListItem>
+          </ListItem> */}
         </List>
-        <Divider />
+        {/* <Divider /> */}
         <Box m={1}>
           <Button color="primary" fullWidth onClick={handleLogout}>
             <LockOpenTwoToneIcon

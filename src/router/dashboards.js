@@ -19,6 +19,7 @@ const Analytics = Loader(
   lazy(() => import('src/content/dashboards/Analytics'))
 );
 const Reports = Loader(lazy(() => import('src/content/dashboards/Reports')));
+const Dashboard = Loader(lazy(() => import('src/content/dashboards/Dashboard')));
 const Banking = Loader(lazy(() => import('src/content/dashboards/Banking')));
 const Commerce = Loader(lazy(() => import('src/content/dashboards/Commerce')));
 const Expenses = Loader(lazy(() => import('src/content/dashboards/Expenses')));
@@ -58,6 +59,10 @@ const dashboardsRoutes = [
   {
     path: 'reports',
     element: <Reports />
+  },
+  {
+    path: 'dashboard',
+    element: <Dashboard />
   },
   {
     path: 'banking',

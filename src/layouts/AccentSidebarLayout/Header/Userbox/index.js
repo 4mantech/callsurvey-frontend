@@ -15,11 +15,11 @@ import {
   styled
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
+// import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+// import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -164,7 +164,7 @@ function HeaderUserbox() {
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Profile')} />
           </ListItem>
-          <ListItem
+          {/* <ListItem
             button
             onClick={() => {
               handleClose();
@@ -185,7 +185,7 @@ function HeaderUserbox() {
           >
             <AccountTreeTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Projects')} />
-          </ListItem>
+          </ListItem> */}
         </List>
         <Divider />
         <Box m={1}>

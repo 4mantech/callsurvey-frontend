@@ -30,11 +30,11 @@ function Footer() {
         >
           Crafted by{' '}
           <Link
-            href="https://bloomui.com"
+            href="https://inetworksolutions.co.th/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            intelligent solutions
+           inetwork solutions
           </Link>
         </Typography>
       </Box>

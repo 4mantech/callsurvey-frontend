@@ -80,7 +80,7 @@ function PageHeader() {
         </AvatarPageTitle>
         <Box>
           <Typography variant="h3" component="h3" gutterBottom>
-            {t('Dashboards')}
+            {t('Dashboard')}
           </Typography>
           <Typography variant="subtitle2">
             {t('Custom dashboard built using the included components')}
@@ -125,8 +125,8 @@ function PageHeader() {
             </MenuItem>
           ))}
         </Menu>
-{/* 
-        <Button variant="contained" startIcon={<DocumentScannerTwoToneIcon />}>
+
+        {/* <Button variant="contained" startIcon={<DocumentScannerTwoToneIcon />}>
           {t('Export')}
         </Button> */}
       </Box>

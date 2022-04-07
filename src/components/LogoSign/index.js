@@ -64,18 +64,18 @@ const LogoSign = styled(Box)(
 `
 );
 
-const LogoSignInner = styled(Box)(
-  ({ theme }) => `
-        width: 16px;
-        height: 16px;
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        z-index: 5;
-        border-radius: ${theme.general.borderRadiusSm};
-        background: ${theme.header.background};
-`
-);
+// const LogoSignInner = styled(Box)(
+//   ({ theme }) => `
+//         width: 16px;
+//         height: 16px;
+//         position: absolute;
+//         top: 12px;
+//         left: 12px;
+//         z-index: 5;
+//         border-radius: ${theme.general.borderRadiusSm};
+//         background: ${theme.header.background};
+// `
+// );
 
 const TooltipWrapper = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -99,7 +99,7 @@ function Logo() {
   const theme = useTheme();
 
   return (
-    <TooltipWrapper title={t('CallSurway')} arrow>
+    <TooltipWrapper title={t('Call Survey')} arrow>
       <LogoWrapper to="/overview">
         <Badge
           sx={{
@@ -112,7 +112,7 @@ function Logo() {
         >
           <LogoSignWrapper>
             <LogoSign>
-              <LogoSignInner />
+              {/* <LogoSignInner /> */}
             </LogoSign>
           </LogoSignWrapper>
         </Badge>
