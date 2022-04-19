@@ -1,6 +1,7 @@
 // import SupportTwoToneIcon from '@mui/icons-material/SupportTwoTone';
 import CallIcon from '@mui/icons-material/Call';
 import SettingsIcon from '@mui/icons-material/Settings';
+import UserIcon from '@mui/icons-material/User';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const menuItems = [
@@ -21,10 +22,6 @@ const menuItems = [
           {
             name: 'Reports',
             link: 'dashboards/reports',
-          },
-          {
-            name: 'User',
-            link: '/collapsed-sidebar/management/users/list' 
           },
         ]
       },
@@ -56,6 +53,11 @@ const menuItems = [
   {
     heading: 'Foundation',
     items: [
+      {
+        name: 'User',
+        icon: UserIcon,
+        link: '/collapsed-sidebar/management/users/list' 
+      },
       {
         name: 'Settings',
         icon: SettingsIcon,
