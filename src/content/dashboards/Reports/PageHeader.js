@@ -80,7 +80,7 @@ function PageHeader() {
         </AvatarPageTitle>
         <Box>
           <Typography variant="h3" component="h3" gutterBottom>
-            {t('Dashboards')}
+            {t('Report')}
           </Typography>
           <Typography variant="subtitle2">
             {t('Custom dashboard built using the included components')}

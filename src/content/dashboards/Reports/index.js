@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 
 import { Grid } from '@mui/material';
 
-import Block1 from 'src/content/blocks/Statistics/Block3';
+// import Block1 from 'src/content/blocks/Statistics/Block3';
 import Block2 from 'src/content/blocks/ListsLarge/Block8';
 // import Block10 from 'src/content/blocks/ListsSmall/Block7';
 // import Block11 from 'src/content/blocks/ListsSmall/Block8';
@@ -23,7 +23,7 @@ function DashboardReports() {
   return (
     <>
       <Helmet>
-        <title>Reports Dashboard</title>
+        <title>Reports</title>
       </Helmet>
       <PageTitleWrapper>
         <PageHeader />
@@ -38,9 +38,9 @@ function DashboardReports() {
         alignItems="stretch"
         spacing={4}
       >
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Block1 />
-        </Grid>
+        </Grid> */}
         <Grid item md={10} xs={12}>
           <Grid
             container
