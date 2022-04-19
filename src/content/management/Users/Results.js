@@ -189,19 +189,19 @@ const Results = ({ users }) => {
     {
       value: 'all',
       label: t('All users')
-    },
-    {
-      value: 'customer',
-      label: t('Customers')
-    },
-    {
-      value: 'admin',
-      label: t('Administrators')
-    },
-    {
-      value: 'subscriber',
-      label: t('Subscribers')
     }
+    // {
+    //   value: 'customer',
+    //   label: t('Customers')
+    // },
+    // {
+    //   value: 'admin',
+    //   label: t('Administrators')
+    // },
+    // {
+    //   value: 'subscriber',
+    //   label: t('Subscribers')
+    // }
   ];
 
   const [page, setPage] = useState(0);
@@ -340,7 +340,7 @@ const Results = ({ users }) => {
                   )
                 }}
                 onChange={handleQueryChange}
-                placeholder={t('Search by name, email or username...')}
+                placeholder={t('Search')}
                 value={query}
                 size="small"
                 fullWidth
@@ -357,14 +357,14 @@ const Results = ({ users }) => {
             <>
               <Typography
                 sx={{
-                  py: 10
+                  py: 6
                 }}
                 variant="h3"
                 fontWeight="normal"
                 color="text.secondary"
                 align="center"
               >
-                {t("We couldn't find any users matching your search criteria")}
+                {t("ไม่พบข้อมูล")}
               </Typography>
             </>
           ) : (
@@ -538,7 +538,7 @@ const Results = ({ users }) => {
                     )
                   }}
                   onChange={handleQueryChange}
-                  placeholder={t('Search by name, email or username...')}
+                  placeholder={t('Search')}
                   value={query}
                   size="small"
                   margin="normal"

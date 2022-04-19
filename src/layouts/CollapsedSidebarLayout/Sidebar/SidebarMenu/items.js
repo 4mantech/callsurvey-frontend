@@ -1,7 +1,7 @@
 // import SupportTwoToneIcon from '@mui/icons-material/SupportTwoTone';
 import CallIcon from '@mui/icons-material/Call';
 import SettingsIcon from '@mui/icons-material/Settings';
-import UserIcon from '@mui/icons-material/User';
+import GroupIcon from '@mui/icons-material/Group';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const menuItems = [
@@ -55,7 +55,7 @@ const menuItems = [
     items: [
       {
         name: 'User',
-        icon: UserIcon,
+        icon: GroupIcon,
         link: '/collapsed-sidebar/management/users/list' 
       },
       {

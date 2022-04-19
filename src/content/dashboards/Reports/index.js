@@ -5,10 +5,11 @@ import { Helmet } from 'react-helmet-async';
 import { Grid } from '@mui/material';
 
 // import Block1 from 'src/content/blocks/Statistics/Block3';
-import Block2 from 'src/content/blocks/ListsLarge/Block8';
+// import Block2 from 'src/content/blocks/ListsLarge/Block8';
 // import Block10 from 'src/content/blocks/ListsSmall/Block7';
 // import Block11 from 'src/content/blocks/ListsSmall/Block8';
 import PageHeader from './PageHeader';
+import EnhancedTable from './TableReport';
 // import Block3 from './Block3';
 // import Block4 from './Block4';
 // import Block5 from './Block5';
@@ -41,6 +42,7 @@ function DashboardReports() {
         {/* <Grid item xs={12}>
           <Block1 />
         </Grid> */}
+
         <Grid item md={10} xs={12}>
           <Grid
             container
@@ -50,7 +52,7 @@ function DashboardReports() {
             spacing={4}
           >
             <Grid item xs={12}>
-              <Block2 />
+              <EnhancedTable />
             </Grid>
             {/* <Grid item xs={12}>
               <Block4 />

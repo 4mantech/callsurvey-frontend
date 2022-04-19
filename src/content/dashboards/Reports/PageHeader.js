@@ -1,18 +1,18 @@
-import { useRef, useState } from 'react';
+// import { useRef, useState } from 'react';
 import {
   Typography,
-  Button,
+  // Button,
   Box,
   alpha,
   lighten,
   Avatar,
-  MenuItem,
-  Menu,
+  // MenuItem,
+  // Menu,
   styled
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 // import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
-import KeyboardArrowDownTwoToneIcon from '@mui/icons-material/KeyboardArrowDownTwoTone';
+// import KeyboardArrowDownTwoToneIcon from '@mui/icons-material/KeyboardArrowDownTwoTone';
 import AddAlertTwoToneIcon from '@mui/icons-material/AddAlertTwoTone';
 // import LineAxisTwoToneIcon from '@mui/icons-material/LineAxisTwoTone';
 
@@ -44,28 +44,28 @@ const AvatarPageTitle = styled(Avatar)(
 function PageHeader() {
   const { t } = useTranslation();
 
-  const periods = [
-    {
-      value: 'today',
-      text: t('Today')
-    },
-    {
-      value: 'yesterday',
-      text: t('Yesterday')
-    },
-    {
-      value: 'last_month',
-      text: t('Last month')
-    },
-    {
-      value: 'last_year',
-      text: t('Last year')
-    }
-  ];
+  // const periods = [
+  //   {
+  //     value: 'today',
+  //     text: t('Today')
+  //   },
+  //   {
+  //     value: 'yesterday',
+  //     text: t('Yesterday')
+  //   },
+  //   {
+  //     value: 'last_month',
+  //     text: t('Last month')
+  //   },
+  //   {
+  //     value: 'last_year',
+  //     text: t('Last year')
+  //   }
+  // ];
 
-  const [openPeriod, setOpenMenuPeriod] = useState(false);
-  const [period, setPeriod] = useState(periods[3].text);
-  const actionRef1 = useRef(null);
+  // const [openPeriod, setOpenMenuPeriod] = useState(false);
+  // const [period, setPeriod] = useState(periods[3].text);
+  // const actionRef1 = useRef(null);
 
   return (
     <Box
@@ -87,7 +87,7 @@ function PageHeader() {
           </Typography>
         </Box>
       </Box>
-      <Box mt={{ xs: 3, md: 0 }}>
+      {/* <Box mt={{ xs: 3, md: 0 }}>
         <Button
           variant="outlined"
           ref={actionRef1}
@@ -125,11 +125,11 @@ function PageHeader() {
             </MenuItem>
           ))}
         </Menu>
-{/* 
+
         <Button variant="contained" startIcon={<DocumentScannerTwoToneIcon />}>
           {t('Export')}
-        </Button> */}
-      </Box>
+        </Button>
+      </Box> */}
     </Box>
   );
 }

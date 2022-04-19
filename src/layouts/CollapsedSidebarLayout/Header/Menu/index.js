@@ -11,7 +11,7 @@ import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { NavLink, useLocation } from 'react-router-dom';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+// import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 
 const ListWrapper = styled(Box)(
   ({ theme }) => `
@@ -71,9 +71,9 @@ function HeaderMenu() {
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -94,7 +94,7 @@ function HeaderMenu() {
               primary={t('Users')}
             />
           </ListItem>
-          <ListItem
+          {/* <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={NavLink}
@@ -104,14 +104,14 @@ function HeaderMenu() {
               primaryTypographyProps={{ noWrap: true }}
               primary={t('Banking')}
             />
-          </ListItem>
-          <ListItem
+          </ListItem> */}
+          {/* <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
             ref={ref}
             onClick={handleOpen}
-          >
-            <ListItemText
+          > */}
+            {/* <ListItemText
               primaryTypographyProps={{ noWrap: true }}
               primary={
                 <Box display="flex" alignItems="center">
@@ -121,8 +121,8 @@ function HeaderMenu() {
                   </Box>
                 </Box>
               }
-            />
-          </ListItem>
+            /> */}
+          {/* </ListItem> */}
         </List>
       </ListWrapper>
       <Menu
