@@ -22,30 +22,34 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
-function createData(name, calories, fat, carbs, protein) {
+function createData(dnis, datetimes, callerid, agentid, agentname, did, score1, score2, score3) {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    dnis,
+    datetimes,
+    callerid,
+    agentid,
+    agentname,
+    did,
+    score1,
+    score2,
+    score3
   };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
+  createData('0000', 2022/3/25, '0967276523', 2000, 'สุวรรณ', '022047983', 2, 2, 2),
+  createData('0000', 2022/3/25, '0967276523', 2001, 'สุวรรณ', '022047983', 1, 2, 2),
+  createData('0001', 2022/3/25, '0967276523', 2001, 'สุวรรณ', '022047983', 2, 2, 2),
+  createData('0000', 2022/3/25, '0967276523', 2001, 'สุวรรณ', '022047983', 4, 2, 2),
+  createData('0000', 2022/3/25, '0967276523', 2001, 'สุวรรณ', '022047983', 4, 2, 2),
+  createData('0001', 2022/3/25, '0967276523', 2002, 'สุวรรณ', '022047983', 4, 2, 2),
+  createData('0001', 2022/3/25, '0967276523', 2001, 'สุวรรณ', '022047983', 1, 2, 2),
+  createData('0000', 2022/3/25, '0967276523', 2008, 'สุวรรณ', '022047983', 4, 2, 2),
+  createData('0000', 2022/3/25, '0967276523', 2001, 'สุวรรณ', '022047983', 3, 2, 2),
+  createData('0000', 2022/3/25, '0967276523', 2001, 'สุวรรณ', '022047983', 2, 2, 2),
+  createData('0001', 2022/3/25, '0967276523', 2002, 'สุวรรณ', '022047983', 2, 2, 2),
+  createData('0000', 2022/3/25, '0967276523', 2003, 'สุวรรณ', '022047983', 4, 2, 2),
+  createData('0000', 2022/3/25, '0967276523', 2001, 'สุวรรณ', '022047983', 1, 2, 2),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -80,34 +84,55 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'dnis',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'dnis',
   },
   {
-    id: 'calories',
+    id: 'datetimes',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: 'datetimes',
   },
   {
-    id: 'fat',
+    id: 'callerid',
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: 'callerid',
   },
   {
-    id: 'carbs',
+    id: 'agentid',
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: 'agentid',
   },
   {
-    id: 'protein',
+    id: 'agentname',
     numeric: true,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: 'agentname',
+  },
+  {
+    id: 'did',
+    numeric: true,
+    disablePadding: false,
+    label: 'did',
+  },{
+    id: 'score1',
+    numeric: true,
+    disablePadding: false,
+    label: 'score1',
+  },{
+    id: 'score2',
+    numeric: true,
+    disablePadding: false,
+    label: 'score2',
+  },{
+    id: 'score3',
+    numeric: true,
+    disablePadding: false,
+    label: 'score3',
   },
 ];
 
@@ -192,12 +217,12 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: '1 1 120%' }}
           variant="h6"
           id="tableTitle"
           component="div"
         >
-          test
+          Report
         </Typography>
       )}
 
