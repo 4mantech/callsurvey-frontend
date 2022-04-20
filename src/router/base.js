@@ -12,7 +12,7 @@ const Loader = (Component) => (props) =>
 
 // Pages
 
-const Overview = Loader(lazy(() => import('src/content/overview')));
+// const Overview = Loader(lazy(() => import('src/content/overview')));
 
 // Status
 
@@ -28,11 +28,13 @@ const StatusComingSoon = Loader(
 const StatusMaintenance = Loader(
   lazy(() => import('src/content/pages/Status/Maintenance'))
 );
+// http://localhost:3000/collapsed-sidebar/dashboards
+
 
 const baseRoutes = [
   {
     path: '/',
-    element: <Overview />
+    element: <Navigate to="/collapsed-sidebar/dashboards" replace />
   },
   {
     path: 'overview',

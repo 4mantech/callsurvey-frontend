@@ -145,7 +145,7 @@ const LoginJWT = () => {
             size="large"
             variant="contained"
             >
-            {t('Sign in ครับ')}
+            {t('Sign In')}
           </Button>
         </form>
       )}

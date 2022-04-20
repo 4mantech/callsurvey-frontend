@@ -3,10 +3,10 @@ import {
   Box,
   Card,
   Link,
-  Tooltip,
+  // Tooltip,
   Typography,
   Container,
-  Alert,
+  // Alert,
   styled
 } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
@@ -92,7 +92,7 @@ function LoginCover() {
   return (
     <>
       <Helmet>
-        <title>Login - Cover</title>
+        <title>Login</title>
       </Helmet>
       <Content>
         <MainContent>
@@ -117,7 +117,7 @@ function LoginCover() {
                     mb: 1
                   }}
                 >
-                  {t('CALL SURVEY BY 4MANTECH')}
+                  {t('CALL SURWAY')}
                 </Typography>
                 <Typography
                   variant="h4"
@@ -127,7 +127,7 @@ function LoginCover() {
                     mb: 3
                   }}
                 >
-                  {t('กรุณากรอกข้อมูลนะคะ')}
+                  {t('กรุณากรอกข้อมูล')}
                 </Typography>
               </Box>
               {method === 'Auth0' && <Auth0Login />}
@@ -141,13 +141,13 @@ function LoginCover() {
                   color="text.primary"
                   fontWeight="bold"
                 >
-                  {t('Don’t have an account, yet? halo')}
+                  {t('Don’t have an account, yet? luuu')}
                 </Typography>{' '}
                 <Link component={RouterLink} to="/account/register">
                   <b>Sign up here</b>
                 </Link>
               </Box>
-              {method !== 'Auth0' && (
+              {/* {method !== 'Auth0' && (
                 <Tooltip
                   title={t('Used only for the live preview demonstration!')}
                 >
@@ -155,7 +155,7 @@ function LoginCover() {
                     Use <b>demo@example.com</b> and password <b>TokyoPass1@</b>
                   </Alert>
                 </Tooltip>
-              )}
+              )} */}
             </Card>
           </Container>
         </MainContent>

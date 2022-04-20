@@ -1,6 +1,6 @@
 // import SupportTwoToneIcon from '@mui/icons-material/SupportTwoTone';
 import CallIcon from '@mui/icons-material/Call';
-import SettingsIcon from '@mui/icons-material/Settings';
+// import SettingsIcon from '@mui/icons-material/Settings';
 import GroupIcon from '@mui/icons-material/Group';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
@@ -9,12 +9,11 @@ const menuItems = [
     heading: 'General',
     items: [
       {
-        name: 'Call Survey',
+        name: 'Call Surwey',
         icon: CallIcon,
         badge: '',
         link: '/collapsed-sidebar/blocks',
         items: [
-      
           {
             name: 'Dashboard',
             link: 'dashboards/dashboard'
@@ -53,16 +52,18 @@ const menuItems = [
   {
     heading: 'Foundation',
     items: [
-      {
-        name: 'User',
+       {
+
+        name: 'Call Surwey',
         icon: GroupIcon,
-        link: '/collapsed-sidebar/management/users/list' 
+        // badge: '',
+        link: '/collapsed-sidebar/management/users/list',
+
+        // name: 'User',
+        // icon: GroupIcon,
+        // link: '/collapsed-sidebar/management/users/list' 
       },
-      {
-        name: 'Settings',
-        icon: SettingsIcon,
-        link: '/collapsed-sidebar/management/projects/list'
-      }
+      
     ]
   }
 ];

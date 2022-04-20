@@ -12,9 +12,9 @@ import {
   Tooltip,
   styled
 } from '@mui/material';
-import Text from 'src/components/Text';
+// import Text from 'src/components/Text';
 
-import WarningTwoToneIcon from '@mui/icons-material/WarningTwoTone';
+// import WarningTwoToneIcon from '@mui/icons-material/WarningTwoTone';
 import internationalization from 'src/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 
@@ -24,6 +24,7 @@ import esFlag from 'country-flag-icons/3x2/ES.svg';
 import frFlag from 'country-flag-icons/3x2/FR.svg';
 import cnFlag from 'country-flag-icons/3x2/CN.svg';
 import aeFlag from 'country-flag-icons/3x2/AE.svg';
+import thFlag from 'country-flag-icons/3x2/TH.svg';
 
 const SectionHeading = styled(Typography)(
   ({ theme }) => `
@@ -82,6 +83,8 @@ function LanguageSwitcher() {
           {getLanguage === 'fr' && <ImageWrapper alt="French" src={frFlag} />}
           {getLanguage === 'cn' && <ImageWrapper alt="Chinese" src={cnFlag} />}
           {getLanguage === 'ae' && <ImageWrapper alt="Arabic" src={aeFlag} />}
+          {getLanguage === 'th' && <ImageWrapper alt="Thai" src={thFlag} />}
+
         </IconButtonWrapper>
       </Tooltip>
       <Popover
@@ -131,6 +134,25 @@ function LanguageSwitcher() {
               />
             </ListItem>
             <ListItem
+              className={getLanguage === 'th' ? 'active' : ''}
+              button
+              onClick={() => {
+                switchLanguage({ lng: 'th' });
+                handleClose();
+              }}
+            >
+              <ImageWrapper alt="ไทย" src={thFlag} />
+              <ListItemText
+                sx={{
+                  pl: 1
+                }}
+                primary="ไทย"
+              />
+            </ListItem>
+
+            
+
+            {/* <ListItem
               className={getLanguage === 'de' ? 'active' : ''}
               button
               onClick={() => {
@@ -209,10 +231,10 @@ function LanguageSwitcher() {
                 }}
                 primary="Arabic"
               />
-            </ListItem>
+            </ListItem> */}
           </List>
           <Divider />
-          <Text color="warning">
+          {/* <Text color="warning">
             <Box
               p={2}
               sx={{
@@ -227,7 +249,7 @@ function LanguageSwitcher() {
                 !
               </Typography>
             </Box>
-          </Text>
+          </Text> */}
         </Box>
       </Popover>
     </>
