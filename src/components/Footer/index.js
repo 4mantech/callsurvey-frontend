@@ -19,7 +19,14 @@ function Footer() {
       >
         <Box>
           <Typography variant="subtitle1">
-            &copy; 2022 - inetwork solutions
+            &copy; Copyright © 2021 | Powered by  {' '}
+            <Link
+            href="https://inetworksolutions.co.th/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+           intelligent networksolutions co.,ltd
+          </Link>
           </Typography>
         </Box>
         <Typography
@@ -28,13 +35,13 @@ function Footer() {
           }}
           variant="subtitle1"
         >
-          Crafted by{' '}
+          Design by{' '}
           <Link
-            href="https://inetworksolutions.co.th/"
+            href="https://www.3cxcustomize.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-           inetwork solutions
+           3cxCustomize
           </Link>
         </Typography>
       </Box>

@@ -49,7 +49,7 @@ function Sidebar() {
         }}
       >
         <TopSection>
-          <Logo />
+          {/* <Logo /> */}
         </TopSection>
         <Box
           sx={{

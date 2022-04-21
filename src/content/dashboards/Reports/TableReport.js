@@ -368,10 +368,10 @@ export default function EnhancedTable() {
         <TableCell align="center">{row.callerid}</TableCell>
         <TableCell align="center">{row.agentid}</TableCell>
         <TableCell align="center">{row.agentname}</TableCell>
-        <TableCell align="center">{row.did}</TableCell>
-        <TableCell align="center">{row.score1}</TableCell>
-        <TableCell align="center">{row.score2}</TableCell>
-        <TableCell align="center">{row.score3}</TableCell>
+        <TableCell align="center">{row.did ? row.did:"-"}</TableCell>
+        <TableCell align="center">{row.score1 ? row.score1:"-"}</TableCell>
+        <TableCell align="center">{row.score2 ? row.score2:"-"}</TableCell>
+        <TableCell align="center">{row.score3 ? row.score3:"-"}</TableCell>
       </TableRow>
     ))};
   </TableBody>

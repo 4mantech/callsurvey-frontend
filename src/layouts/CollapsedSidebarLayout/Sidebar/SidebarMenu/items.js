@@ -1,6 +1,6 @@
 // import SupportTwoToneIcon from '@mui/icons-material/SupportTwoTone';
 import CallIcon from '@mui/icons-material/Call';
-// import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from '@mui/icons-material/Settings';
 import GroupIcon from '@mui/icons-material/Group';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
@@ -54,14 +54,18 @@ const menuItems = [
     items: [
        {
 
-        name: 'Call Surwey',
-        icon: GroupIcon,
+        name: 'Setting',
+        icon: SettingsIcon,
         // badge: '',
-        link: '/collapsed-sidebar/management/users/list',
-
-        // name: 'User',
-        // icon: GroupIcon,
-        // link: '/collapsed-sidebar/management/users/list' 
+        link: '/collapsed-sidebar/blocks',
+        items: [
+          {
+            name: 'User',
+            icon: GroupIcon,
+            link: '/collapsed-sidebar/management/users/list' 
+          }
+          
+        ]
       },
       
     ]

@@ -40,7 +40,7 @@ function DashboardReports() {
         spacing={4}
       >
         {/* <Grid item xs={12}>
-          <Block1 />
+          <EnhancedTable />
         </Grid> */}
 
         <Grid item md={10} xs={12}>

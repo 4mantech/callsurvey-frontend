@@ -119,7 +119,7 @@ function Block3() {
               variant="subtitle2"
               component="div"
             >
-              {t('Total Good')}
+              {t('Score 1')}
             </Typography>
           </Box>
           <Box
@@ -183,7 +183,7 @@ function Block3() {
               variant="subtitle2"
               component="div"
             >
-              {t('Total Bad')}
+              {t('Score 2')}
             </Typography>
           </Box>
           <Box
@@ -247,7 +247,7 @@ function Block3() {
               variant="subtitle2"
               component="div"
             >
-              {t('Not Score')}
+              {t('Score 3')}
             </Typography>
           </Box>
           <Box
