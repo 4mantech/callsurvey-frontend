@@ -82,9 +82,6 @@ function PageHeader() {
           <Typography variant="h3" component="h3" gutterBottom>
             {t('Dashboard')}
           </Typography>
-          <Typography variant="subtitle2">
-            {t('Custom dashboard built using the included components')}
-          </Typography>
         </Box>
       </Box>
       <Box mt={{ xs: 3, md: 0 }}>
