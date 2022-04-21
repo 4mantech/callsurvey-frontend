@@ -278,7 +278,7 @@ const Results = ({ users }) => {
   const handleDeleteCompleted = () => {
     setOpenConfirmDelete(false);
 
-    enqueueSnackbar(t('The user account has been removed'), {
+    enqueueSnackbar(t('ลบผู้ใช้งาน เรียบร้อย'), {
       variant: 'success',
       anchorOrigin: {
         vertical: 'top',
