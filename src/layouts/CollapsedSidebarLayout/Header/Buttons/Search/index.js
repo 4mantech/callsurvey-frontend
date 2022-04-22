@@ -1,19 +1,19 @@
 import { Fragment, forwardRef, useState } from 'react';
 import {
-  Link,
+  // Link,
   Box,
   Divider,
   IconButton,
-  List,
+  // List,
   CircularProgress,
-  ListItem,
-  Grid,
+  // ListItem,
+  // Grid,
   InputBase,
   Tooltip,
   Typography,
   Card,
   Dialog,
-  alpha,
+  // alpha,
   Slide,
   styled,
   useTheme
@@ -22,13 +22,13 @@ import {
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import { useTranslation } from 'react-i18next';
 import ContactSupportTwoToneIcon from '@mui/icons-material/ContactSupportTwoTone';
-import Scrollbar from 'src/components/Scrollbar';
-import RestoreTwoToneIcon from '@mui/icons-material/RestoreTwoTone';
-import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
-import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
-import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
-import AppSettingsAltTwoToneIcon from '@mui/icons-material/AppSettingsAltTwoTone';
-import KeyboardArrowRightTwoToneIcon from '@mui/icons-material/KeyboardArrowRightTwoTone';
+// import Scrollbar from 'src/components/Scrollbar';
+// import RestoreTwoToneIcon from '@mui/icons-material/RestoreTwoTone';
+// import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
+// import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
+// import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
+// import AppSettingsAltTwoToneIcon from '@mui/icons-material/AppSettingsAltTwoTone';
+// import KeyboardArrowRightTwoToneIcon from '@mui/icons-material/KeyboardArrowRightTwoTone';
 
 const wait = (time) => new Promise((res) => setTimeout(res, time));
 
@@ -63,72 +63,72 @@ const IconButtonWrapper = styled(IconButton)(
 `
 );
 
-const ListButton = styled(Box)(
-  ({ theme }) => `
-      background-color: transparent;
-      color:  ${theme.colors.alpha.black[100]};
-      transition: ${theme.transitions.create(['all'])};
-      border: ${theme.colors.alpha.black[10]} solid 1px;
-      border-radius: ${theme.general.borderRadius};
-      padding: ${theme.spacing(1)};
-      margin: ${theme.spacing(1, 0)};
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+// const ListButton = styled(Box)(
+//   ({ theme }) => `
+//       background-color: transparent;
+//       color:  ${theme.colors.alpha.black[100]};
+//       transition: ${theme.transitions.create(['all'])};
+//       border: ${theme.colors.alpha.black[10]} solid 1px;
+//       border-radius: ${theme.general.borderRadius};
+//       padding: ${theme.spacing(1)};
+//       margin: ${theme.spacing(1, 0)};
+//       cursor: pointer;
+//       display: flex;
+//       align-items: center;
+//       justify-content: space-between;
 
-      & > div > .MuiSvgIcon-root {
-        color:  ${theme.colors.alpha.black[50]};
-        transition: ${theme.transitions.create(['all'])};
-      }
+//       & > div > .MuiSvgIcon-root {
+//         color:  ${theme.colors.alpha.black[50]};
+//         transition: ${theme.transitions.create(['all'])};
+//       }
 
-      &:hover {
-        background-color: ${alpha(theme.colors.primary.main, 0.08)};
-        color:  ${theme.colors.primary.main};
-        border-color: ${alpha(theme.colors.primary.main, 0.3)};
+//       &:hover {
+//         background-color: ${alpha(theme.colors.primary.main, 0.08)};
+//         color:  ${theme.colors.primary.main};
+//         border-color: ${alpha(theme.colors.primary.main, 0.3)};
 
-        & > div > .MuiSvgIcon-root {
-          color:  ${theme.colors.primary.main};
-        }
-      }
-`
-);
+//         & > div > .MuiSvgIcon-root {
+//           color:  ${theme.colors.primary.main};
+//         }
+//       }
+// `
+// );
 
-const searchTerms = {
-  Dashboards: [
-    {
-      title: 'Automation UI'
-    },
-    {
-      title: 'Banking Performance'
-    },
-    {
-      title: 'Fitness Statistics'
-    }
-  ],
-  Applications: [
-    {
-      title: 'Events Manager'
-    },
-    {
-      title: 'Messenging Platform'
-    }
-  ],
-  Management: [
-    {
-      title: 'Products Admin'
-    },
-    {
-      title: 'Customers Database'
-    },
-    {
-      title: 'Learning Center'
-    },
-    {
-      title: 'Invoices Archive'
-    }
-  ]
-};
+// const searchTerms = {
+//   Dashboards: [
+//     {
+//       title: 'Automation UI'
+//     },
+//     {
+//       title: 'Banking Performance'
+//     },
+//     {
+//       title: 'Fitness Statistics'
+//     }
+//   ],
+//   Applications: [
+//     {
+//       title: 'Events Manager'
+//     },
+//     {
+//       title: 'Messenging Platform'
+//     }
+//   ],
+//   Management: [
+//     {
+//       title: 'Products Admin'
+//     },
+//     {
+//       title: 'Customers Database'
+//     },
+//     {
+//       title: 'Learning Center'
+//     },
+//     {
+//       title: 'Invoices Archive'
+//     }
+//   ]
+// };
 
 function HeaderSearch() {
   const { t } = useTranslation();
@@ -273,10 +273,10 @@ function HeaderSearch() {
             {searchResults ? (
               <Box
                 sx={{
-                  height: 450
+                  height: 250
                 }}
               >
-                <Scrollbar>
+                {/* <Scrollbar>
                   {Object.keys(searchTerms).map((type, index) => (
                     <Box px={2} py={1} key={index}>
                       <Typography
@@ -305,7 +305,7 @@ function HeaderSearch() {
                       ))}
                     </Box>
                   ))}
-                </Scrollbar>
+                </Scrollbar> */}
               </Box>
             ) : (
               <Box
@@ -313,7 +313,7 @@ function HeaderSearch() {
                   height: 450
                 }}
               >
-                <Scrollbar>
+                {/* <Scrollbar>
                   <Box pb={2} px={2}>
                     <Typography
                       sx={{
@@ -555,7 +555,7 @@ function HeaderSearch() {
                       </Grid>
                     </Box>
                   </Box>
-                </Scrollbar>
+                </Scrollbar> */}
               </Box>
             )}
           </>

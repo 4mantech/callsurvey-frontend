@@ -141,7 +141,7 @@ function LoginCover() {
                   color="text.primary"
                   fontWeight="bold"
                 >
-                  {t('Don’t have an account, yet? luuu')}
+                  {t('Don’t have an account, yet?')}
                 </Typography>{' '}
                 <Link component={RouterLink} to="/account/register">
                   <b>Sign up here</b>

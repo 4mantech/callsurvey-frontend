@@ -2,12 +2,12 @@ import { useContext, useRef, useState } from 'react';
 import {
   Popover,
   styled,
-  Button,
-  MenuItem,
-  Menu,
+  // Button,
+  // MenuItem,
+  // Menu,
   Typography,
   Stack,
-  Divider,
+  // Divider,
   Box,
   Tooltip
 } from '@mui/material';
@@ -16,8 +16,8 @@ import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import Fab from '@mui/material/Fab';
 import { useTranslation } from 'react-i18next';
-import UnfoldMoreTwoToneIcon from '@mui/icons-material/UnfoldMoreTwoTone';
-import { NavLink } from 'react-router-dom';
+// import UnfoldMoreTwoToneIcon from '@mui/icons-material/UnfoldMoreTwoTone';
+// import { NavLink } from 'react-router-dom';
 
 const ThemeSettingsButton = styled(Box)(
   ({ theme }) => `
@@ -220,14 +220,14 @@ const ThemeSettings = () => {
     setThemeName(theme);
   };
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const openMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const closeMenu = () => {
-    setAnchorEl(null);
-  };
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const open = Boolean(anchorEl);
+  // const openMenu = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const closeMenu = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
     <>
@@ -251,7 +251,7 @@ const ThemeSettings = () => {
             horizontal: 'right'
           }}
         >
-          <Box p={2}>
+          {/* <Box p={2}>
             <Typography
               sx={{
                 mb: 2,
@@ -354,7 +354,7 @@ const ThemeSettings = () => {
               </MenuItem>
             </Menu>
           </Box>
-          <Divider />
+          <Divider /> */}
           <ThemeToggleWrapper>
             <Typography
               sx={{

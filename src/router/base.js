@@ -34,6 +34,7 @@ const StatusMaintenance = Loader(
 const baseRoutes = [
   {
     path: '/',
+    // element: <Overview/>
     element: <Navigate to="/collapsed-sidebar/dashboards" replace />
   },
   {

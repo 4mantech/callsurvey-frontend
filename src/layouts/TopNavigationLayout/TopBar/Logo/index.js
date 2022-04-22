@@ -80,7 +80,7 @@ function Logo() {
       <Tooltip
         arrow
         placement="right"
-        title="Tokyo White React Javascript Admin Dashboard"
+        title="Call Surway"
       >
         <LogoSignWrapper>
           <LogoSign>

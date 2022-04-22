@@ -34,7 +34,7 @@ function Overview() {
   return (
     <OverviewWrapper>
       <Helmet>
-        <title>Tokyo White React Javascript Admin Dashboard</title>
+        <title>Call Surway</title>
       </Helmet>
       <HeaderWrapper>
         <Container maxWidth="lg">

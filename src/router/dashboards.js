@@ -46,7 +46,7 @@ const Tasks = Loader(lazy(() => import('src/content/dashboards/Tasks')));
 const dashboardsRoutes = [
   {
     path: '/',
-    element: <Navigate to="reports" replace />
+    element: <Navigate to="dashboard" replace />
   },
   {
     path: 'automation',
