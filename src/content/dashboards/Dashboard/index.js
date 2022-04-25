@@ -21,6 +21,12 @@ import Block1 from './totalScore';
 // import Block13 from './Block13';
 
 function DashboardReports() {
+  const data = {
+    "totalDay":594,
+    "score1": 50,
+    "score2": 20,
+    "score3": 70
+  };
   return (
     <>
       <Helmet>
@@ -40,7 +46,7 @@ function DashboardReports() {
         spacing={4}
       >
         <Grid item xs={12}>
-          <Block1 />
+          <Block1 data={data}/>
         </Grid>
         <Grid item md={10} xs={12}>
           <Grid

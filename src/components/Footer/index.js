@@ -19,7 +19,7 @@ function Footer() {
       >
         <Box>
           <Typography variant="subtitle1">
-            &copy; Copyright © 2021 | Powered by  {' '}
+            Copyright © 2022 | Powered by  {' '}
             <Link
             href="https://inetworksolutions.co.th/"
             target="_blank"

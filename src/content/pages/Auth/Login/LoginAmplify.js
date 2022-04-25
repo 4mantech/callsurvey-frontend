@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 import { Formik } from 'formik';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
 
 import {
   Box,
@@ -10,7 +10,7 @@ import {
   TextField,
   Checkbox,
   Typography,
-  Link,
+  // Link,
   FormControlLabel,
   CircularProgress
 } from '@mui/material';
@@ -117,18 +117,15 @@ const LoginAmplify = () => {
               label={
                 <>
                   <Typography variant="body2">
-                    {t('I accept the')}{' '}
-                    <Link component="a" href="#">
-                      {t('terms and conditions')}
-                    </Link>
+                    {t('I accept the terms and conditions')}{' '}
                     .
                   </Typography>
                 </>
               }
             />
-            <Link component={RouterLink} to="/account/recover-password">
+            {/* <Link component={RouterLink} to="/account/recover-password">
               <b>{t('Lost password?')}</b>
-            </Link>
+            </Link> */}
           </Box>
 
           {Boolean(touched.terms && errors.terms) && (
@@ -147,7 +144,7 @@ const LoginAmplify = () => {
             size="large"
             variant="contained"
           >
-            {t('Sign in นะไอโง่')}
+            {t('Sign in')}
           </Button>
         </form>
       )}

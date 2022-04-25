@@ -178,7 +178,7 @@ function LoginFirebaseAuth() {
               type="submit"
               variant="contained"
             >
-              {t('Sign in นะไอสัส')}
+              {t('Sign in')}
             </Button>
           </form>
         )}

@@ -64,9 +64,32 @@ function PageHeader() {
     }
   ];
 
+  // const dniss = [
+  //   {
+  //     value: '1',
+  //     text: t('1')
+  //   },
+  //   {
+  //     value: '2',
+  //     text: t('2')
+  //   },
+  //   {
+  //     value: '3',
+  //     text: t('3')
+  //   },
+  //   {
+  //     value: 'veince',
+  //     text: t('Vince')
+  //   }
+  // ];
+
+
   const [openPeriod, setOpenMenuPeriod] = useState(false);
+  // const [openDnis, setOpenMenuDnis] = useState(false);
   const [period, setPeriod] = useState(periods[0].text);
+  // const [dnis, setDnis] = useState(dnis[0].text);
   const actionRef1 = useRef(null);
+  // const actionRef2 = useRef(null);
 
   return (
     <Box
@@ -86,6 +109,45 @@ function PageHeader() {
         </Box>
       </Box>
       <Box mt={{ xs: 3, md: 0 }}>
+        {/* <Button  
+          variant="outlined"  
+          ref={actionRef2}
+          sx={{
+            mr: 1
+          }}
+          endIcon={<KeyboardArrowDownTwoToneIcon fontSize="small" />}
+          >
+            {dnis}
+          </Button>
+
+          <Menu
+          disableScrollLock
+          anchorEl={actionRef2.current}
+          onClose={() => setOpenMenuDnis(false)}
+          open={openDnis}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+        >
+          {dniss.map((_dnis) => (
+            <MenuItem
+              key={_dnis.value}
+              onClick={() => {
+                setDnis(_dnis.text);
+                setOpenMenuDnis(false);
+              }}
+            >
+              {_dnis.text}
+            </MenuItem>
+          ))}
+        </Menu> */}
+
+          
         <Button
           variant="outlined"
           ref={actionRef1}
@@ -97,6 +159,7 @@ function PageHeader() {
         >
           {period}
         </Button>
+
         <Menu
           disableScrollLock
           anchorEl={actionRef1.current}

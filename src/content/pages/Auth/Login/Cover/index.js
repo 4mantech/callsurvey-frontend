@@ -1,8 +1,8 @@
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Card,
-  Link,
+  // Link,
   // Tooltip,
   Typography,
   Container,
@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 // import Scrollbar from 'src/components/Scrollbar';
 
 import useAuth from 'src/hooks/useAuth';
+import LogoImage2 from 'src/components/Logo';
 import Auth0Login from '../LoginAuth0';
 import FirebaseAuthLogin from '../LoginFirebaseAuth';
 import JWTLogin from '../LoginJWT';
@@ -117,7 +118,7 @@ function LoginCover() {
                     mb: 1
                   }}
                 >
-                  {t('CALL SURWAY')}
+                  {t('3CX Customize')}
                 </Typography>
                 <Typography
                   variant="h4"
@@ -134,7 +135,7 @@ function LoginCover() {
               {method === 'FirebaseAuth' && <FirebaseAuthLogin />}
               {method === 'JWT' && <JWTLogin />}
               {method === 'Amplify' && <AmplifyLogin />}
-              <Box my={4}>
+              {/* <Box my={4}>
                 <Typography
                   component="span"
                   variant="subtitle2"
@@ -146,7 +147,7 @@ function LoginCover() {
                 <Link component={RouterLink} to="/account/register">
                   <b>Sign up here</b>
                 </Link>
-              </Box>
+              </Box> */}
               {/* {method !== 'Auth0' && (
                 <Tooltip
                   title={t('Used only for the live preview demonstration!')}

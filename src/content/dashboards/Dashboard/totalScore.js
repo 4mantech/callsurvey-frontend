@@ -24,7 +24,9 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-function Block3() {
+function scoreBoard(props) {
+  const { score1,score2,score3,totalDay } = props.data;
+  // const free = "";
   const { t } = useTranslation();
   const theme = useTheme();
 
@@ -80,7 +82,7 @@ function Block3() {
               }}
               variant="h1"
             >
-              594
+              {totalDay}
             </Typography>
           </Box>
           {/* <Typography
@@ -144,7 +146,7 @@ function Block3() {
               }}
               variant="h1"
             >
-              987
+              {score1}%
             </Typography>
           </Box>
           {/* <Typography
@@ -208,7 +210,7 @@ function Block3() {
               }}
               variant="h1"
             >
-              17,865
+              {score2}%
             </Typography>
           </Box>
           {/* <Typography
@@ -272,7 +274,7 @@ function Block3() {
               }}
               variant="h1"
             >
-              5,489
+              {score3}%
             </Typography>
           </Box>
           {/* <Typography
@@ -290,4 +292,4 @@ function Block3() {
   );
 }
 
-export default Block3;
+export default scoreBoard;

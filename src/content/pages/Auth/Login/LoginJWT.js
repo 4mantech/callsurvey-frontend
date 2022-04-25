@@ -1,22 +1,23 @@
 import * as Yup from 'yup';
 
 import { Formik } from 'formik';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
 
 import {
   Box,
   Button,
   FormHelperText,
   TextField,
-  Checkbox,
-  Typography,
-  Link,
-  FormControlLabel,
+  // Checkbox,
+  // Typography,
+  // Link,
+  // FormControlLabel,
   CircularProgress
 } from '@mui/material';
 import useAuth from 'src/hooks/useAuth';
 import useRefMounted from 'src/hooks/useRefMounted';
 import { useTranslation } from 'react-i18next';
+
 
 const LoginJWT = () => {
   const { login } = useAuth();
@@ -104,7 +105,7 @@ const LoginJWT = () => {
             display="flex"
             justifyContent="space-between"
           >
-            <FormControlLabel
+            {/* <FormControlLabel
               control={
                 <Checkbox
                   checked={values.terms}
@@ -116,7 +117,7 @@ const LoginJWT = () => {
               label={
                 <>
                   <Typography variant="body2">
-                    {t('I accept the')}{' '}
+                    {t('I accept the terms and conditions')}{' '}
                     <Link component="a" href="#">
                       {t('terms and conditions')}
                     </Link>
@@ -124,10 +125,10 @@ const LoginJWT = () => {
                   </Typography>
                 </>
               }
-            />
-            <Link component={RouterLink} to="/account/recover-password">
+            /> */}
+            {/* <Link component={RouterLink} to="/account/recover-password">
               <b>{t('Lost password?')}</b>
-            </Link>
+            </Link> */}
           </Box>
 
           {Boolean(touched.terms && errors.terms) && (

@@ -26,26 +26,26 @@ export default function dashboardTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell align="center">#</TableCell>
+            <TableCell align="center">AGENTNAME</TableCell>
+            <TableCell align="center">Datetimes</TableCell>
+            <TableCell align="center">SCORE1</TableCell>
+            <TableCell align="center">SCORE2</TableCell>
+            <TableCell align="center">SCORE3</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row,index) => (
             <TableRow
-              key={row.name}
+              key={row.dnis}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+                <TableCell align="center">{++index}</TableCell>
+                <TableCell align="center">{row.agenname}</TableCell>
+                <TableCell align="center">{row.datetimes}</TableCell>
+                <TableCell align="center">{row.score1 ? row.score1:"-"}</TableCell>
+                <TableCell align="center">{row.score2 ? row.score2:"-"}</TableCell>
+                <TableCell align="center">{row.score3 ? row.score3:"-"}</TableCell>
             </TableRow>
           ))}
         </TableBody>
