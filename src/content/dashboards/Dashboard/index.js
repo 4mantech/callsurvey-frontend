@@ -1,3 +1,6 @@
+// import * as React from 'react';
+// import axios from 'axios';
+// import useRefMounted from 'src/hooks/useRefMounted';
 import Footer from 'src/components/Footer';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Helmet } from 'react-helmet-async';
@@ -5,9 +8,13 @@ import { Helmet } from 'react-helmet-async';
 import { Grid } from '@mui/material';
 
 
+// import SalesByCategory from 'src/content/dashboards/Commerce/SalesByCategory';
 import Block2 from './tableDashboards';
+// import Block5 from './testchart';
+import Block5 from './chartScore1';
 // import Block10 from 'src/content/blocks/ListsSmall/Block7';
-// import Block11 from 'src/content/blocks/ListsSmall/Block8';
+// import Block11 from 'src/content/blocks/ListsSmall/Block8'; chartDashboard
+// import Block3 from './Commerce/SalesByCategory';
 import PageHeader from './PageHeader';
 import Block1 from './totalScore';
 // import Block3 from './Block3';
@@ -17,10 +24,27 @@ import Block1 from './totalScore';
 // import Block7 from './Block7';
 // import Block8 from './Block8';
 // import Block9 from './Block9';
-// import Block12 from './Block12';
+ import Block12 from './Block12';
 // import Block13 from './Block13';
 
 function DashboardReports() {
+  // const [data, setData] = React.useState({});
+  // const isMountedRef = useRefMounted();
+  // const getDataServer = React.useCallback(async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:4000/api/v1/dashboard`);
+  //     console.table(reports);
+  //     if (isMountedRef.current) {
+  //       setReports(response.data.data);
+  //     }
+  //   } catch (err) {
+  //     console.eror(err);
+  //   };
+  // }, [isMountedRef]);
+
+  // React.useEffect(() => {
+  //   getDataServer();
+  // }, [getDataServer]);
   const data = {
     "totalDay":594,
     "score1": 50,
@@ -48,6 +72,11 @@ function DashboardReports() {
         <Grid item xs={12}>
           <Block1 data={data}/>
         </Grid>
+        
+        <Grid item xs={12}>
+          <Block5 data={data}/>
+        </Grid>
+        
         <Grid item md={10} xs={12}>
           <Grid
             container
