@@ -24,7 +24,7 @@ import Block1 from './totalScore';
 // import Block7 from './Block7';
 // import Block8 from './Block8';
 // import Block9 from './Block9';
- import Block12 from './Block12';
+//  import Block12 from './Block12';
 // import Block13 from './Block13';
 
 function DashboardReports() {

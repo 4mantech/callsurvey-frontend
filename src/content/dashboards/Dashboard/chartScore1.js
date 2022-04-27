@@ -1,10 +1,10 @@
 import {
   Card,
-  CardContent,
-  CardHeader,
+  // CardContent,
+  // CardHeader,
   Typography,
   Grid,
-  Divider,
+  // Divider,
   Box,
   useTheme,
   styled
@@ -97,10 +97,9 @@ function SalesByCategory() {
 
   return (
     <Card>
-      <CardHeader title={t('Sales by Category')} />
-      <Divider />
-      <CardContent>
-        <Grid container spacing={1}>
+      {/* <Divider /> */}
+      {/* <CardContent> */}
+        <Grid container spacing={4}>
           <Grid
             md={3}
             item
@@ -195,7 +194,7 @@ function SalesByCategory() {
             </Box>
           </Grid> */}
         </Grid>
-      </CardContent>
+      {/* </CardContent> */}
     </Card>
   );
 }

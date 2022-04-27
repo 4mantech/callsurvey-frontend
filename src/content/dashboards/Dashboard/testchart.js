@@ -256,15 +256,20 @@ function scoreBoard(props) {
               justifyContent: 'center'
             }}
           >
-            <Typography
-              sx={{
-                pl: 1,
-                fontSize: `${theme.typography.pxToRem(35)}`
-              }}
-              variant="h1"
-            >
-              {score3}%
-            </Typography>
+            <Grid
+            md={3}
+            item
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Chart
+              height={300}
+              options={chartOptions}
+              series={chartSeries}
+              type="donut"
+            />
+          </Grid>
           </Box>
         </Card>
       </Grid>
