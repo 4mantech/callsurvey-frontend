@@ -114,7 +114,7 @@ function Logo() {
   const theme = useTheme();
 
   return (
-    <TooltipWrapper title={t('Call Survey')} arrow>
+    <TooltipWrapper title={t('3CX Customize')} arrow>
       <LogoWrapper to="/overview">
         <Badge
           sx={{

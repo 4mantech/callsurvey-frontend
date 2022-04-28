@@ -16,7 +16,7 @@ import Block5 from './chartScore1';
 // import Block11 from 'src/content/blocks/ListsSmall/Block8'; chartDashboard
 // import Block3 from './Commerce/SalesByCategory';
 import PageHeader from './PageHeader';
-import Block1 from './totalScore';
+// import Block1 from './totalScore';
 // import Block3 from './Block3';
 // import Block4 from './Block4';
 // import Block5 from './Block5';
@@ -70,7 +70,7 @@ function DashboardReports() {
         spacing={4}
       >
         <Grid item xs={12}>
-          <Block1 data={data}/>
+          {/* <Block1 data={data}/> */}
         </Grid>
         
         <Grid item xs={12}>

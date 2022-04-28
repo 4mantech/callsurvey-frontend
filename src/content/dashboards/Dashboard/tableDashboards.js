@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+// import useRefMounted from 'src/hooks/useRefMounted';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -21,6 +22,25 @@ const rows = [
 ];
 
 export default function dashboardTable() {
+  // const [dashboard, setDashboard] = React.useState([]);
+  // const isMountedRef = useRefMounted();
+
+  // const getDataServer = React.useCallback(async() => {
+  //   try{
+  //     const response = await axios.get(`http://61.47.81.110:3001/api/v1/dashboard`);
+  //     console.table(dashboard);
+  //     if (isMountedRef.current) {
+  //       setDashboard(response.data.data);
+  //     }
+  //   }catch(err){
+  //     console.eror(err);
+  //   };
+  // },[isMountedRef]);
+
+  // React.useEffect(()=>{
+  //   getDataServer();
+  // },[getDataServer]);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
