@@ -1,7 +1,7 @@
 // import { useRef, useState } from 'react';
 import {
   Typography,
-  // Button,
+  Button,
   Box,
   alpha,
   lighten,
@@ -11,7 +11,7 @@ import {
   styled
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-// import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
+import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
 // import KeyboardArrowDownTwoToneIcon from '@mui/icons-material/KeyboardArrowDownTwoTone';
 import AddAlertTwoToneIcon from '@mui/icons-material/AddAlertTwoTone';
 // import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -88,8 +88,8 @@ function PageHeader() {
           </Typography> */}
         </Box>
       </Box>
-      {/* <Box mt={{ xs: 3, md: 0 }}>
-        <Button
+      <Box mt={{ xs: 3, md: 0 }}>
+        {/* <Button
           variant="outlined"
           ref={actionRef1}
           onClick={() => setOpenMenuPeriod(true)}
@@ -125,12 +125,12 @@ function PageHeader() {
               {_period.text}
             </MenuItem>
           ))}
-        </Menu>
+        </Menu> */}
 
         <Button variant="contained" startIcon={<DocumentScannerTwoToneIcon />}>
           {t('Export')}
         </Button>
-      </Box> */}
+      </Box>
     </Box>
   );
 }

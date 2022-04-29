@@ -270,13 +270,13 @@ export default function EnhancedTable() {
 
   const getDataServer = React.useCallback(async() => {
     try{
-      const response = await axios.get(`http://61.47.81.110:3001/api/v1/dashboard`);
+      const response = await axios.get(`http://61.47.81.110:3001/api/v1/reports`);
       console.table(reports);
       if (isMountedRef.current) {
         setReports(response.data.data);
       }
     }catch(err){
-      console.eror(err);
+      console.error(err);
     };
   },[isMountedRef]);
 

@@ -1,17 +1,16 @@
-// import * as React from 'react';
-// import axios from 'axios';
-// import useRefMounted from 'src/hooks/useRefMounted';
+import * as React from 'react';
+import axios from 'axios';
+import useRefMounted from 'src/hooks/useRefMounted';
 import Footer from 'src/components/Footer';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Helmet } from 'react-helmet-async';
 
 import { Grid } from '@mui/material';
 
-
 // import SalesByCategory from 'src/content/dashboards/Commerce/SalesByCategory';
 import Block2 from './tableDashboards';
 // import Block5 from './testchart';
-import Block5 from './chartScore1';
+import Block5 from './chartScore';
 // import Block10 from 'src/content/blocks/ListsSmall/Block7';
 // import Block11 from 'src/content/blocks/ListsSmall/Block8'; chartDashboard
 // import Block3 from './Commerce/SalesByCategory';
@@ -28,28 +27,38 @@ import PageHeader from './PageHeader';
 // import Block13 from './Block13';
 
 function DashboardReports() {
-  // const [data, setData] = React.useState({});
-  // const isMountedRef = useRefMounted();
-  // const getDataServer = React.useCallback(async () => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:4000/api/v1/dashboard`);
-  //     console.table(reports);
-  //     if (isMountedRef.current) {
-  //       setReports(response.data.data);
-  //     }
-  //   } catch (err) {
-  //     console.eror(err);
-  //   };
-  // }, [isMountedRef]);
+  const [dataDashboard, setDataDashboard] = React.useState([]);
+  const [dataScore1, setDataScore1] = React.useState([]);
+  const [dataScore2, setDataScore2] = React.useState([]);
+  const [dataScore3, setDataScore3] = React.useState([]);
+  
+  const isMountedRef = useRefMounted();
+  const getDataServer = React.useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `http://61.47.81.110:3001/api/v1/dashboard`
+      );
+      const { data, score1, score2, score3} = response.data;
+      if (isMountedRef.current) {
+        setDataDashboard(data);
+        setDataScore1(score1);
+        setDataScore2(score2);
+        setDataScore3(score3);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
 
-  // React.useEffect(() => {
-  //   getDataServer();
-  // }, [getDataServer]);
+  React.useEffect(() => {
+    getDataServer();
+  }, [getDataServer]);
+
   const data = {
-    "totalDay":594,
-    "score1": 50,
-    "score2": 20,
-    "score3": 70
+    totalDay: 594,
+    score1: 50,
+    score2: 20,
+    score3: 70
   };
   return (
     <>
@@ -72,11 +81,11 @@ function DashboardReports() {
         <Grid item xs={12}>
           {/* <Block1 data={data}/> */}
         </Grid>
-        
+
         <Grid item xs={12}>
-          <Block5 data={data}/>
+          <Block5 data1={dataScore1} data2={dataScore2} data3={dataScore3} />
         </Grid>
-        
+
         <Grid item md={10} xs={12}>
           <Grid
             container
@@ -86,7 +95,7 @@ function DashboardReports() {
             spacing={4}
           >
             <Grid item xs={12}>
-              <Block2 /> 
+              <Block2 data={dataDashboard} />
             </Grid>
             {/* <Grid item xs={12}>
               <Block4 />
