@@ -28,6 +28,7 @@ import PageHeader from './PageHeader';
 
 function DashboardReports() {
   const [dataDashboard, setDataDashboard] = React.useState([]);
+  const [dataTotalScore, setDataTotalScore] = React.useState([]);
   const [dataScore1, setDataScore1] = React.useState([]);
   const [dataScore2, setDataScore2] = React.useState([]);
   const [dataScore3, setDataScore3] = React.useState([]);
@@ -38,12 +39,13 @@ function DashboardReports() {
       const response = await axios.get(
         `http://61.47.81.110:3001/api/v1/dashboard`
       );
-      const { data, score1, score2, score3} = response.data;
+      const { data, score1, score2, score3,totalScore } = response.data;
       if (isMountedRef.current) {
         setDataDashboard(data);
         setDataScore1(score1);
         setDataScore2(score2);
         setDataScore3(score3);
+        setDataTotalScore(totalScore);
       }
     } catch (err) {
       console.error(err);
@@ -83,7 +85,7 @@ function DashboardReports() {
         </Grid>
 
         <Grid item xs={12}>
-          <Block5 data1={dataScore1} data2={dataScore2} data3={dataScore3} />
+          <Block5 data1={dataScore1} data2={dataScore2} data3={dataScore3} dataTotal={dataTotalScore} />
         </Grid>
 
         <Grid item md={10} xs={12}>

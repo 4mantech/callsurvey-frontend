@@ -42,7 +42,7 @@ const AvatarWrapper = styled(Avatar)(
 // );
 
 function SalesByCategory(props) {
-  const { data1, data2, data3 } = props;
+  const { data1, data2, data3 ,dataTotal} = props;
   const { t } = useTranslation();
   const theme = useTheme();
 
@@ -132,6 +132,8 @@ function SalesByCategory(props) {
   const chartSeries1 = data1;
   const chartSeries2 = data2;
   const chartSeries3 = data3;
+  const chartSeries4 = dataTotal;
+
 
   return (
     <Grid container spacing={4}>
@@ -170,7 +172,7 @@ function SalesByCategory(props) {
             justifyContent="center"
             alignItems="center"
           >
-                      {reDucer(chartSeries1) ? (
+                      {reDucer(chartSeries4) ? (
               <Typography
                 sx={{
                   ml: 1.5,
@@ -188,7 +190,7 @@ function SalesByCategory(props) {
               <Chart
                 height={210}
                 options={chartOptions}
-                series={chartSeries1}
+                series={chartSeries4}
                 type="donut"
               />
             )}
@@ -302,7 +304,7 @@ function SalesByCategory(props) {
                 component="div"
                 height={192}
               >
-                {t('noscore')}
+                {t('No Score')}
               </Typography>
             ) : (
               <Chart
@@ -362,7 +364,7 @@ function SalesByCategory(props) {
                 component="div"
                 height={192}
               >
-                {t('noscore')}
+                {t('No Score')}
               </Typography>
             ) : (
               <Chart
