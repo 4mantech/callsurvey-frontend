@@ -9,7 +9,8 @@ import useRefMounted from 'src/hooks/useRefMounted';
 
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 
-import Results from './Results';
+// import Results from './Results';
+import Block2 from './tableUser';
 import PageHeader from './PageHeader';
 
 function ManagementUsers() {
@@ -52,7 +53,7 @@ function ManagementUsers() {
         spacing={4}
       >
         <Grid item xs={12}>
-          <Results users={users} />
+          <Block2 users={users} />
         </Grid>
       </Grid>
       <Footer />

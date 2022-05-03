@@ -188,7 +188,7 @@ const Results = ({ users }) => {
   const tabs = [
     {
       value: 'all',
-      label: t('All users')
+      label: t('users')
     }
     // {
     //   value: 'customer',
@@ -380,7 +380,7 @@ const Results = ({ users }) => {
                           onChange={handleSelectAllUsers}
                         />
                       </TableCell>
-                      <TableCell>{t('Username')}</TableCell>
+                      {/* <TableCell>{t('Username')}</TableCell> */}
                       <TableCell>{t('Name')}</TableCell>
                       <TableCell>{t('Email')}</TableCell>
                       <TableCell align="center">{t('Posts')}</TableCell>
@@ -403,19 +403,19 @@ const Results = ({ users }) => {
                               value={isUserSelected}
                             />
                           </TableCell>
-                          <TableCell>
+                          {/* <TableCell>
                             <Typography variant="h5">
                               {user.username}
                             </Typography>
-                          </TableCell>
+                          </TableCell> */}
                           <TableCell>
                             <Box display="flex" alignItems="center">
-                              <Avatar
+                              {/* <Avatar
                                 sx={{
                                   mr: 1
                                 }}
                                 src={user.avatar}
-                              />
+                              /> */}
                               <Box>
                                 <Link
                                   variant="h5"
@@ -426,9 +426,9 @@ const Results = ({ users }) => {
                                 >
                                   {user.name}
                                 </Link>
-                                <Typography noWrap variant="subtitle2">
+                                {/* <Typography noWrap variant="subtitle2">
                                   {user.jobtitle}
-                                </Typography>
+                                </Typography> */}
                               </Box>
                             </Box>
                           </TableCell>

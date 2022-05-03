@@ -343,7 +343,7 @@ export default function EnhancedTable() {
 <TableContainer component={Paper}>
 <Table sx={{ minWidth: 650 }} aria-label="simple table">
   <TableHead>
-    <TableRow>
+    <TableRow  hover >
       <TableCell align="center">#</TableCell>
       <TableCell align="center">DNIS</TableCell>
       <TableCell align="center">Datetimes</TableCell>
@@ -373,7 +373,7 @@ export default function EnhancedTable() {
         <TableCell align="center">{row.score2 ? row.score2:"-"}</TableCell>
         <TableCell align="center">{row.score3 ? row.score3:"-"}</TableCell>
       </TableRow>
-    ))};
+    ))}
   </TableBody>
 </Table>
 </TableContainer>

@@ -122,7 +122,7 @@ function PageHeader() {
           </Typography>
           <Typography variant="subtitle2">
             {t(
-              'All aspects related to the app users can be managed from this page'
+              'All aspects related to the webapp users can be managed from this page'
             )}
           </Typography>
         </Grid>
@@ -162,16 +162,12 @@ function PageHeader() {
         <Formik
           initialValues={{
             email: '',
-            username: '',
             first_name: '',
             last_name: '',
             password: '',
             submit: null
           }}
           validationSchema={Yup.object().shape({
-            username: Yup.string()
-              .max(255)
-              .required(t('The username field is required')),
             first_name: Yup.string()
               .max(255)
               .required(t('The first name field is required')),
@@ -223,7 +219,7 @@ function PageHeader() {
                 <Grid container spacing={3}>
                   <Grid item xs={12} lg={7}>
                     <Grid container spacing={3}>
-                      <Grid item xs={12}>
+                      {/* <Grid item xs={12}>
                         <TextField
                           error={Boolean(touched.username && errors.username)}
                           fullWidth
@@ -235,7 +231,7 @@ function PageHeader() {
                           value={values.username}
                           variant="outlined"
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid item xs={12} md={6}>
                         <TextField
                           error={Boolean(
