@@ -32,16 +32,12 @@ const getUserRoleLabel = (userRole) => {
   console.log(userRole)
   const map = {
     0: {
-      text: 'Super Administrator',
+      text: 'Administrator',
       color: 'error'
     },
     1: {
-      text: 'Venice',
-      color: 'info'
-    },
-    2: {
       text: 'User',
-      color: 'warning'
+      color: 'info'
     }
   };
 

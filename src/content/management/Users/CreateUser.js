@@ -73,8 +73,7 @@ import { useSnackbar } from 'notistack';
 
 const roles = [
   { label: 'Administrator', value: 0 },
-  { label: 'Venice', value: 1 },
-  { label: 'Customer', value: 2 }
+  { label: 'User', value: 1 },
 ];
 
 function CreateUser() {
