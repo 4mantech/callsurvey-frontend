@@ -1,37 +1,38 @@
-import { useState, useEffect, useCallback } from 'react';
-import axios from 'src/utils/axios';
+// import { useState, useEffect, useCallback } from 'react';
+// import axios from 'src/utils/axios';
 
 import { Helmet } from 'react-helmet-async';
 import Footer from 'src/components/Footer';
 
 import { Grid } from '@mui/material';
-import useRefMounted from 'src/hooks/useRefMounted';
+// import useRefMounted from 'src/hooks/useRefMounted';
 
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 
-// import Results from './Results';
+// import Block2 from './Results';
 import Block2 from './tableUser';
-import PageHeader from './PageHeader';
+// import PageHeader from './PageHeader';
+import CreateUser from './CreateUser';
 
 function ManagementUsers() {
-  const isMountedRef = useRefMounted();
-  const [users, setUsers] = useState([]);
+  // const isMountedRef = useRefMounted();
+  // const [users, setUsers] = useState([]);
 
-  const getUsers = useCallback(async () => {
-    try {
-      const response = await axios.get('/api/users');
+  // const getUsers = useCallback(async () => {
+  //   try {
+  //     const response = await axios.get('/api/users');
 
-      if (isMountedRef.current) {
-        setUsers(response.data.users);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [isMountedRef]);
+  //     if (isMountedRef.current) {
+  //       setUsers(response.data.users);
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }, [isMountedRef]);
 
-  useEffect(() => {
-    getUsers();
-  }, [getUsers]);
+  // useEffect(() => {
+  //   getUsers();
+  // }, [getUsers]);
 
   return (
     <>
@@ -39,7 +40,7 @@ function ManagementUsers() {
         <title>Users - Management</title>
       </Helmet>
       <PageTitleWrapper>
-        <PageHeader />
+        <CreateUser />
       </PageTitleWrapper>
 
       <Grid
@@ -53,7 +54,7 @@ function ManagementUsers() {
         spacing={4}
       >
         <Grid item xs={12}>
-          <Block2 users={users} />
+          <Block2 />
         </Grid>
       </Grid>
       <Footer />

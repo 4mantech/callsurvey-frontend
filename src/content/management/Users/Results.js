@@ -121,15 +121,15 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 const getUserRoleLabel = (userRole) => {
   const map = {
-    admin: {
+    1: {
       text: 'Administrator',
       color: 'error'
     },
-    customer: {
+    2: {
       text: 'Customer',
       color: 'info'
     },
-    subscriber: {
+    3: {
       text: 'Subscriber',
       color: 'warning'
     }

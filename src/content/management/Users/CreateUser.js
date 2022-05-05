@@ -3,9 +3,11 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { styled } from '@mui/material/styles';
+// import { styled } from '@mui/material/styles';
 import wait from 'src/utils/wait';
-import useAuth from 'src/hooks/useAuth';
+import axios from 'axios';
+// import useAuth from 'src/hooks/useAuth';
+
 
 import {
   Grid,
@@ -13,10 +15,10 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
-  Box,
+  // Box,
   Zoom,
   Typography,
-  Divider,
+  // Divider,
   TextField,
   CircularProgress,
   // Switch,
@@ -70,27 +72,27 @@ import { useSnackbar } from 'notistack';
 // );
 
 const roles = [
-  { label: 'Administrator', value: 'admin' },
-  { label: 'Subscriber', value: 'subscriber' },
-  { label: 'Customer', value: 'customer' }
+  { label: 'Administrator', value: 0 },
+  { label: 'Venice', value: 1 },
+  { label: 'Customer', value: 2 }
 ];
 
-function PageHeader() {
+function CreateUser() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   const [publicProfile, setPublicProfile] = useState({
     public: true
   });
 
-  const handlePublicProfile = (event) => {
-    setPublicProfile({
-      ...publicProfile,
-      [event.target.name]: event.target.checked
-    });
-  };
+  // const handlePublicProfile = (event) => {
+  //   setPublicProfile({
+  //     ...publicProfile,
+  //     [event.target.name]: event.target.checked
+  //   });
+  // };
 
   const handleCreateUserOpen = () => {
     setOpen(true);
@@ -141,7 +143,7 @@ function PageHeader() {
       </Grid>
       <Dialog
         fullWidth
-        maxWidth="md"
+        maxWidth="sm"
         open={open}
         onClose={handleCreateUserClose}
       >
@@ -162,16 +164,16 @@ function PageHeader() {
         <Formik
           initialValues={{
             email: '',
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             password: '',
-            submit: null
+            confirmpassword: ''
           }}
           validationSchema={Yup.object().shape({
-            first_name: Yup.string()
+            firstName: Yup.string()
               .max(255)
               .required(t('The first name field is required')),
-            last_name: Yup.string()
+            lastName: Yup.string()
               .max(255)
               .required(t('The last name field is required')),
             email: Yup.string()
@@ -180,24 +182,30 @@ function PageHeader() {
               .required(t('The email field is required')),
             password: Yup.string()
               .max(255)
-              .required(t('The password field is required'))
+              .required(t('The password field is required')),
+            confirmpassword: Yup.string()
+              .max(255)
+              .required(t('The Confirm Password field is required'))
           })}
           onSubmit={async (
             _values,
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
-            try {
-              await wait(1000);
+            const option = {
+              headers: {'Content-Type': 'application/json' }
+            }
+            axios.post('http://61.47.81.110:3001/api/V1/users',_values, option).then(response=>{
+              console.log(response);
               resetForm();
               setStatus({ success: true });
               setSubmitting(false);
               handleCreateUserSuccess();
-            } catch (err) {
-              console.error(err);
+            }).catch(error=>{
+              console.error(error);
               setStatus({ success: false });
-              setErrors({ submit: err.message });
+              setErrors({ submit: error.message });
               setSubmitting(false);
-            }
+            })
           }}
         >
           {({
@@ -217,7 +225,7 @@ function PageHeader() {
                 }}
               >
                 <Grid container spacing={3}>
-                  <Grid item xs={12} lg={7}>
+                  <Grid item xs={12} lg={12}>
                     <Grid container spacing={3}>
                       {/* <Grid item xs={12}>
                         <TextField
@@ -235,28 +243,28 @@ function PageHeader() {
                       <Grid item xs={12} md={6}>
                         <TextField
                           error={Boolean(
-                            touched.first_name && errors.first_name
+                            touched.firstName && errors.firstName
                           )}
                           fullWidth
-                          helperText={touched.first_name && errors.first_name}
+                          helperText={touched.firstName && errors.firstName}
                           label={t('First name')}
-                          name="first_name"
+                          name="firstName"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          value={values.first_name}
+                          value={values.firstName}
                           variant="outlined"
                         />
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <TextField
-                          error={Boolean(touched.last_name && errors.last_name)}
+                          error={Boolean(touched.lastName && errors.lastName)}
                           fullWidth
-                          helperText={touched.last_name && errors.last_name}
+                          helperText={touched.lastName && errors.lastName}
                           label={t('Last name')}
-                          name="last_name"
+                          name="lastName"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          value={values.last_name}
+                          value={values.lastName}
                           variant="outlined"
                         />
                       </Grid>
@@ -286,6 +294,21 @@ function PageHeader() {
                           onChange={handleChange}
                           type="password"
                           value={values.password}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          error={Boolean(touched.confirmpassword && errors.confirmpassword)}
+                          fullWidth
+                          margin="normal"
+                          helperText={touched.confirmpassword && errors.confirmpassword}
+                          label={t('Confirm Password')}
+                          name="confirmpassword"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          type="password"
+                          value={values.confirmpassword}
                           variant="outlined"
                         />
                       </Grid>
@@ -391,4 +414,4 @@ function PageHeader() {
   );
 }
 
-export default PageHeader;
+export default CreateUser;
