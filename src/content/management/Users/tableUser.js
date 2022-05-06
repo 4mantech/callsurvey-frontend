@@ -52,7 +52,6 @@ const ButtonError = styled(Button)(
   ({ theme }) => `
      background: ${theme.colors.error.main};
      color: ${theme.palette.error.contrastText};
-
      &:hover {
         background: ${theme.colors.error.dark};
      }
@@ -78,7 +77,6 @@ const getUserRoleLabel = (userRole) => {
   };
 
   const { text, color } = map[userRole];
-
   return <Label color={color}>{text}</Label>;
 };
 
@@ -116,10 +114,10 @@ export default function usersTable(props) {
           <TableHead>
             <TableRow>
               <TableCell align="center">#</TableCell>
-              <TableCell align="center">NAME</TableCell>
-              <TableCell align="center">EMAIL</TableCell>
-              <TableCell align="center">ROLE</TableCell>
-              <TableCell align="center">ACTION</TableCell>
+              <TableCell align="center">{t('name')}</TableCell>
+              <TableCell align="center">{t('email')}</TableCell>
+              <TableCell align="center">{t('role')}</TableCell>
+              <TableCell align="center">{t('action')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -180,7 +178,6 @@ export default function usersTable(props) {
           <AvatarError>
             <CloseIcon />
           </AvatarError>
-
           <Typography
             align="center"
             sx={{

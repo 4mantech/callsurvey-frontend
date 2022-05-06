@@ -121,11 +121,11 @@ function CreateUser(props) {
           <Typography variant="h3" component="h3" gutterBottom>
             {t('Users Management')}
           </Typography>
-          <Typography variant="subtitle2">
+          {/* <Typography variant="subtitle2">
             {t(
               'All aspects related to the webapp users can be managed from this page'
             )}
-          </Typography>
+          </Typography> */}
         </Grid>
         <Grid item>
           <Button

@@ -24,7 +24,16 @@ const thJSON = {
    'Point 5':'แต้ม 5',
    'noscore':'ไม่มีแต้ม',
    'Deleted User Successfully':'ลบผู้ใช้เสร็จสิ้น',
-   'Are you sure you want to permanently delete this user account?': 'คุณต้องการลบบัญชีผู้ใช้คนนี้ใช่หรือไม่ ?'
-};
+   'Are you sure you want to permanently delete this user account': 'คุณต้องการลบบัญชีผู้ใช้คนนี้ใช่หรือไม่',
+   'Delete':'ลบ',
+   'Cancel':'ยกเลิก',
+   'name': 'ชื่อ - สกุล',
+   'email': 'อีเมล',
+   'role' : 'ตำแหน่ง',
+   'action' : 'จัดการ'
+  //  'TABLEUSER': {
+  //   'NAME': 'ชื่อ - นามสกุล',
+  //  }
+  };
 
 export default thJSON;

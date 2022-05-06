@@ -11,7 +11,7 @@ const menuItems = [
       {
         name: 'Call Surwey',
         icon: CallIcon,
-        badge: '',
+        // badge: '',
         link: '/collapsed-sidebar/blocks',
         items: [
           {
