@@ -8,7 +8,6 @@ import wait from 'src/utils/wait';
 import axios from 'axios';
 // import useAuth from 'src/hooks/useAuth';
 
-
 import {
   Grid,
   Dialog,
@@ -25,7 +24,7 @@ import {
   // Avatar,
   Autocomplete,
   // IconButton,
-  Button
+  Button,
 } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useSnackbar } from 'notistack';
@@ -76,7 +75,8 @@ const roles = [
   { label: 'User', value: 1 },
 ];
 
-function CreateUser() {
+function CreateUser(props) {
+  const { setUsers } = props;
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -193,18 +193,21 @@ function CreateUser() {
             const option = {
               headers: {'Content-Type': 'application/json' }
             }
-            axios.post('http://61.47.81.110:3001/api/V1/users',_values, option).then(response=>{
+            try{
+              const response = await axios.post('http://61.47.81.110:3001/api/V1/users',_values, option);
               console.log(response);
               resetForm();
               setStatus({ success: true });
               setSubmitting(false);
               handleCreateUserSuccess();
-            }).catch(error=>{
-              console.error(error);
+              const res = await axios.get(`http://61.47.81.110:3001/api/V1/users`);
+              setUsers(res.data.data);
+            }catch(err){
+              console.error(err);
               setStatus({ success: false });
-              setErrors({ submit: error.message });
+              setErrors({ submit: err.message });
               setSubmitting(false);
-            })
+            }
           }}
         >
           {({
@@ -311,7 +314,7 @@ function CreateUser() {
                           variant="outlined"
                         />
                       </Grid>
-                      <Grid item xs={12} md={6}>
+                      {/* <Grid item xs={12} md={6}>
                         <Autocomplete
                           disablePortal
                           options={roles}
@@ -324,7 +327,7 @@ function CreateUser() {
                             />
                           )}
                         />
-                      </Grid>
+                      </Grid> */}
                     </Grid>
                   </Grid>
                   {/* <Grid item xs={12} lg={5} justifyContent="center">

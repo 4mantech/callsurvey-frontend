@@ -278,7 +278,7 @@ const Results = ({ users }) => {
   const handleDeleteCompleted = () => {
     setOpenConfirmDelete(false);
 
-    enqueueSnackbar(t('ลบผู้ใช้งาน เรียบร้อย'), {
+    enqueueSnackbar(t('ลบผู้ใช้งานเรียบร้อย'), {
       variant: 'success',
       anchorOrigin: {
         vertical: 'top',

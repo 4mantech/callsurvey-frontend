@@ -1,16 +1,15 @@
 const thJSON = {
   'Sign In':'เข้าสู่ระบบ',
-   Reports: 'รายงาน',
+   'Reports': 'รายงาน',
    'Language Switcher': 'เปลี่ยนภาษา',
-   Dashboard: 'แดชบอร์ด',
-   Users:'ผู้ใช้งาน',
-   'Custom dashboard built using the included components' : 'เอาออกนะอันนี้ ไม่ใช้แล้ว',
+   'Dashboard': 'แดชบอร์ด',
+   'Users':'ผู้ใช้งาน',
    'Users Management':'จัดการผู้ใช้งาน',
-   Today: 'วันนี้',
-   Yesterday: 'เมื่อวาน',
+   'Today': 'วันนี้',
+   'Yesterday': 'เมื่อวาน',
    'Last month': 'เดือนที่แล้ว',
    'Last year':'ปีที่แล้ว',
-   Report:'รายงาน',
+   'Report':'รายงาน',
    'Sign in': 'เข้าสู่ระบบ',
    'Sign out': 'ออกจากระบบ',
    'Profile': 'โปรไฟล์',
@@ -23,9 +22,9 @@ const thJSON = {
    'Point 3':'แต้ม 3',
    'Point 4':'แต้ม 4',
    'Point 5':'แต้ม 5',
-   noscore:'ไม่มีแต้ม',
-
-
+   'noscore':'ไม่มีแต้ม',
+   'Deleted User Successfully':'ลบผู้ใช้เสร็จสิ้น',
+   'Are you sure you want to permanently delete this user account?': 'คุณต้องการลบบัญชีผู้ใช้คนนี้ใช่หรือไม่ ?'
 };
 
 export default thJSON;
