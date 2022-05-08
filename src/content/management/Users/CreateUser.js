@@ -70,10 +70,10 @@ import { useSnackbar } from 'notistack';
 // `
 // );
 
-const roles = [
-  { label: 'Administrator', value: 0 },
-  { label: 'User', value: 1 },
-];
+// const roles = [
+//   { label: 'Administrator', value: 0 },
+//   { label: 'User', value: 1 },
+// ];
 
 function CreateUser(props) {
   const { getDataServer } = props;
@@ -82,9 +82,9 @@ function CreateUser(props) {
   const { enqueueSnackbar } = useSnackbar();
   // const { user } = useAuth();
 
-  const [publicProfile, setPublicProfile] = useState({
-    public: true
-  });
+  // const [publicProfile, setPublicProfile] = useState({
+  //   public: true
+  // });
 
   // const handlePublicProfile = (event) => {
   //   setPublicProfile({

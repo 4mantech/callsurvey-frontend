@@ -56,7 +56,6 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const getUserRoleLabel = (userRole) => {
-  console.log(userRole);
   const map = {
     0: {
       text: 'Administrator',
@@ -184,6 +183,16 @@ const DialogDelete = (props) => {
 export default function usersTable(props) {
   const { users, getDataServer } = props;
   const { t } = useTranslation();
+  const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(5);
+
+  const handlePageChange = (_event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleLimitChange = (event) => {
+    setLimit(parseInt(event.target.value));
+  };
 
   return (
     <Paper sx={{ width: '100%', mb: 2 }}>
@@ -206,7 +215,7 @@ export default function usersTable(props) {
               >
                 <TableCell align="center">{++index}</TableCell>
                 <TableCell align="center">
-                  {row.firstName}&nbsp;{row.lastName}
+                  {row.firstName} {row.lastName}
                 </TableCell>
                 <TableCell align="center">{row.email}</TableCell>
                 <TableCell align="center">
@@ -226,11 +235,12 @@ export default function usersTable(props) {
       <Box p={2}>
         <TablePagination
           component="div"
-          // count={filteredUsers.length}
-          // onPageChange={handlePageChange}
-          // onRowsPerPageChange={handleLimitChange}
-          // page={page}
-          // rowsPerPage={limit}
+          count={users.length}
+          onPageChange={handlePageChange}
+          onRowsPerPageChange={handleLimitChange}
+          page={page}
+          rowsPerPage={limit}
+          labelRowsPerPage=""
           rowsPerPageOptions={[5, 10, 15]}
         />
       </Box>

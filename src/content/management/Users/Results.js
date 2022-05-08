@@ -210,6 +210,7 @@ const Results = ({ users }) => {
   const [filters, setFilters] = useState({
     role: null
   });
+  
   const handleTabsChange = (_event, tabsValue) => {
     let value = null;
 
