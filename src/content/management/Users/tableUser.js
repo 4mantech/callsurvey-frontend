@@ -1,14 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import { useState, forwardRef } from 'react';
-import { 
-  Dialog, 
-  Zoom, 
-  styled, 
-  Slide,
-  Avatar,
-  Button
- } from '@mui/material';
+import { Dialog, Zoom, styled, Slide, Avatar, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
@@ -62,9 +55,8 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-
 const getUserRoleLabel = (userRole) => {
-  console.log(userRole)
+  console.log(userRole);
   const map = {
     0: {
       text: 'Administrator',
@@ -80,11 +72,11 @@ const getUserRoleLabel = (userRole) => {
   return <Label color={color}>{text}</Label>;
 };
 
-export default function usersTable(props) {
+const DialogDelete = (props) => {
+  const { id, getDataServer } = props;
   const { enqueueSnackbar } = useSnackbar();
-  const { users } = props;
-  const { t } = useTranslation();
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const { t } = useTranslation();
 
   const handleConfirmDelete = () => {
     setOpenConfirmDelete(true);
@@ -93,80 +85,50 @@ export default function usersTable(props) {
   const closeConfirmDelete = () => {
     setOpenConfirmDelete(false);
   };
-
-  const handleDeleteCompleted = () => {
-    setOpenConfirmDelete(false);
-
-    enqueueSnackbar(t('Deleted User Successfully'), {
-      variant: 'success',
-      anchorOrigin: {
-        vertical: 'top',
-        horizontal: 'right'
-      },
-      TransitionComponent: Zoom
-    });
+  
+  const handleDeleteCompleted = async () => {
+    try{
+      const response = await axios.delete(`http://61.47.81.110:3001/api/V1/users/${id}`)
+      console.log(response.data);
+      getDataServer();
+      setOpenConfirmDelete(false);
+      enqueueSnackbar(t('Deleted User Successfully'), {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'right'
+        },
+        TransitionComponent: Zoom
+      });
+    }catch(error){
+      console.log(error);
+      setOpenConfirmDelete(false);
+      enqueueSnackbar(t('Deleted User Failed'), {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'right'
+        },
+        TransitionComponent: Zoom
+      });
+    }
   };
 
   return (
-    <Paper sx={{ width: '100%', mb: 2 }}>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">#</TableCell>
-              <TableCell align="center">{t('name')}</TableCell>
-              <TableCell align="center">{t('email')}</TableCell>
-              <TableCell align="center">{t('role')}</TableCell>
-              <TableCell align="center">{t('action')}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map((row, index) => (
-              <TableRow
-                key={index}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align="center">{++index}</TableCell>
-                <TableCell align="center">{row.firstName}&nbsp;{row.lastName}</TableCell>
-                <TableCell align="center">{row.email}</TableCell>
-                <TableCell align="center">{getUserRoleLabel(row.role)}</TableCell>
-
-                <TableCell align="center">
-                  <Typography noWrap>
-                    <Tooltip title={t('Delete')} arrow>
-                      <IconButton
-                        onClick={handleConfirmDelete}
-                        color="error"
-                      >
-                        <DeleteTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Box p={2}>
-        <TablePagination
-          component="div"
-          // count={filteredUsers.length}
-          // onPageChange={handlePageChange}
-          // onRowsPerPageChange={handleLimitChange}
-          // page={page}
-          // rowsPerPage={limit}
-          rowsPerPageOptions={[5, 10, 15]}
-        />
-      </Box>
-
+    <>
+      <Tooltip title={t('Delete')} arrow>
+        <IconButton onClick={handleConfirmDelete} color="error">
+          <DeleteTwoToneIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
       <DialogWrapper
         open={openConfirmDelete}
         maxWidth="sm"
         fullWidth
         TransitionComponent={Transition}
         keepMounted
-        onClose={closeConfirmDelete}
+        on
+        Close={closeConfirmDelete}
       >
         <Box
           display="flex"
@@ -215,6 +177,63 @@ export default function usersTable(props) {
           </Box>
         </Box>
       </DialogWrapper>
+    </>
+  );
+};
+
+export default function usersTable(props) {
+  const { users, getDataServer } = props;
+  const { t } = useTranslation();
+
+  return (
+    <Paper sx={{ width: '100%', mb: 2 }}>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">#</TableCell>
+              <TableCell align="center">{t('name')}</TableCell>
+              <TableCell align="center">{t('email')}</TableCell>
+              <TableCell align="center">{t('role')}</TableCell>
+              <TableCell align="center">{t('action')}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users.map((row, index) => (
+              <TableRow
+                key={index}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell align="center">{++index}</TableCell>
+                <TableCell align="center">
+                  {row.firstName}&nbsp;{row.lastName}
+                </TableCell>
+                <TableCell align="center">{row.email}</TableCell>
+                <TableCell align="center">
+                  {getUserRoleLabel(row.role)}
+                </TableCell>
+
+                <TableCell align="center">
+                  <Typography noWrap>
+                    <DialogDelete id={row.id} getDataServer={getDataServer} />
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Box p={2}>
+        <TablePagination
+          component="div"
+          // count={filteredUsers.length}
+          // onPageChange={handlePageChange}
+          // onRowsPerPageChange={handleLimitChange}
+          // page={page}
+          // rowsPerPage={limit}
+          rowsPerPageOptions={[5, 10, 15]}
+        />
+      </Box>
     </Paper>
   );
 }

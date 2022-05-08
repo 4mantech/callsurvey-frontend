@@ -42,9 +42,8 @@ function ManagementUsers() {
         <title>Users - Management</title>
       </Helmet>
       <PageTitleWrapper>
-        <CreateUser setUsers={setUsers} />
+        <CreateUser getDataServer={getDataServer} />
       </PageTitleWrapper>
-
       <Grid
         sx={{
           px: 4
@@ -56,7 +55,7 @@ function ManagementUsers() {
         spacing={4}
       >
         <Grid item xs={12}>
-          <TableUser users={users} />
+          <TableUser users={users} getDataServer={getDataServer} />
         </Grid>
       </Grid>
       <Footer />

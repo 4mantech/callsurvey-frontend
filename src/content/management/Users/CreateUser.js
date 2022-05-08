@@ -76,7 +76,7 @@ const roles = [
 ];
 
 function CreateUser(props) {
-  const { setUsers } = props;
+  const { getDataServer } = props;
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -166,7 +166,7 @@ function CreateUser(props) {
             firstName: '',
             lastName: '',
             password: '',
-            confirmpassword: ''
+            confirmPassword: ''
           }}
           validationSchema={Yup.object().shape({
             firstName: Yup.string()
@@ -182,9 +182,10 @@ function CreateUser(props) {
             password: Yup.string()
               .max(255)
               .required(t('The password field is required')),
-            confirmpassword: Yup.string()
+            confirmPassword: Yup.string()
               .max(255)
               .required(t('The Confirm Password field is required'))
+              .oneOf([Yup.ref('password')], t('Your passwords do not match'))
           })}
           onSubmit={async (
             _values,
@@ -199,9 +200,8 @@ function CreateUser(props) {
               resetForm();
               setStatus({ success: true });
               setSubmitting(false);
-              handleCreateUserSuccess();
-              const res = await axios.get(`http://61.47.81.110:3001/api/V1/users`);
-              setUsers(res.data.data);
+              handleCreateUserSuccess(); 
+              getDataServer();
             }catch(err){
               console.error(err);
               setStatus({ success: false });
@@ -301,16 +301,16 @@ function CreateUser(props) {
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
-                          error={Boolean(touched.confirmpassword && errors.confirmpassword)}
+                          error={Boolean(touched.confirmPassword && errors.confirmPassword)}
                           fullWidth
                           margin="normal"
-                          helperText={touched.confirmpassword && errors.confirmpassword}
+                          helperText={touched.confirmPassword && errors.confirmPassword}
                           label={t('Confirm Password')}
-                          name="confirmpassword"
+                          name="confirmPassword"
                           onBlur={handleBlur}
                           onChange={handleChange}
                           type="password"
-                          value={values.confirmpassword}
+                          value={values.confirmPassword}
                           variant="outlined"
                         />
                       </Grid>
