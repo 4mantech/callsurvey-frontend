@@ -145,7 +145,7 @@ const applyFilters = (users, query, filters) => {
     let matches = true;
 
     if (query) {
-      const properties = ['email', 'name', 'username'];
+      const properties = ['email','firstName','lastName'];
       let containsQuery = false;
 
       properties.forEach((property) => {
@@ -186,14 +186,15 @@ const Results = ({ users }) => {
   const location = useLocation();
 
   const tabs = [
+ 
     {
       value: 'all',
       label: t('users')
-    }
-    // {
-    //   value: 'customer',
-    //   label: t('Customers')
-    // },
+    },
+    {
+      value: 'customer',
+      label: t('Customers')
+    },
     // {
     //   value: 'admin',
     //   label: t('Administrators')
@@ -374,20 +375,18 @@ const Results = ({ users }) => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell padding="checkbox">
+                      {/* <TableCell padding="checkbox">
                         <Checkbox
                           checked={selectedAllUsers}
                           indeterminate={selectedSomeUsers}
                           onChange={handleSelectAllUsers}
                         />
-                      </TableCell>
-                      {/* <TableCell>{t('Username')}</TableCell> */}
-                      <TableCell>{t('Name')}</TableCell>
-                      <TableCell>{t('Email')}</TableCell>
-                      <TableCell align="center">{t('Posts')}</TableCell>
-                      <TableCell>{t('Location')}</TableCell>
-                      <TableCell>{t('Role')}</TableCell>
-                      <TableCell align="center">{t('Actions')}</TableCell>
+                      </TableCell> */}
+                      <TableCell align="center">#</TableCell>
+                      <TableCell align="center">{t('name')}</TableCell>
+                      <TableCell align="center">{t('email')}</TableCell>
+                      <TableCell align="center">{t('role')}</TableCell>
+                      <TableCell align="center">{t('action')}</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -395,7 +394,7 @@ const Results = ({ users }) => {
                       const isUserSelected = selectedItems.includes(user.id);
                       return (
                         <TableRow hover key={user.id} selected={isUserSelected}>
-                          <TableCell padding="checkbox">
+                          {/* <TableCell padding="checkbox">
                             <Checkbox
                               checked={isUserSelected}
                               onChange={(event) =>
@@ -403,36 +402,22 @@ const Results = ({ users }) => {
                               }
                               value={isUserSelected}
                             />
-                          </TableCell>
+                          </TableCell> */}
                           {/* <TableCell>
                             <Typography variant="h5">
                               {user.username}
                             </Typography>
                           </TableCell> */}
-                          <TableCell>
-                            <Box display="flex" alignItems="center">
-                              {/* <Avatar
-                                sx={{
-                                  mr: 1
-                                }}
-                                src={user.avatar}
-                              /> */}
-                              <Box>
-                                <Link
-                                  variant="h5"
-                                  component={RouterLink}
-                                  to={`/${
-                                    location.pathname.split('/')[1]
-                                  }/management/users/single/${user.id}`}
-                                >
-                                  {user.name}
-                                </Link>
-                                {/* <Typography noWrap variant="subtitle2">
-                                  {user.jobtitle}
-                                </Typography> */}
-                              </Box>
-                            </Box>
+
+                          <TableCell align="center">
+                                    {user.firstName} {user.lastName}
+                                  </TableCell>
+                                  
+
+                          <TableCell align="center">
+                            {user.firstName} {user.lastName}
                           </TableCell>
+
                           <TableCell>
                             <Typography>{user.email}</Typography>
                           </TableCell>

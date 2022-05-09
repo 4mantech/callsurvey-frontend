@@ -12,7 +12,7 @@ import { Grid } from '@mui/material';
 
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 
-// import Block2 from './Results';
+// import TableUser from './Results';
 import TableUser from './tableUser';
 // import PageHeader from './PageHeader';
 import CreateUser from './CreateUser';
