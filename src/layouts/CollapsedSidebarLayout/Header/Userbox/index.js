@@ -6,10 +6,10 @@ import {
   Avatar,
   Box,
   Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
+  // Divider,
+  // List,
+  // ListItem,
+  // ListItemText,
   Popover,
   Typography,
   styled
@@ -17,7 +17,7 @@ import {
 import { useTranslation } from 'react-i18next';
 // import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
+// import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 // import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 
@@ -86,6 +86,8 @@ function HeaderUserbox() {
 
   return (
     <>
+
+
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
         <Avatar variant="rounded" alt={user.name} src={user.avatar} />
         <Box
@@ -96,9 +98,9 @@ function HeaderUserbox() {
         >
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
+            {/* <UserBoxDescription variant="body2">
               {user.jobtitle}
-            </UserBoxDescription>
+            </UserBoxDescription> */}
           </UserBoxText>
         </Box>
         <Box
@@ -134,15 +136,15 @@ function HeaderUserbox() {
           }}
           display="flex"
         >
-          <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+          {/* <Avatar variant="rounded" alt={user.name} src={user.avatar} /> */}
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
+            {/* <UserBoxDescription variant="body2">
               {user.jobtitle}
-            </UserBoxDescription>
+            </UserBoxDescription> */}
           </UserBoxText>
         </MenuUserBox>
-        <Divider
+        {/* <Divider
           sx={{
             mb: 0
           }}
@@ -152,8 +154,8 @@ function HeaderUserbox() {
             p: 1
           }}
           component="nav"
-        >
-          <ListItem
+        > */}
+          {/* <ListItem
             onClick={() => {
               handleClose();
             }}
@@ -163,7 +165,7 @@ function HeaderUserbox() {
           >
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Profile')} />
-          </ListItem>
+          </ListItem> */}
           {/* <ListItem
             onClick={() => {
               handleClose();
@@ -190,8 +192,8 @@ function HeaderUserbox() {
             <AccountTreeTwoToneIcon fontSize="small" />
             <ListItemText primary={t('Projects')} />
           </ListItem> */}
-        </List>
-        <Divider />
+        {/* </List>
+        <Divider /> */}
         <Box m={1}>
           <Button color="primary" fullWidth onClick={handleLogout}>
             <LockOpenTwoToneIcon

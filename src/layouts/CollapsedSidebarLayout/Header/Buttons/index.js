@@ -21,9 +21,9 @@ function HeaderButtons() {
       </Box>
       <Box
         component="span"
-        sx={{
-          display: { xs: 'none', sm: 'inline-block' }
-        }}
+        // sx={{
+        //   display: { xs: 'none', sm: 'inline-block' }
+        // }}
       >
         <LanguageSwitcher />
       </Box>

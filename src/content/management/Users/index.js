@@ -16,6 +16,7 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import TableUser from './tableUser';
 // import PageHeader from './PageHeader';
 import CreateUser from './CreateUser';
+import EditUser from './EditUser';
 
 
 function ManagementUsers() {

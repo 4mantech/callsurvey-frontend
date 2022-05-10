@@ -75,7 +75,7 @@ import { useSnackbar } from 'notistack';
 //   { label: 'User', value: 1 },
 // ];
 
-function CreateUser(props) {
+function EditUser(props) {
   const { getDataServer } = props;
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
@@ -93,15 +93,15 @@ function CreateUser(props) {
   //   });
   // };
 
-  const handleCreateUserOpen = () => {
+  const handleEditUserOpen = () => {
     setOpen(true);
   };
 
-  const handleCreateUserClose = () => {
+  const handleEditUserClose = () => {
     setOpen(false);
   };
 
-  const handleCreateUserSuccess = () => {
+  const handleEditUserSuccess = () => {
     enqueueSnackbar(t('The user account was created successfully'), {
       variant: 'success',
       anchorOrigin: {
@@ -132,7 +132,7 @@ function CreateUser(props) {
             sx={{
               mt: { xs: 2, sm: 0 }
             }}
-            onClick={handleCreateUserOpen}
+            onClick={handleEditUserOpen}
             variant="contained"
             startIcon={<AddTwoToneIcon fontSize="small" />}
           >
@@ -144,7 +144,7 @@ function CreateUser(props) {
         fullWidth
         maxWidth="sm"
         open={open}
-        onClose={handleCreateUserClose}
+        onClose={handleEditUserClose}
       >
         <DialogTitle
           sx={{
@@ -200,7 +200,7 @@ function CreateUser(props) {
               resetForm();
               setStatus({ success: true });
               setSubmitting(false);
-              handleCreateUserSuccess(); 
+              handleEditUserSuccess(); 
               getDataServer();
             }catch(err){
               console.error(err);
@@ -229,6 +229,19 @@ function CreateUser(props) {
                 <Grid container spacing={3}>
                   <Grid item xs={12} lg={12}>
                     <Grid container spacing={3}>
+                      {/* <Grid item xs={12}>
+                        <TextField
+                          error={Boolean(touched.username && errors.username)}
+                          fullWidth
+                          helperText={touched.username && errors.username}
+                          label={t('Username')}
+                          name="username"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.username}
+                          variant="outlined"
+                        />
+                      </Grid> */}
                       <Grid item xs={12} md={6}>
                         <TextField
                           error={Boolean(
@@ -269,7 +282,6 @@ function CreateUser(props) {
                           type="email"
                           value={values.email}
                           variant="outlined"
-                          disa
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -302,8 +314,79 @@ function CreateUser(props) {
                           variant="outlined"
                         />
                       </Grid>
+                      {/* <Grid item xs={12} md={6}>
+                        <Autocomplete
+                          disablePortal
+                          options={roles}
+                          getOptionLabel={(option) => option.label}
+                          renderInput={(params) => (
+                            <TextField
+                              fullWidth
+                              {...params}
+                              label={t('User role')}
+                            />
+                          )}
+                        />
+                      </Grid> */}
                     </Grid>
                   </Grid>
+                  {/* <Grid item xs={12} lg={5} justifyContent="center">
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      flexDirection="column"
+                      mt={3}
+                    >
+                      <AvatarWrapper>
+                        <Avatar
+                          variant="rounded"
+                          alt={user.name}
+                          src={user.avatar}
+                        />
+                        <ButtonUploadWrapper>
+                          <Input
+                            accept="image/*"
+                            id="icon-button-file"
+                            name="icon-button-file"
+                            type="file"
+                          />
+                          <label htmlFor="icon-button-file">
+                            <IconButton component="span" color="primary">
+                              <CloudUploadTwoToneIcon />
+                            </IconButton>
+                          </label>
+                        </ButtonUploadWrapper>
+                      </AvatarWrapper>
+                      <Divider
+                        flexItem
+                        sx={{
+                          m: 4
+                        }}
+                      />
+                      <Box
+                        display="flex"
+                        alignItems="center"
+                        flexDirection="column"
+                        justifyContent="space-between"
+                      >
+                        <Typography
+                          variant="h4"
+                          sx={{
+                            pb: 1
+                          }}
+                        >
+                          {t('Public Profile')}
+                        </Typography>
+                        <Switch
+                          checked={publicProfile.public}
+                          onChange={handlePublicProfile}
+                          name="public"
+                          color="primary"
+                        />
+                      </Box>
+                    </Box>
+                  </Grid> */}
                 </Grid>
               </DialogContent>
               <DialogActions
@@ -311,7 +394,7 @@ function CreateUser(props) {
                   p: 3
                 }}
               >
-                <Button color="secondary" onClick={handleCreateUserClose}>
+                <Button color="secondary" onClick={handleEditUserClose}>
                   {t('Cancel')}
                 </Button>
                 <Button
@@ -322,7 +405,7 @@ function CreateUser(props) {
                   disabled={Boolean(errors.submit) || isSubmitting}
                   variant="contained"
                 >
-                  {t('Add new user')}
+                  {t('Submit')}
                 </Button>
               </DialogActions>
             </form>
@@ -333,4 +416,4 @@ function CreateUser(props) {
   );
 }
 
-export default CreateUser;
+export default EditUser;

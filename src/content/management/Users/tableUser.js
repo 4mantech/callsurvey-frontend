@@ -1,10 +1,28 @@
 import * as React from 'react';
 import axios from 'axios';
 import { useState, forwardRef } from 'react';
-import { Dialog, Zoom, styled, Slide, Avatar, Button } from '@mui/material';
+import {
+  Dialog,
+  Zoom,
+  styled,
+  Slide,
+  Avatar,
+  Button,
+  Grid,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  Box,
+  Typography,
+  TextField,
+  CircularProgress,
+  Autocomplete
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
-import Box from '@mui/material/Box';
+import * as Yup from 'yup';
+import wait from 'src/utils/wait';
+import { Formik } from 'formik';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,12 +30,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Label from 'src/components/Label';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import EditIcon from '@mui/icons-material/Edit';
 import { useSnackbar } from 'notistack';
 
 const DialogWrapper = styled(Dialog)(
@@ -70,6 +88,243 @@ const getUserRoleLabel = (userRole) => {
   const { text, color } = map[userRole];
   return <Label color={color}>{text}</Label>;
 };
+const DialogEdit = (props) => {
+  const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
+  const { getDataServer } = props;
+  const { id , firstName , lastName, password, Confirmpassword, email} = props.row;
+  const [ModalEdit, setModalEdit] = useState(false);
+  const [InputFirstName, setInputFirstName] = useState(firstName);
+  const [InputLastName, setInputLastName] = useState(lastName);
+  const [InputPassword, setInputPassword] = useState(password);
+  const [InputConfirmPassword, setInputConfirmPassword] = useState(Confirmpassword);
+  const [InputEmail, setInputEmail] = useState(email);
+
+
+  const openModalEdit = () => {
+    console.log(firstName);
+    setModalEdit(true)
+  };
+
+  const closeModalEdit = () =>{ 
+    setModalEdit(false)
+  }
+
+  const handleEditSuccess = () => {
+    enqueueSnackbar(t('The user account was edited successfully'), {
+      variant: 'success',
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'right'
+      },
+      TransitionComponent: Zoom
+    });
+
+    setModalEdit(false);
+  };
+  
+  return (
+    <>
+      <Tooltip title={t('Edit')} arrow>
+        <IconButton onClick={openModalEdit} color="warning">
+          <EditIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
+      <Dialog
+        fullWidth
+        maxWidth="sm"
+        open={ModalEdit}
+         onClose={closeModalEdit}
+      >
+        <DialogTitle
+          sx={{
+            p: 3
+          }}
+        >
+          <Typography variant="h4" gutterBottom>
+            {t('Edit User')}
+          </Typography>
+          <Typography variant="subtitle2">
+            {t(
+              'Fill in the fields below to edit user'
+            )}
+          </Typography>
+        </DialogTitle>
+        <Formik
+          initialValues={{
+            email: InputEmail,
+            firstName: InputFirstName,
+            lastName: InputLastName,
+            password: '',
+            confirmPassword: ''
+          }}
+          validationSchema={Yup.object().shape({
+            email: Yup.string()
+            .email(t('The email provided should be a valid email address'))
+            .max(255)
+            .required(t('The email field is required')),
+            firstName: Yup.string()
+              .max(255)
+              .required(t('The first name field is required')),
+            lastName: Yup.string()
+              .max(255)
+              .required(t('The last name field is required')),
+            password: Yup.string()
+              .max(255)
+              // .required(t('The password field is required')),
+              .oneOf([Yup.ref('confirmPassword')], t('Your passwords do not match')),
+            confirmPassword: Yup.string()
+              .max(255)
+              // .required(t('The Confirm Password field is required'))
+              .oneOf([Yup.ref('password')], t('Your passwords do not match'))
+          })}
+          onSubmit={async (
+            _values,
+            { resetForm, setErrors, setStatus, setSubmitting }
+          ) => {
+            const option = {
+              headers: {'Content-Type': 'application/json' }
+            }
+            try {
+              const response = await axios.patch(`http://61.47.81.110:3001/api/V1/users/${id}`,_values, option);
+              await wait(1000);
+              resetForm();
+              setStatus({ success: true });
+              setSubmitting(false);
+              handleEditSuccess();
+              getDataServer();
+            } catch (err) {
+              console.error(err);
+              setStatus({ success: false });
+              setErrors({ submit: err.message });
+              setSubmitting(false);
+            }
+          }}
+        >
+          {({
+            errors,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            isSubmitting,
+            touched,
+            values
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <DialogContent
+                dividers
+                sx={{
+                  p: 3
+                }}
+              >
+                <Grid container spacing={3}>
+                  <Grid item xs={12} lg={12}>
+                    <Grid container spacing={3}>
+                      <Grid item xs={12}>
+                        <TextField
+                          error={Boolean(touched.email && errors.email)}
+                          fullWidth
+                          helperText={touched.email && errors.email}
+                          label={t('Email address')}
+                          name="email"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          type="email"
+                          value={values.email}
+                          variant="outlined"
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          error={Boolean(
+                            touched.firstName && errors.firstName
+                          )}
+                          fullWidth
+                          helperText={touched.firstName && errors.firstName}
+                          label={t('First name')}
+                          name="firstName"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.firstName}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          error={Boolean(touched.lastName && errors.lastName)}
+                          fullWidth
+                          helperText={touched.lastName && errors.lastName}
+                          label={t('Last name')}
+                          name="lastName"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          value={values.lastName}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          error={Boolean(touched.password && errors.password)}
+                          fullWidth
+                          margin="normal"
+                          helperText={touched.password && errors.password}
+                          label={t('Password')}
+                          name="password"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          type="password"
+                          value={values.password}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                          fullWidth
+                          margin="normal"
+                          helperText={touched.confirmPassword && errors.confirmPassword}
+                          label={t('Confirm Password')}
+                          name="confirmPassword"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          type="password"
+                          value={values.confirmPassword}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </DialogContent>
+              <DialogActions
+                sx={{
+                  p: 3
+                }}
+              >
+                <Button color="secondary" onClick={closeModalEdit}  >
+                  {t('Cancel')}
+                </Button>
+                <Button
+                  type="submit"
+                  startIcon={
+                    isSubmitting ? <CircularProgress size="1rem" /> : null
+                  }
+                  disabled={Boolean(errors.submit) || isSubmitting}
+                  variant="contained"
+                >
+                  {t('Submit')}
+                </Button>
+              </DialogActions>
+            </form>
+          )}
+        </Formik>
+      </Dialog>
+    </>
+  );
+};
 
 const DialogDelete = (props) => {
   const { id, getDataServer } = props;
@@ -84,10 +339,12 @@ const DialogDelete = (props) => {
   const closeConfirmDelete = () => {
     setOpenConfirmDelete(false);
   };
-  
+
   const handleDeleteCompleted = async () => {
-    try{
-      const response = await axios.delete(`http://61.47.81.110:3001/api/V1/users/${id}`)
+    try {
+      const response = await axios.delete(
+        `http://61.47.81.110:3001/api/V1/users/${id}`
+      );
       console.log(response.data);
       getDataServer();
       setOpenConfirmDelete(false);
@@ -99,7 +356,7 @@ const DialogDelete = (props) => {
         },
         TransitionComponent: Zoom
       });
-    }catch(error){
+    } catch (error) {
       console.log(error);
       setOpenConfirmDelete(false);
       enqueueSnackbar(t('Deleted User Failed'), {
@@ -224,6 +481,7 @@ export default function usersTable(props) {
 
                 <TableCell align="center">
                   <Typography noWrap>
+                    <DialogEdit row={row} getDataServer={getDataServer}/>
                     <DialogDelete id={row.id} getDataServer={getDataServer} />
                   </Typography>
                 </TableCell>
