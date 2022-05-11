@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState,useEffect } from 'react';
 import {
   Typography,
   Button,
@@ -11,6 +11,7 @@ import {
   styled
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 // import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
 import KeyboardArrowDownTwoToneIcon from '@mui/icons-material/KeyboardArrowDownTwoTone';
 // import AddAlertTwoToneIcon from '@mui/icons-material/AddAlertTwoTone';
@@ -42,7 +43,8 @@ const AvatarPageTitle = styled(Avatar)(
 `
 );
 
-function PageHeader() {
+function PageHeader(props) {
+  const { setSearchParams, searchParams } = props;
   const { t } = useTranslation();
 
   const periods = [
@@ -55,11 +57,11 @@ function PageHeader() {
       text: t('Yesterday')
     },
     {
-      value: 'last_month',
+      value: 'lastmonth',
       text: t('Last month')
     },
     {
-      value: 'last_year',
+      value: 'lastyear',
       text: t('Last year')
     }
   ];
@@ -77,19 +79,20 @@ function PageHeader() {
       value: '3',
       text: t('3')
     },
-    {
-      value: 'veince',
-      text: t('Vince')
-    }
   ];
 
+  const search = periods.find((d) =>
+    d.value.includes(searchParams.get('search'))
+  );
+  const initSearch = !search ? { value: 'today', text: t('Today')} : search;
 
   const [openPeriod, setOpenMenuPeriod] = useState(false);
   const [openDnis, setOpenMenuDnis] = useState(false);
-  const [period, setPeriod] = useState(periods[0].text);
+  const [period, setPeriod] = useState(initSearch);
   const [dnis, setDnis] = useState(dniss[0].text);
   const actionRef1 = useRef(null);
   const actionRef2 = useRef(null);
+
 
   return (
     <Box
@@ -158,7 +161,9 @@ function PageHeader() {
           }}
           endIcon={<KeyboardArrowDownTwoToneIcon fontSize="small" />}
         >
-          {period}
+          {
+          period.text
+          }
         </Button>
 
         <Menu
@@ -179,9 +184,10 @@ function PageHeader() {
             <MenuItem
               key={_period.value}
               onClick={() => {
-                setPeriod(_period.text);
+                setPeriod(_period);
                 setOpenMenuPeriod(false);
-                console.log(_period.value)
+                setSearchParams({ search: _period.value });
+                // console.log(_period.value)
               }}
             >
               {_period.text}

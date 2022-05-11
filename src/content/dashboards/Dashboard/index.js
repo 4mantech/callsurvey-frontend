@@ -4,13 +4,14 @@ import useRefMounted from 'src/hooks/useRefMounted';
 import Footer from 'src/components/Footer';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Helmet } from 'react-helmet-async';
+import { useSearchParams } from 'react-router-dom';
 
 import { Grid } from '@mui/material';
 
 // import SalesByCategory from 'src/content/dashboards/Commerce/SalesByCategory';
-import Block2 from './tableDashboards';
+import TableDashboards from './tableDashboards';
 // import Block5 from './testchart';
-import Block5 from './chartScore';
+import ChartScore from './chartScore';
 // import Block10 from 'src/content/blocks/ListsSmall/Block7';
 // import Block11 from 'src/content/blocks/ListsSmall/Block8'; chartDashboard
 // import Block3 from './Commerce/SalesByCategory';
@@ -32,14 +33,18 @@ function DashboardReports() {
   const [dataScore1, setDataScore1] = React.useState([]);
   const [dataScore2, setDataScore2] = React.useState([]);
   const [dataScore3, setDataScore3] = React.useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
   
   const isMountedRef = useRefMounted();
   const getDataServer = React.useCallback(async () => {
+    let date = searchParams.get('search')
+      ? searchParams.get('search')
+      : 'today';
     try {
       const response = await axios.get(
-        `http://61.47.81.110:3001/api/v1/dashboard`
+        `http://61.47.81.110:3001/api/v1/dashboard?search=${date}`
       );
-      const { data, score1, score2, score3,totalScore } = response.data;
+      const { data, score1, score2, score3, totalScore } = response.data;
       if (isMountedRef.current) {
         setDataDashboard(data);
         setDataScore1(score1);
@@ -50,7 +55,7 @@ function DashboardReports() {
     } catch (err) {
       console.error(err);
     }
-  }, [isMountedRef]);
+  }, [isMountedRef, searchParams]);
 
   React.useEffect(() => {
     getDataServer();
@@ -68,7 +73,10 @@ function DashboardReports() {
         <title>Dashboard</title>
       </Helmet>
       <PageTitleWrapper>
-        <PageHeader />
+        <PageHeader
+          setSearchParams={setSearchParams}
+          searchParams={searchParams}
+        />
       </PageTitleWrapper>
       <Grid
         sx={{
@@ -85,7 +93,12 @@ function DashboardReports() {
         </Grid>
 
         <Grid item xs={12}>
-          <Block5 data1={dataScore1} data2={dataScore2} data3={dataScore3} dataTotal={dataTotalScore} />
+          <ChartScore
+            data1={dataScore1}
+            data2={dataScore2}
+            data3={dataScore3}
+            dataTotal={dataTotalScore}
+          />
         </Grid>
 
         <Grid item md={10} xs={12}>
@@ -97,7 +110,7 @@ function DashboardReports() {
             spacing={4}
           >
             <Grid item xs={12}>
-              <Block2 data={dataDashboard} />
+              <TableDashboards data={dataDashboard} />
             </Grid>
             {/* <Grid item xs={12}>
               <Block4 />
