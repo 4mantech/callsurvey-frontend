@@ -89,12 +89,12 @@ function HeaderUserbox() {
 
 
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+        {/* <Avatar variant="rounded" alt={user.name} src={user.avatar} /> */}
         <Box
           component="span"
-          sx={{
-            display: { xs: 'none', md: 'inline-block' }
-          }}
+          // sx={{
+          //   display: { xs: 'none', md: 'inline-block' }
+          // }}
         >
           <UserBoxText>
             <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>

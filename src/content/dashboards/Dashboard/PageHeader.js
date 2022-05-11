@@ -64,32 +64,32 @@ function PageHeader() {
     }
   ];
 
-  // const dniss = [
-  //   {
-  //     value: '1',
-  //     text: t('1')
-  //   },
-  //   {
-  //     value: '2',
-  //     text: t('2')
-  //   },
-  //   {
-  //     value: '3',
-  //     text: t('3')
-  //   },
-  //   {
-  //     value: 'veince',
-  //     text: t('Vince')
-  //   }
-  // ];
+  const dniss = [
+    {
+      value: 'all',
+      text: t('All')
+    },
+    {
+      value: '2',
+      text: t('2')
+    },
+    {
+      value: '3',
+      text: t('3')
+    },
+    {
+      value: 'veince',
+      text: t('Vince')
+    }
+  ];
 
 
   const [openPeriod, setOpenMenuPeriod] = useState(false);
-  // const [openDnis, setOpenMenuDnis] = useState(false);
+  const [openDnis, setOpenMenuDnis] = useState(false);
   const [period, setPeriod] = useState(periods[0].text);
-  // const [dnis, setDnis] = useState(dnis[0].text);
+  const [dnis, setDnis] = useState(dniss[0].text);
   const actionRef1 = useRef(null);
-  // const actionRef2 = useRef(null);
+  const actionRef2 = useRef(null);
 
   return (
     <Box
@@ -109,9 +109,11 @@ function PageHeader() {
         </Box>
       </Box>
       <Box mt={{ xs: 3, md: 0 }}>
-        {/* <Button  
+        
+        <Button  
           variant="outlined"  
           ref={actionRef2}
+          onClick={() => setOpenMenuDnis(true)}
           sx={{
             mr: 1
           }}
@@ -145,7 +147,7 @@ function PageHeader() {
               {_dnis.text}
             </MenuItem>
           ))}
-        </Menu> */}
+        </Menu>
 
         <Button
           variant="outlined"
@@ -179,6 +181,7 @@ function PageHeader() {
               onClick={() => {
                 setPeriod(_period.text);
                 setOpenMenuPeriod(false);
+                console.log(_period.value)
               }}
             >
               {_period.text}
