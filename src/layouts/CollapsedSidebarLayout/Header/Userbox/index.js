@@ -62,6 +62,7 @@ function HeaderUserbox() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
+  console.log(user)
 
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
@@ -97,7 +98,7 @@ function HeaderUserbox() {
           // }}
         >
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{}</UserBoxLabel>
             {/* <UserBoxDescription variant="body2">
               {user.jobtitle}
             </UserBoxDescription> */}
@@ -138,7 +139,7 @@ function HeaderUserbox() {
         >
           {/* <Avatar variant="rounded" alt={user.name} src={user.avatar} /> */}
           <UserBoxText>
-            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{}</UserBoxLabel>
             {/* <UserBoxDescription variant="body2">
               {user.jobtitle}
             </UserBoxDescription> */}

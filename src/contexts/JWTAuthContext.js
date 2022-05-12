@@ -9,7 +9,6 @@ const initialAuthState = {
   user: null
 };
 
-
 const setSession = (accessToken) => {
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
@@ -113,19 +112,23 @@ export const AuthProvider = (props) => {
 
   const login = async (email, password) => {
     const option = {
-      headers: {'Content-Type': 'application/json' }
-    }
-    console.log(email);
-    console.log(password);
-    const response = await axios.post('http://localhost:4000/api/v1/users/login',option, {
+      headers: { 'Content-Type': 'application/json' }
+    };
+    const value = {
       email,
       password
-    });
+    };
+    const response = await axios.post(
+      'http://localhost:4000/api/V1/users/login',
+      value,
+      option,
+    );
     // const response = await axios.post('/api/account/login', {
     //   email,
     //   password
     // });
-    const { accessToken, user } = response.data;
+    const { accessToken , user } = response.data;
+    console.log(user);
     localStorage.setItem('user', user);
     setSession(accessToken);
     dispatch({
