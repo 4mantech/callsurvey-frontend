@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer } from 'react';
-import axios from 'src/utils/axios';
+import axios from 'axios';
 import { verify, JWT_SECRET } from 'src/utils/jwt';
 import PropTypes from 'prop-types';
 
@@ -9,12 +9,14 @@ const initialAuthState = {
   user: null
 };
 
+
 const setSession = (accessToken) => {
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   } else {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
     delete axios.defaults.headers.common.Authorization;
   }
 };
@@ -69,18 +71,15 @@ const AuthContext = createContext({
 export const AuthProvider = (props) => {
   const { children } = props;
   const [state, dispatch] = useReducer(reducer, initialAuthState);
-
   useEffect(() => {
     const initialize = async () => {
       try {
         const accessToken = window.localStorage.getItem('accessToken');
-
         if (accessToken && verify(accessToken, JWT_SECRET)) {
           setSession(accessToken);
-
-          const response = await axios.get('/api/account/personal');
-          const { user } = response.data;
-
+          const user = window.localStorage.getItem('user');
+          // const response = await axios.get('/api/account/personal');
+          // const { user } = response.data;
           dispatch({
             type: 'INITIALIZE',
             payload: {
@@ -113,12 +112,21 @@ export const AuthProvider = (props) => {
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post('/api/account/login', {
+    const option = {
+      headers: {'Content-Type': 'application/json' }
+    }
+    console.log(email);
+    console.log(password);
+    const response = await axios.post('http://localhost:4000/api/v1/users/login',option, {
       email,
       password
     });
+    // const response = await axios.post('/api/account/login', {
+    //   email,
+    //   password
+    // });
     const { accessToken, user } = response.data;
-
+    localStorage.setItem('user', user);
     setSession(accessToken);
     dispatch({
       type: 'LOGIN',

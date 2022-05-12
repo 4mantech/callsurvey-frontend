@@ -8,7 +8,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-// import TablePagination from '@mui/material/TablePagination';
+import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 // import TableSortLabel from '@mui/material/TableSortLabel';
 // import Toolbar from '@mui/material/Toolbar';
@@ -259,6 +259,18 @@ import useRefMounted from 'src/hooks/useRefMounted';
 
 
 export default function EnhancedTable() {
+
+  const [page, setPage] = React.useState(2);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   // const [order, setOrder] = React.useState('asc');
   // const [orderBy, setOrderBy] = React.useState('calories');
   // const [selected, setSelected] = React.useState([]);
@@ -377,6 +389,14 @@ export default function EnhancedTable() {
   </TableBody>
 </Table>
 </TableContainer>
+<TablePagination
+      component="div"
+      count={10}
+      page={page}
+      onPageChange={handleChangePage}
+      rowsPerPage={rowsPerPage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+    />
 </Paper>
   );
 }
