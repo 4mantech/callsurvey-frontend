@@ -62,7 +62,7 @@ function HeaderUserbox() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
-  console.log(user)
+
 
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
@@ -90,7 +90,7 @@ function HeaderUserbox() {
 
 
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        <Avatar variant="rounded" alt={user.name} src={user.avatar} />
+        {/* <Avatar variant="rounded" alt={user.name} src={user.avatar} /> */}
         <Box
           component="span"
           sx={{
@@ -98,10 +98,10 @@ function HeaderUserbox() {
           }}
         >
           <UserBoxText>
-            <UserBoxLabel variant="body1">{}</UserBoxLabel>
-            <UserBoxDescription variant="body2">
+            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
+            {/* <UserBoxDescription variant="body2">
               {user.jobtitle}
-            </UserBoxDescription>
+            </UserBoxDescription> */}
           </UserBoxText>
         </Box>
         <Box
@@ -139,7 +139,7 @@ function HeaderUserbox() {
         >
           {/* <Avatar variant="rounded" alt={user.name} src={user.avatar} /> */}
           <UserBoxText>
-            <UserBoxLabel variant="body1">{}</UserBoxLabel>
+            <UserBoxLabel variant="body1">{user.name}</UserBoxLabel>
             {/* <UserBoxDescription variant="body2">
               {user.jobtitle}
             </UserBoxDescription> */}

@@ -77,7 +77,6 @@ export const AuthProvider = (props) => {
         if (accessToken && verify(accessToken, JWT_SECRET)) {
           setSession(accessToken);
           const user = JSON.parse(window.localStorage.getItem('user'));
-          console.log("Hiiiiiiiiii => " ,user);
           // const response = await axios.get('/api/account/personal');
           // const { user } = response.data;
           dispatch({
@@ -129,7 +128,6 @@ export const AuthProvider = (props) => {
     //   password
     // });
     const { accessToken , user } = response.data;
-    console.log(JSON.stringify(user));
     localStorage.setItem('user', JSON.stringify(user));
     setSession(accessToken);
     dispatch({

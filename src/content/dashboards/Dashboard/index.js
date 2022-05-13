@@ -10,6 +10,7 @@ import { Grid } from '@mui/material';
 
 // import SalesByCategory from 'src/content/dashboards/Commerce/SalesByCategory';
 import TableDashboards from './tableDashboards';
+// import TableDashboardstest from './testchart';
 // import Block5 from './testchart';
 import ChartScore from './chartScore';
 // import Block10 from 'src/content/blocks/ListsSmall/Block7';
@@ -115,6 +116,9 @@ function DashboardReports() {
             <Grid item xs={12}>
               <TableDashboards data={dataDashboard} />
             </Grid>
+            {/* <Grid item xs={12}>
+              <TableDashboardstest data={dataDashboard} />
+            </Grid> */}
             {/* <Grid item xs={12}>
               <Block4 />
             </Grid> */}

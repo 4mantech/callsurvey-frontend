@@ -49,6 +49,10 @@ function PageHeader(props) {
 
   const periods = [
     {
+      value: 'all',
+      text: t('All')
+    },
+    {
       value: 'today',
       text: t('Today')
     },
