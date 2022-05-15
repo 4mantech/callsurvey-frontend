@@ -2,12 +2,13 @@ import * as Yup from 'yup';
 
 import { Formik } from 'formik';
 // import { Link as RouterLink } from 'react-router-dom';
-
+import { useSnackbar } from 'notistack';
 import {
   Box,
   Button,
   FormHelperText,
   TextField,
+  Zoom,
   // Checkbox,
   // Typography,
   // Link,
@@ -19,10 +20,23 @@ import useRefMounted from 'src/hooks/useRefMounted';
 import { useTranslation } from 'react-i18next';
 
 
+
 const LoginJWT = () => {
   const { login } = useAuth();
   const isMountedRef = useRefMounted();
   const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleLoginFailed = () => {
+    enqueueSnackbar(t('Username or Password is incorrect'), {
+      variant: 'error',
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'right'
+      },
+      TransitionComponent: Zoom
+    });
+  };
 
   return (
     <Formik
@@ -55,6 +69,8 @@ const LoginJWT = () => {
           }
         } catch (err) {
           console.error(err);
+          console.log("failed")
+          handleLoginFailed();
           if (isMountedRef.current) {
             setStatus({ success: false });
             setErrors({ submit: err.message });

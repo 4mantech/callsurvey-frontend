@@ -10,6 +10,7 @@ import {
   // Menu,
   styled
 } from '@mui/material';
+
 import { useTranslation } from 'react-i18next';
 import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
 // import KeyboardArrowDownTwoToneIcon from '@mui/icons-material/KeyboardArrowDownTwoTone';
@@ -44,30 +45,6 @@ const AvatarPageTitle = styled(Avatar)(
 
 function PageHeader() {
   const { t } = useTranslation();
-
-  // const periods = [
-  //   {
-  //     value: 'today',
-  //     text: t('Today')
-  //   },
-  //   {
-  //     value: 'yesterday',
-  //     text: t('Yesterday')
-  //   },
-  //   {
-  //     value: 'last_month',
-  //     text: t('Last month')
-  //   },
-  //   {
-  //     value: 'last_year',
-  //     text: t('Last year')
-  //   }
-  // ];
-
-  // const [openPeriod, setOpenMenuPeriod] = useState(false);
-  // const [period, setPeriod] = useState(periods[3].text);
-  // const actionRef1 = useRef(null);
-
   return (
     <Box
       display="flex"
@@ -88,49 +65,13 @@ function PageHeader() {
           </Typography> */}
         </Box>
       </Box>
-      <Box mt={{ xs: 3, md: 0 }}>
-        {/* <Button
-          variant="outlined"
-          ref={actionRef1}
-          onClick={() => setOpenMenuPeriod(true)}
-          sx={{
-            mr: 1
-          }}
-          endIcon={<KeyboardArrowDownTwoToneIcon fontSize="small" />}
-        >
-          {period}
-        </Button>
-        <Menu
-          disableScrollLock
-          anchorEl={actionRef1.current}
-          onClose={() => setOpenMenuPeriod(false)}
-          open={openPeriod}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right'
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-        >
-          {periods.map((_period) => (
-            <MenuItem
-              key={_period.value}
-              onClick={() => {
-                setPeriod(_period.text);
-                setOpenMenuPeriod(false);
-              }}
-            >
-              {_period.text}
-            </MenuItem>
-          ))}
-        </Menu> */}
+      {/* <Box mt={{ xs: 3, md: 0 }}>
 
+ 
         <Button variant="contained" startIcon={<DocumentScannerTwoToneIcon />}>
           {t('Export')}
         </Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

@@ -54,6 +54,25 @@ function SalesByCategory(props) {
     );
   };
 
+  const total = {
+    datasets: [
+      {
+        backgroundColor: [
+          theme.palette.primary.main,
+          theme.palette.success.main,
+          theme.palette.warning.main,
+          theme.palette.info.main,
+          theme.palette.secondary.main
+        ]
+      }
+    ],
+    labels: [
+      t('Score 1'),
+      t('Score 2'),
+      t('Score 3'),
+    ]
+  };
+  
   const sales = {
     datasets: [
       {
@@ -128,6 +147,10 @@ function SalesByCategory(props) {
       mode: theme.palette.mode
     }
   };
+  
+  const chartOptionTotal = {...chartOptions}
+  chartOptionTotal.labels = total.labels;
+  
 
   const chartSeries1 = data1;
   const chartSeries2 = data2;
@@ -137,7 +160,7 @@ function SalesByCategory(props) {
 
   return (
     <Grid container spacing={4}>
-      <Grid item lg={3}>
+      <Grid item xs={12} sm={6} lg={3}>
         <Card
           sx={{
             px: 3,
@@ -162,7 +185,7 @@ function SalesByCategory(props) {
               variant="subtitle2"
               component="div"
             >
-              {t('Total')}
+              {t('Score average')}
             </Typography>
           </Box>
           <Grid
@@ -172,7 +195,7 @@ function SalesByCategory(props) {
             justifyContent="center"
             alignItems="center"
           >
-                      {reDucer(chartSeries4) ? (
+              {reDucer(chartSeries4) ? (
               <Typography
                 sx={{
                   ml: 1.5,
@@ -189,7 +212,7 @@ function SalesByCategory(props) {
             ) : (
               <Chart
                 height={210}
-                options={chartOptions}
+                options={chartOptionTotal}
                 series={chartSeries4}
                 type="donut"
               />

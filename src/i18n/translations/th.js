@@ -16,7 +16,7 @@ const thJSON = {
    'Score 1': 'คะแนน 1',
    'Score 2': 'คะแนน 2',
    'Score 3': 'คะแนน 3',
-   'Total': 'ทั้งหมด',
+   'Score average': 'คะแนนเฉลี่ย',
    'Point 1':'แต้ม 1',
    'Point 2':'แต้ม 2',
    'Point 3':'แต้ม 3',

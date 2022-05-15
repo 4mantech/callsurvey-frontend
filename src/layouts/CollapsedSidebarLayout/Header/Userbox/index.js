@@ -85,12 +85,24 @@ function HeaderUserbox() {
     }
   };
 
+  const LogoImage2 = () =>{
+    return <img src="/static/images/avatars/avatra.svg" alt="avatra"
+    style={{
+      width :"40px",
+      // position: "absolute",
+      // top: "-17px",
+      // left: "-50px"
+    }} 
+    />;
+  }
+  
+
   return (
     <>
 
 
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
-        {/* <Avatar variant="rounded" alt={user.name} src={user.avatar} /> */}
+        <LogoImage2  />
         <Box
           component="span"
           sx={{

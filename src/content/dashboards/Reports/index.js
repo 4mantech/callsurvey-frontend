@@ -1,8 +1,10 @@
+import * as React from 'react';
 import Footer from 'src/components/Footer';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Helmet } from 'react-helmet-async';
-
 import { Grid } from '@mui/material';
+import useRefMounted from 'src/hooks/useRefMounted';
+import axios from 'axios';
 
 // import Block1 from 'src/content/blocks/Statistics/Block3';
 // import Block2 from 'src/content/blocks/ListsLarge/Block8';
@@ -21,6 +23,27 @@ import EnhancedTable from './TableReport';
 // import Block13 from './Block13';
 
 function DashboardReports() {
+  const isMountedRef = useRefMounted();
+  const [reports, setReports] = React.useState([]);
+
+  const getDataServer = React.useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `http://61.47.81.110:3001/api/v1/reports`
+      );
+      console.table(reports);
+      if (isMountedRef.current) {
+  
+        setReports(response.data.data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMountedRef]);
+
+  React.useEffect(() => {
+    getDataServer();
+  }, [getDataServer]);
   return (
     <>
       <Helmet>
@@ -52,7 +75,7 @@ function DashboardReports() {
             spacing={4}
           >
             <Grid item xs={12}>
-              <EnhancedTable />
+              <EnhancedTable reports={reports} />
             </Grid>
             {/* <Grid item xs={12}>
               <Block4 />
