@@ -65,12 +65,7 @@ function DashboardReports() {
     getDataServer();
   }, [getDataServer]);
 
-  const data = {
-    totalDay: 594,
-    score1: 50,
-    score2: 20,
-    score3: 70
-  };
+
   return (
     <>
       <Helmet>

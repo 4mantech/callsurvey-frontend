@@ -1,4 +1,4 @@
-import { useRef, useState,useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   Typography,
   Button,
@@ -46,6 +46,34 @@ const AvatarPageTitle = styled(Avatar)(
 function PageHeader(props) {
   const { setSearchParams, searchParams } = props;
   const { t } = useTranslation();
+  const [dniss, setDniss] = useState([]);
+  const isMountedRef = useRefMounted();
+
+  const getDataServer = React.useCallback(async () => {
+    let date = searchParams.get('search')
+      ? searchParams.get('search')
+      : 'today';
+    try {
+      const response = await axios.get(
+        `http://61.47.81.110:3001/api/v1/dashboard/dnis`
+      );
+      const { dnis } = response.data.data;
+      if (isMountedRef.current) {
+        let ans = dnis.map((data) => {
+          return {
+            value: `${data.dnis}`,
+            text: `${data.dnis}`
+          };
+        });
+        // setDniss();
+      }
+    } catch (err) {}
+  }, [isMountedRef]);
+
+  React.useEffect(() => {
+    getDataServer();
+    console.log(dniss);
+  }, [getDataServer]);
 
   const periods = [
     {
@@ -70,30 +98,30 @@ function PageHeader(props) {
     }
   ];
 
-  const dniss = [
-    {
-      value: 'all',
-      text: t('All')
-    },
-    {
-      value: '2',
-      text: t('2')
-    },
-    {
-      value: '3',
-      text: t('3')
-    },
-  ];
+  // const dniss = [
+  //   {
+  //     value: 'all',
+  //     text: t('All')
+  //   },
+  //   {
+  //     value: '2',
+  //     text: t('2')
+  //   },
+  //   {
+  //     value: '3',
+  //     text: t('3')
+  //   },
+  // ];
 
   const search = periods.find((d) =>
     d.value.includes(searchParams.get('search'))
   );
-  const initSearch = !search ? { value: 'today', text: t('Today')} : search;
+  const initSearch = !search ? { value: 'today', text: t('Today') } : search;
 
   const [openPeriod, setOpenMenuPeriod] = useState(false);
   const [openDnis, setOpenMenuDnis] = useState(false);
   const [period, setPeriod] = useState(initSearch);
-  const [dnis, setDnis] = useState(dniss[0].text);
+  const [dnis, setDnis] = useState('none');
   const actionRef1 = useRef(null);
   const actionRef2 = useRef(null);
 
@@ -115,20 +143,19 @@ function PageHeader(props) {
         </Box>
       </Box>
       <Box mt={{ xs: 3, md: 0 }}>
-        
-        <Button  
-          variant="outlined"  
+        <Button
+          variant="outlined"
           ref={actionRef2}
           onClick={() => setOpenMenuDnis(true)}
           sx={{
             mr: 1
           }}
           endIcon={<KeyboardArrowDownTwoToneIcon fontSize="small" />}
-          >
-            {dnis}
-          </Button>
+        >
+          {dnis}
+        </Button>
 
-          <Menu
+        <Menu
           disableScrollLock
           anchorEl={actionRef2.current}
           onClose={() => setOpenMenuDnis(false)}
@@ -142,17 +169,21 @@ function PageHeader(props) {
             horizontal: 'right'
           }}
         >
-          {dniss.map((_dnis) => (
-            <MenuItem
-              key={_dnis.value}
-              onClick={() => {
-                setDnis(_dnis.text);
-                setOpenMenuDnis(false);
-              }}
-            >
-              {_dnis.text}
-            </MenuItem>
-          ))}
+          {dniss
+            ? dniss.map((_dnis) => {
+                return (
+                  <MenuItem
+                    key={_dnis.value}
+                    onClick={() => {
+                      setDnis(_dnis.text);
+                      setOpenMenuDnis(false);
+                    }}
+                  >
+                    {_dnis.text}
+                  </MenuItem>
+                );
+              })
+            : null}
         </Menu>
 
         <Button
@@ -164,9 +195,7 @@ function PageHeader(props) {
           }}
           endIcon={<KeyboardArrowDownTwoToneIcon fontSize="small" />}
         >
-          {
-          period.text
-          }
+          {period.text}
         </Button>
 
         <Menu
