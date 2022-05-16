@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import {
   Typography,
   Button,
@@ -10,8 +10,9 @@ import {
   Menu,
   styled
 } from '@mui/material';
+import axios from 'axios';
+import useRefMounted from 'src/hooks/useRefMounted';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
 // import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
 import KeyboardArrowDownTwoToneIcon from '@mui/icons-material/KeyboardArrowDownTwoTone';
 // import AddAlertTwoToneIcon from '@mui/icons-material/AddAlertTwoTone';
@@ -46,34 +47,14 @@ const AvatarPageTitle = styled(Avatar)(
 function PageHeader(props) {
   const { setSearchParams, searchParams } = props;
   const { t } = useTranslation();
-  const [dniss, setDniss] = useState([]);
+  const [dniss, setDniss] = useState([{ value: 'all', text: 'All' }]);
   const isMountedRef = useRefMounted();
-
-  const getDataServer = React.useCallback(async () => {
-    let date = searchParams.get('search')
-      ? searchParams.get('search')
-      : 'today';
-    try {
-      const response = await axios.get(
-        `http://61.47.81.110:3001/api/v1/dashboard/dnis`
-      );
-      const { dnis } = response.data.data;
-      if (isMountedRef.current) {
-        let ans = dnis.map((data) => {
-          return {
-            value: `${data.dnis}`,
-            text: `${data.dnis}`
-          };
-        });
-        // setDniss();
-      }
-    } catch (err) {}
-  }, [isMountedRef]);
-
-  React.useEffect(() => {
-    getDataServer();
-    console.log(dniss);
-  }, [getDataServer]);
+  const [openPeriod, setOpenMenuPeriod] = useState(false);
+  const [openDnis, setOpenMenuDnis] = useState(false);
+  const [period, setPeriod] = useState('All');
+  const [dnis, setDnis] = useState('All');
+  const actionRef1 = useRef(null);
+  const actionRef2 = useRef(null);
 
   const periods = [
     {
@@ -98,32 +79,34 @@ function PageHeader(props) {
     }
   ];
 
-  // const dniss = [
-  //   {
-  //     value: 'all',
-  //     text: t('All')
-  //   },
-  //   {
-  //     value: '2',
-  //     text: t('2')
-  //   },
-  //   {
-  //     value: '3',
-  //     text: t('3')
-  //   },
-  // ];
+  const getDataServer = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `http://61.47.81.110:3001/api/v1/dashboard/dnis`
+      );
+      const dnis = response.data.data;
+      if (isMountedRef.current) {
+        let ans = dnis.map((data) => {
+          return {
+            value: `${data.dnis}`,
+            text: `${data.dnis}`
+          };
+        });
+        setDniss([{ value: 'all', text: 'All' }, ...ans]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [isMountedRef]);
 
-  const search = periods.find((d) =>
-    d.value.includes(searchParams.get('search'))
-  );
-  const initSearch = !search ? { value: 'today', text: t('Today') } : search;
-
-  const [openPeriod, setOpenMenuPeriod] = useState(false);
-  const [openDnis, setOpenMenuDnis] = useState(false);
-  const [period, setPeriod] = useState(initSearch);
-  const [dnis, setDnis] = useState('none');
-  const actionRef1 = useRef(null);
-  const actionRef2 = useRef(null);
+  useEffect(() => {
+    let search = periods.find((d) =>
+      d.value.includes(searchParams.get('search'))
+    );
+    let initSearch = !search ? { value: 'today', text: t('Today') } : search;
+    setPeriod(initSearch);
+    getDataServer();
+  }, [getDataServer]);
 
   return (
     <Box
@@ -177,6 +160,12 @@ function PageHeader(props) {
                     onClick={() => {
                       setDnis(_dnis.text);
                       setOpenMenuDnis(false);
+                      setSearchParams({
+                        dnis: _dnis.value,
+                        search: searchParams.get('search')
+                          ? searchParams.get('search')
+                          : 'today'
+                      });
                     }}
                   >
                     {_dnis.text}
@@ -218,7 +207,12 @@ function PageHeader(props) {
               onClick={() => {
                 setPeriod(_period);
                 setOpenMenuPeriod(false);
-                setSearchParams({ search: _period.value });
+                setSearchParams({
+                  dnis: searchParams.get('dnis')
+                    ? searchParams.get('dnis')
+                    : 'all',
+                  search: _period.value
+                });
                 // console.log(_period.value)
               }}
             >
