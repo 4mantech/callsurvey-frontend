@@ -468,8 +468,8 @@ const columns = [
 
       return (
       <>
-      <DialogDelete />
-      <Button onClick={onClick}>Click</Button>
+      <DialogDelete onClick={onClick} />
+      {/* <Button onClick={onClick}>Click</Button> */}
       </>
       );
     }
