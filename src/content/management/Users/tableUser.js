@@ -440,79 +440,124 @@ const DialogDelete = (props) => {
 
 const columns = [
   { field: 'id', headerName: '#', minWidth: 20, flex: 1 },
-  { field: 'agentname', headerName: 'Agentname', minWidth: 330, flex: 1 },
+  { field: 'fullName', headerName: 'Name', minWidth: 400, flex: 1 , valueGetter: (params) =>
+  `${params.row.firstName || ''} ${params.row.lastName || ''}`,},
+  { field: 'email', headerName: 'Email', minWidth: 450, flex: 2 },
+  { field: 'role', headerName: 'Role', minWidth: 380, flex: 2 },
+  {
+    field: 'action',
+    headerName: 'Action',
+    minWidth: 10, 
+    flex: 1,
+    sortable: false,
+    renderCell: (params) => {
+
+      const onClick = (e) => {
+        e.stopPropagation(); // don't select this row after clicking
+        const { api } = params;
+        const thisRow = {};
+
+        api
+          .getAllColumns()
+          .forEach(
+            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+          );
+
+        console.log(JSON.stringify(thisRow, null,3));
+      };
+
+      return (
+      <>
+      <DialogDelete />
+      <Button onClick={onClick}>Click</Button>
+      </>
+      );
+    }
+  }
 ];
 
 
 export default function usersTable(props) {
-  const { users, getDataServer } = props;
-  const { t } = useTranslation();
-  const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(5);
-
-  const handlePageChange = (_event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleLimitChange = (event) => {
-    console.log(event.target.value);
-    setLimit(parseInt(event.target.value));
-  };
-
-
-
-
+  const { users } = props;
+  console.log(users)
+  const rows = users;
+  rows.forEach((element, index) => {
+    element.id = Number(++index);
+  });
+  const [pageSize, setPageSize] = React.useState(10);
   return (
-    <Paper sx={{ width: '100%', mb: 2 }}>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">#</TableCell>
-              <TableCell align="center">{t('name')}</TableCell>
-              <TableCell align="center">{t('email')}</TableCell>
-              <TableCell align="center">{t('role')}</TableCell>
-              <TableCell align="center">{t('action')}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map((row, index) => (
-              <TableRow
-                key={index}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align="center">{++index}</TableCell>
-                <TableCell align="center">
-                  {row.firstName} {row.lastName}
-                </TableCell>
-                <TableCell align="center">{row.email}</TableCell>
-                <TableCell align="center">
-                  {getUserRoleLabel(row.role)}
-                </TableCell>
-
-                <TableCell align="center">
-                  <Typography noWrap>
-                    <DialogEdit row={row} getDataServer={getDataServer}/>
-                    <DialogDelete id={row.id} getDataServer={getDataServer} />
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Box p={2}>
-        <TablePagination
-          component="div"
-          count={users.length}
-          onPageChange={handlePageChange}
-          onRowsPerPageChange={handleLimitChange}
-          page={page}
-          rowsPerPage={limit}
-          labelRowsPerPage=""
-          rowsPerPageOptions={[5, 10, 15]}
-        />
-      </Box>
-    </Paper>
+    <>
+      <Paper sx={{ width: '100%', mb: 2 }}>
+        <div style={{ width: '100%' }}>
+          <DataGrid
+            alignItems="flex-center"
+            rows={rows}
+            columns={columns}
+            pageSize={pageSize}
+            rowsPerPageOptions={[10, 20, 50]}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            autoHeight
+            disableSelectionOnClick
+          />
+        </div>
+      </Paper>
+    </>
   );
+
+
+  // return (
+  //   <Paper sx={{ width: '100%', mb: 2 }}>
+  //     <TableContainer component={Paper}>
+  //       <Table sx={{ minWidth: 650 }} aria-label="simple table">
+  //         <TableHead>
+  //           <TableRow>
+  //             <TableCell align="center">#</TableCell>
+  //             <TableCell align="center">{t('name')}</TableCell>
+  //             <TableCell align="center">{t('email')}</TableCell>
+  //             <TableCell align="center">{t('role')}</TableCell>
+  //             <TableCell align="center">{t('action')}</TableCell>
+  //           </TableRow>
+  //         </TableHead>
+  //         <TableBody>
+  //           {users.map((row, index) => (
+  //             <TableRow
+  //               key={index}
+  //               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+  //             >
+  //               <TableCell align="center">{++index}</TableCell>
+  //               <TableCell align="center">
+  //                 {row.firstName} {row.lastName}
+  //               </TableCell>
+  //               <TableCell align="center">{row.email}</TableCell>
+  //               <TableCell align="center">
+  //                 {getUserRoleLabel(row.role)}
+  //               </TableCell>
+
+  //               <TableCell align="center">
+  //                 <Typography noWrap>
+                    // <DialogEdit row={row} getDataServer={getDataServer}/>
+                    // <DialogDelete id={row.id} getDataServer={getDataServer} />
+  //                 </Typography>
+  //               </TableCell>
+  //             </TableRow>
+  //           ))}
+  //         </TableBody>
+  //       </Table>
+  //     </TableContainer>
+  //     <Box p={2}>
+  //       <TablePagination
+  //         component="div"
+  //         count={users.length}
+  //         onPageChange={handlePageChange}
+  //         onRowsPerPageChange={handleLimitChange}
+  //         page={page}
+  //         rowsPerPage={limit}
+  //         labelRowsPerPage=""
+  //         rowsPerPageOptions={[5, 10, 15]}
+  //       />
+  //     </Box>
+  //   </Paper>
+  // );
+
+
 }
