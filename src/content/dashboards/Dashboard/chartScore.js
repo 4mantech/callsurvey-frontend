@@ -10,11 +10,17 @@ import {
 
 import { useTranslation } from 'react-i18next';
 // import ArrowDownwardTwoToneIcon from '@mui/icons-material/ArrowDownwardTwoTone';
-import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
+// import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
+import LooksOneIcon from '@mui/icons-material/LooksOne';
+import LooksTwoIcon from '@mui/icons-material/LooksTwo';
+import Looks3Icon from '@mui/icons-material/Looks3';
+import FunctionsIcon from '@mui/icons-material/Functions';
+
+
 // import ArrowUpwardTwoToneIcon from '@mui/icons-material/ArrowUpwardTwoTone';
-import SupportTwoToneIcon from '@mui/icons-material/SupportTwoTone';
-import YardTwoToneIcon from '@mui/icons-material/YardTwoTone';
-import SnowmobileTwoToneIcon from '@mui/icons-material/SnowmobileTwoTone';
+// import SupportTwoToneIcon from '@mui/icons-material/SupportTwoTone';
+// import YardTwoToneIcon from '@mui/icons-material/YardTwoTone';
+// import SnowmobileTwoToneIcon from '@mui/icons-material/SnowmobileTwoTone';
 import Chart from 'react-apexcharts';
 
 const AvatarWrapper = styled(Avatar)(
@@ -174,7 +180,7 @@ function SalesByCategory(props) {
                 background: `${theme.colors.gradients.blue4}`
               }}
             >
-              <ReceiptTwoToneIcon fontSize="small" />
+              <FunctionsIcon fontSize="small" />
             </AvatarWrapper>
             <Typography
               sx={{
@@ -234,7 +240,7 @@ function SalesByCategory(props) {
                 background: `${theme.colors.gradients.orange3}`
               }}
             >
-              <SupportTwoToneIcon fontSize="small" />
+              <LooksOneIcon fontSize="small" />
             </AvatarWrapper>
             <Typography
               sx={{
@@ -291,10 +297,10 @@ function SalesByCategory(props) {
           <Box display="flex" alignItems="center">
             <AvatarWrapper
               sx={{
-                background: `${theme.colors.success.main}`
+                background: `${theme.palette.success.main}`
               }}
             >
-              <YardTwoToneIcon fontSize="small" />
+              <LooksTwoIcon fontSize="small" />
             </AvatarWrapper>
             <Typography
               sx={{
@@ -354,7 +360,7 @@ function SalesByCategory(props) {
                 background: `${theme.colors.primary.main}`
               }}
             >
-              <SnowmobileTwoToneIcon fontSize="small" />
+              <Looks3Icon fontSize="small" />
             </AvatarWrapper>
             <Typography
               sx={{

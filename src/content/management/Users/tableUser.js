@@ -1,5 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
+import { DataGrid } from '@mui/x-data-grid';
 import { useState, forwardRef } from 'react';
 import {
   Dialog,
@@ -437,6 +438,12 @@ const DialogDelete = (props) => {
   );
 };
 
+const columns = [
+  { field: 'id', headerName: '#', minWidth: 20, flex: 1 },
+  { field: 'agentname', headerName: 'Agentname', minWidth: 330, flex: 1 },
+];
+
+
 export default function usersTable(props) {
   const { users, getDataServer } = props;
   const { t } = useTranslation();
@@ -448,8 +455,12 @@ export default function usersTable(props) {
   };
 
   const handleLimitChange = (event) => {
+    console.log(event.target.value);
     setLimit(parseInt(event.target.value));
   };
+
+
+
 
   return (
     <Paper sx={{ width: '100%', mb: 2 }}>

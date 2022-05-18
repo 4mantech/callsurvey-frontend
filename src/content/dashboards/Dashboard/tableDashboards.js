@@ -82,7 +82,7 @@ const columns = [
             (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
           );
 
-        console.log(JSON.stringify(thisRow, null, 3));
+        console.log(JSON.stringify(thisRow, null,3));
       };
 
       return <Button onClick={onClick}>Click</Button>;
@@ -96,7 +96,7 @@ const columns = [
 //       <GridToolbarExport />
 //     </GridToolbarContainer>
 //   );
-// }
+// }b
 
 export default function dashboardTable(props) {
   const { data } = props;
