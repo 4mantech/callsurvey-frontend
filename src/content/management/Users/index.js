@@ -14,6 +14,7 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 
 // import TableUser from './Results';
 import TableUser from './tableUser';
+// import ApplicationsJobsPlatform from './test';
 // import PageHeader from './PageHeader';
 import CreateUser from './CreateUser';
 import EditUser from './EditUser';
@@ -21,6 +22,9 @@ import EditUser from './EditUser';
 
 function ManagementUsers() {
   const [users, setUsers] = React.useState([]);
+  const [dnis, setDnis] = React.useState([]);
+
+
   const isMountedRef = useRefMounted();
   const getDataServer = React.useCallback(async () => {
     try {
@@ -32,10 +36,23 @@ function ManagementUsers() {
       console.error(err);
     };
   }, [isMountedRef]);
+
+  const getDnis = React.useCallback(async () => {
+    try {
+      const response = await axios.get(`http://61.47.81.110:3001/api/v1/dashboard/dnis`);
+      if (isMountedRef.current) {
+        setDnis(response.data.data);
+      }
+    } catch (err) {
+      console.error(err);
+    };
+  }, [isMountedRef]);
   
   React.useEffect(() => {
     getDataServer();
+    getDnis();
   }, [getDataServer]);
+
 
   return (
     <>
@@ -43,7 +60,7 @@ function ManagementUsers() {
         <title>Users - Management</title>
       </Helmet>
       <PageTitleWrapper>
-        <CreateUser getDataServer={getDataServer} />
+        <CreateUser dnis={dnis} getDataServer={getDataServer} />
       </PageTitleWrapper>
       <Grid
         sx={{

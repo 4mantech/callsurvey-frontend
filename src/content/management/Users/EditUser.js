@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 // import { styled } from '@mui/material/styles';
-import wait from 'src/utils/wait';
+// import wait from 'src/utils/wait';
 import axios from 'axios';
 // import useAuth from 'src/hooks/useAuth';
 
@@ -28,6 +28,8 @@ import {
 } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useSnackbar } from 'notistack';
+import InputDnis from './InputDnis';
+
 // import CloudUploadTwoToneIcon from '@mui/icons-material/CloudUploadTwoTone';
 
 // const Input = styled('input')({
@@ -314,79 +316,11 @@ function EditUser(props) {
                           variant="outlined"
                         />
                       </Grid>
-                      {/* <Grid item xs={12} md={6}>
-                        <Autocomplete
-                          disablePortal
-                          options={roles}
-                          getOptionLabel={(option) => option.label}
-                          renderInput={(params) => (
-                            <TextField
-                              fullWidth
-                              {...params}
-                              label={t('User role')}
-                            />
-                          )}
-                        />
-                      </Grid> */}
+                      <Grid item xs={12}>
+                        <InputDnis/>
+                      </Grid>
                     </Grid>
                   </Grid>
-                  {/* <Grid item xs={12} lg={5} justifyContent="center">
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      flexDirection="column"
-                      mt={3}
-                    >
-                      <AvatarWrapper>
-                        <Avatar
-                          variant="rounded"
-                          alt={user.name}
-                          src={user.avatar}
-                        />
-                        <ButtonUploadWrapper>
-                          <Input
-                            accept="image/*"
-                            id="icon-button-file"
-                            name="icon-button-file"
-                            type="file"
-                          />
-                          <label htmlFor="icon-button-file">
-                            <IconButton component="span" color="primary">
-                              <CloudUploadTwoToneIcon />
-                            </IconButton>
-                          </label>
-                        </ButtonUploadWrapper>
-                      </AvatarWrapper>
-                      <Divider
-                        flexItem
-                        sx={{
-                          m: 4
-                        }}
-                      />
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        flexDirection="column"
-                        justifyContent="space-between"
-                      >
-                        <Typography
-                          variant="h4"
-                          sx={{
-                            pb: 1
-                          }}
-                        >
-                          {t('Public Profile')}
-                        </Typography>
-                        <Switch
-                          checked={publicProfile.public}
-                          onChange={handlePublicProfile}
-                          name="public"
-                          color="primary"
-                        />
-                      </Box>
-                    </Box>
-                  </Grid> */}
                 </Grid>
               </DialogContent>
               <DialogActions

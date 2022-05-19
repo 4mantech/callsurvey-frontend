@@ -16,7 +16,7 @@ import {
   Box,
   Typography,
   TextField,
-  CircularProgress,
+  CircularProgress
   // Autocomplete
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -93,23 +93,24 @@ const DialogEdit = (props) => {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const { getDataServer } = props;
-  const { id , firstName , lastName, password, Confirmpassword, email} = props.row;
+  const { id, firstName, lastName, password, Confirmpassword, email } =
+    props.row;
   const [ModalEdit, setModalEdit] = useState(false);
   const [InputFirstName, setInputFirstName] = useState(firstName);
   const [InputLastName, setInputLastName] = useState(lastName);
   const [InputPassword, setInputPassword] = useState(password);
-  const [InputConfirmPassword, setInputConfirmPassword] = useState(Confirmpassword);
+  const [InputConfirmPassword, setInputConfirmPassword] =
+    useState(Confirmpassword);
   const [InputEmail, setInputEmail] = useState(email);
-
 
   const openModalEdit = () => {
     console.log(firstName);
-    setModalEdit(true)
+    setModalEdit(true);
   };
 
-  const closeModalEdit = () =>{ 
-    setModalEdit(false)
-  }
+  const closeModalEdit = () => {
+    setModalEdit(false);
+  };
 
   const handleEditSuccess = () => {
     enqueueSnackbar(t('The user account was edited successfully'), {
@@ -123,7 +124,7 @@ const DialogEdit = (props) => {
 
     setModalEdit(false);
   };
-  
+
   return (
     <>
       <Tooltip title={t('Edit')} arrow>
@@ -131,12 +132,7 @@ const DialogEdit = (props) => {
           <EditIcon fontSize="small" />
         </IconButton>
       </Tooltip>
-      <Dialog
-        fullWidth
-        maxWidth="sm"
-        open={ModalEdit}
-         onClose={closeModalEdit}
-      >
+      <Dialog fullWidth maxWidth="sm" open={ModalEdit} onClose={closeModalEdit}>
         <DialogTitle
           sx={{
             p: 3
@@ -146,9 +142,7 @@ const DialogEdit = (props) => {
             {t('Edit User')}
           </Typography>
           <Typography variant="subtitle2">
-            {t(
-              'Fill in the fields below to edit user'
-            )}
+            {t('Fill in the fields below to edit user')}
           </Typography>
         </DialogTitle>
         <Formik
@@ -161,9 +155,9 @@ const DialogEdit = (props) => {
           }}
           validationSchema={Yup.object().shape({
             email: Yup.string()
-            .email(t('The email provided should be a valid email address'))
-            .max(255)
-            .required(t('The email field is required')),
+              .email(t('The email provided should be a valid email address'))
+              .max(255)
+              .required(t('The email field is required')),
             firstName: Yup.string()
               .max(255)
               .required(t('The first name field is required')),
@@ -173,7 +167,10 @@ const DialogEdit = (props) => {
             password: Yup.string()
               .max(255)
               // .required(t('The password field is required')),
-              .oneOf([Yup.ref('confirmPassword')], t('Your passwords do not match')),
+              .oneOf(
+                [Yup.ref('confirmPassword')],
+                t('Your passwords do not match')
+              ),
             confirmPassword: Yup.string()
               .max(255)
               // .required(t('The Confirm Password field is required'))
@@ -184,10 +181,14 @@ const DialogEdit = (props) => {
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
             const option = {
-              headers: {'Content-Type': 'application/json' }
-            }
+              headers: { 'Content-Type': 'application/json' }
+            };
             try {
-              const response = await axios.patch(`http://61.47.81.110:3001/api/V1/users/${id}`,_values, option);
+              const response = await axios.patch(
+                `http://61.47.81.110:3001/api/V1/users/${id}`,
+                _values,
+                option
+              );
               await wait(1000);
               resetForm();
               setStatus({ success: true });
@@ -234,15 +235,13 @@ const DialogEdit = (props) => {
                           value={values.email}
                           variant="outlined"
                           InputProps={{
-                            readOnly: true,
+                            readOnly: true
                           }}
                         />
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <TextField
-                          error={Boolean(
-                            touched.firstName && errors.firstName
-                          )}
+                          error={Boolean(touched.firstName && errors.firstName)}
                           fullWidth
                           helperText={touched.firstName && errors.firstName}
                           label={t('First name')}
@@ -283,10 +282,14 @@ const DialogEdit = (props) => {
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
-                          error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                          error={Boolean(
+                            touched.confirmPassword && errors.confirmPassword
+                          )}
                           fullWidth
                           margin="normal"
-                          helperText={touched.confirmPassword && errors.confirmPassword}
+                          helperText={
+                            touched.confirmPassword && errors.confirmPassword
+                          }
                           label={t('Confirm Password')}
                           name="confirmPassword"
                           onBlur={handleBlur}
@@ -305,7 +308,7 @@ const DialogEdit = (props) => {
                   p: 3
                 }}
               >
-                <Button color="secondary" onClick={closeModalEdit}  >
+                <Button color="secondary" onClick={closeModalEdit}>
                   {t('Cancel')}
                 </Button>
                 <Button
@@ -438,52 +441,54 @@ const DialogDelete = (props) => {
   );
 };
 
-const columns = [
-  { field: 'id', headerName: '#', minWidth: 20, flex: 1 },
-  { field: 'fullName', headerName: 'Name', minWidth: 400, flex: 1 , valueGetter: (params) =>
-  `${params.row.firstName || ''} ${params.row.lastName || ''}`,},
-  { field: 'email', headerName: 'Email', minWidth: 450, flex: 2 },
-  { field: 'role', headerName: 'Role', minWidth: 380, flex: 2 },
-  {
-    field: 'action',
-    headerName: 'Action',
-    minWidth: 10, 
-    flex: 1,
-    sortable: false,
-    renderCell: (params) => {
-
-      const onClick = (e) => {
-        e.stopPropagation(); // don't select this row after clicking
-        const { api } = params;
-        const thisRow = {};
-
-        api
-          .getAllColumns()
-          .forEach(
-            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-          );
-
-        console.log(JSON.stringify(thisRow, null,3));
-      };
-
-      return (
-      <>
-      <DialogDelete onClick={onClick} />
-      {/* <Button onClick={onClick}>Click</Button> */}
-      </>
-      );
-    }
-  }
-];
-
-
 export default function usersTable(props) {
-  const { users } = props;
-  console.log(users)
+  const { users, getDataServer } = props;
   const rows = users;
-  rows.forEach((element, index) => {
-    element.id = Number(++index);
-  });
+
+  const columns = [
+    { field: 'id', headerName: '#', minWidth: 20, flex: 1, hide: true },
+    {
+      field: 'fullName',
+      headerName: 'Name',
+      minWidth: 400,
+      flex: 1,
+      valueGetter: (params) =>
+        `${params.row.firstName || ''} ${params.row.lastName || ''}`
+    },
+    { field: 'email', headerName: 'Email', minWidth: 450, flex: 2 },
+    { field: 'role', headerName: 'Role', minWidth: 380, flex: 2 },
+    {
+      field: 'action',
+      headerName: 'Action',
+      minWidth: 10,
+      flex: 1,
+      sortable: false,
+      renderCell: (params) => {
+        const onClick = (e) => {
+          e.stopPropagation(); // don't select this row after clicking
+          const { api } = params;
+          const thisRow = {};
+
+          api
+            .getAllColumns()
+            .forEach(
+              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+            );
+
+          console.log(JSON.stringify(thisRow, null, 3));
+        };
+
+        return (
+          <>
+            <DialogEdit row={params.row} getDataServer={getDataServer}/>
+            <DialogDelete getDataServer={getDataServer} id={params.id} />
+            {/* <Button onClick={onClick}>Click</Button> */}
+          </>
+        );
+      }
+    }
+  ];
+
   const [pageSize, setPageSize] = React.useState(10);
   return (
     <>
@@ -503,7 +508,6 @@ export default function usersTable(props) {
       </Paper>
     </>
   );
-
 
   // return (
   //   <Paper sx={{ width: '100%', mb: 2 }}>
@@ -535,8 +539,8 @@ export default function usersTable(props) {
 
   //               <TableCell align="center">
   //                 <Typography noWrap>
-                    // <DialogEdit row={row} getDataServer={getDataServer}/>
-                    // <DialogDelete id={row.id} getDataServer={getDataServer} />
+  // <DialogEdit row={row} getDataServer={getDataServer}/>
+  // <DialogDelete id={row.id} getDataServer={getDataServer} />
   //                 </Typography>
   //               </TableCell>
   //             </TableRow>
@@ -558,6 +562,4 @@ export default function usersTable(props) {
   //     </Box>
   //   </Paper>
   // );
-
-
 }

@@ -66,28 +66,6 @@ const columns = [
   { field: 'score1', headerName: 'Score1', minWidth: 100, flex: 1 },
   { field: 'score2', headerName: 'Score2', minWidth: 100, flex: 1 },
   { field: 'score3', headerName: 'Score3', minWidth: 100, flex: 1 },
-  {
-    field: 'action',
-    headerName: 'Action',
-    sortable: false,
-    renderCell: (params) => {
-      const onClick = (e) => {
-        e.stopPropagation(); // don't select this row after clicking
-        const { api } = params;
-        const thisRow = {};
-
-        api
-          .getAllColumns()
-          .forEach(
-            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-          );
-
-        console.log(JSON.stringify(thisRow, null,3));
-      };
-
-      return <Button onClick={onClick}>Click</Button>;
-    }
-  }
 ];
 
 // function CustomToolbar() {
@@ -118,9 +96,6 @@ export default function dashboardTable(props) {
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
             autoHeight
             disableSelectionOnClick
-            // components={{
-            //   Toolbar: CustomToolbar,
-            // }}
           />
         </div>
       </Paper>

@@ -82,14 +82,14 @@ function PageHeader(props) {
   const getDataServer = useCallback(async () => {
     try {
       const response = await axios.get(
-        `http://61.47.81.110:3001/api/v1/dashboard/dnis`
+        `http://61.47.81.110:3001/api/v1/dashboard/dnis2`
       );
-      const dnis = response.data.data;
+      const { dnis }= response.data;
       if (isMountedRef.current) {
         let ans = dnis.map((data) => {
           return {
-            value: `${data.dnis}`,
-            text: `${data.dnis}`
+            value: `${data}`,
+            text: `${data}`
           };
         });
         setDniss([{ value: 'all', text: 'All' }, ...ans]);

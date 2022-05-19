@@ -24,7 +24,7 @@ import {
   // Avatar,
   Autocomplete,
   // IconButton,
-  Button,
+  Button
 } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useSnackbar } from 'notistack';
@@ -62,7 +62,7 @@ import { useSnackbar } from 'notistack';
 //       width: ${theme.spacing(6)};
 //       height: ${theme.spacing(6)};
 //       padding: 0;
-  
+
 //       &:hover {
 //         background: ${theme.colors.primary.dark};
 //       }
@@ -72,11 +72,16 @@ import { useSnackbar } from 'notistack';
 
 // const roles = [
 //   { label: 'Administrator', value: 0 },
-//   { label: 'User', value: 1 },
+//   { label: 'User', value: 1 }
 // ];
 
 function CreateUser(props) {
-  const { getDataServer } = props;
+  const { getDataServer, dnis } = props;
+  let newDnis = [];
+  if (dnis.length>0){
+    dnis.map(data => newDnis.push(Object.values(data)[0]));
+  }
+  console.log(newDnis, '<=====');
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -166,7 +171,8 @@ function CreateUser(props) {
             firstName: '',
             lastName: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            dnis: []
           }}
           validationSchema={Yup.object().shape({
             firstName: Yup.string()
@@ -192,22 +198,27 @@ function CreateUser(props) {
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
             const option = {
-              headers: {'Content-Type': 'application/json' }
-            }
-            try{
-              const response = await axios.post('http://61.47.81.110:3001/api/V1/users',_values, option);
-              console.log(response);
-              resetForm();
-              setStatus({ success: true });
-              setSubmitting(false);
-              handleCreateUserSuccess(); 
-              getDataServer();
-            }catch(err){
-              console.error(err);
-              setStatus({ success: false });
-              setErrors({ submit: err.message });
-              setSubmitting(false);
-            }
+              headers: { 'Content-Type': 'application/json' }
+            };
+            console.log(_values);
+            // try {
+            //   const response = await axios.post(
+            //     'http://61.47.81.110:3001/api/V1/users',
+            //     _values,
+            //     option
+            //   );
+            //   console.log(response);
+            //   resetForm();
+            //   setStatus({ success: true });
+            //   setSubmitting(false);
+            //   handleCreateUserSuccess();
+            //   getDataServer();
+            // } catch (err) {
+            //   console.error(err);
+            //   setStatus({ success: false });
+            //   setErrors({ submit: err.message });
+            //   setSubmitting(false);
+            // }
           }}
         >
           {({
@@ -231,9 +242,7 @@ function CreateUser(props) {
                     <Grid container spacing={3}>
                       <Grid item xs={12} md={6}>
                         <TextField
-                          error={Boolean(
-                            touched.firstName && errors.firstName
-                          )}
+                          error={Boolean(touched.firstName && errors.firstName)}
                           fullWidth
                           helperText={touched.firstName && errors.firstName}
                           label={t('First name')}
@@ -289,10 +298,14 @@ function CreateUser(props) {
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
-                          error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                          error={Boolean(
+                            touched.confirmPassword && errors.confirmPassword
+                          )}
                           fullWidth
                           margin="normal"
-                          helperText={touched.confirmPassword && errors.confirmPassword}
+                          helperText={
+                            touched.confirmPassword && errors.confirmPassword
+                          }
                           label={t('Confirm Password')}
                           name="confirmPassword"
                           onBlur={handleBlur}
@@ -300,6 +313,32 @@ function CreateUser(props) {
                           type="password"
                           value={values.confirmPassword}
                           variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Autocomplete
+                          multiple
+                          fullWidth
+                          limitTags={2}
+                          name="dnis"
+                          options={dnis}
+                          onChange={(_, value) => {
+                            console.log(value);
+                          }}
+                          getOptionLabel={(option) => option.dnis}
+                          renderInput={(params) => {
+                            return (
+                              <TextField
+                                {...params}
+                                fullWidth
+                                onBlur={handleBlur}
+                                name="dnis"
+                                variant="outlined"
+                                label={t('Select Dnis')}
+                                placeholder={t('Select Dnis...')}
+                              />
+                            );
+                          }}
                         />
                       </Grid>
                     </Grid>
