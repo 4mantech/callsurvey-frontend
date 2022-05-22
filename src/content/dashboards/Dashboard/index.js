@@ -38,16 +38,21 @@ function DashboardReports() {
   
   const isMountedRef = useRefMounted();
   const getDataServer = React.useCallback(async () => {
+    const accessToken = window.localStorage.getItem('accessToken');
+    const option = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      }
+    };
     let date = searchParams.get('search')
       ? searchParams.get('search')
       : 'today';
-    let dnis = searchParams.get('dnis')
-      ? searchParams.get('dnis')
-      : 'all';
+    let dnis = searchParams.get('dnis') ? searchParams.get('dnis') : 'all';
     try {
       const response = await axios.get(
         `http://61.47.81.110:3001/api/v1/dashboard?search=${date}&dnis=${dnis}`
-      );
+      ,option);
       const { data, score1, score2, score3, totalScore } = response.data;
       if (isMountedRef.current) {
         setDataDashboard(data);

@@ -128,6 +128,7 @@ export const AuthProvider = (props) => {
     //   password
     // });
     const { accessToken , user } = response.data;
+    console.log(response)
     localStorage.setItem('user', JSON.stringify(user));
     setSession(accessToken);
     dispatch({

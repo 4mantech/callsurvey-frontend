@@ -107,7 +107,7 @@ const router = [
   // Collapsed Sidebar Layout
 
   {
-    path: 'collapsed-sidebar',
+    path: '/',
     element: (
       <Authenticated>
         <CollapsedSidebarLayout />

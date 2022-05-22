@@ -78,10 +78,9 @@ import { useSnackbar } from 'notistack';
 function CreateUser(props) {
   const { getDataServer, dnis } = props;
   let newDnis = [];
-  if (dnis.length>0){
-    dnis.map(data => newDnis.push(Object.values(data)[0]));
+  if (dnis.length > 0) {
+    dnis.map((data) => newDnis.push(Object.values(data)[0]));
   }
-  console.log(newDnis, '<=====');
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -197,8 +196,12 @@ function CreateUser(props) {
             _values,
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
+            const accessToken = window.localStorage.getItem('accessToken');
             const option = {
-              headers: { 'Content-Type': 'application/json' }
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+              }
             };
             console.log(_values);
             // try {

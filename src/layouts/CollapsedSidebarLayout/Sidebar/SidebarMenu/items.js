@@ -62,7 +62,7 @@ const menuItems = [
           {
             name: 'User',
             icon: GroupIcon,
-            link: '/collapsed-sidebar/management/users/list' 
+            link: '/management/users/list' 
           }
           
         ]

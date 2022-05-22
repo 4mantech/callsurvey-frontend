@@ -80,11 +80,18 @@ function PageHeader(props) {
   ];
 
   const getDataServer = useCallback(async () => {
+    const accessToken = window.localStorage.getItem('accessToken');
+    const option = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      }
+    };
     try {
       const response = await axios.get(
         `http://61.47.81.110:3001/api/v1/dashboard/dnis2`
-      );
-      const { dnis }= response.data;
+      ,option);
+      const { dnis } = response.data;
       if (isMountedRef.current) {
         let ans = dnis.map((data) => {
           return {

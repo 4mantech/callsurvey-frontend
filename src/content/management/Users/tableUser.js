@@ -180,8 +180,12 @@ const DialogEdit = (props) => {
             _values,
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
+            const accessToken = window.localStorage.getItem('accessToken');
             const option = {
-              headers: { 'Content-Type': 'application/json' }
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+              }
             };
             try {
               const response = await axios.patch(
@@ -480,7 +484,7 @@ export default function usersTable(props) {
 
         return (
           <>
-            <DialogEdit row={params.row} getDataServer={getDataServer}/>
+            <DialogEdit row={params.row} getDataServer={getDataServer} />
             <DialogDelete getDataServer={getDataServer} id={params.id} />
             {/* <Button onClick={onClick}>Click</Button> */}
           </>
