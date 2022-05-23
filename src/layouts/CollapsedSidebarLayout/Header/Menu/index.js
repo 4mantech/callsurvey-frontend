@@ -78,7 +78,6 @@ function HeaderMenu() {
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <>
       <ListWrapper>
@@ -87,7 +86,7 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={NavLink}
-            to={`/${location.pathname.split('/')[1]}/management/users`}
+            to={`/${location.pathname.split('/')[0]}management/users/list`} 
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}

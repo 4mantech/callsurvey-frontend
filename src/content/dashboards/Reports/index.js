@@ -31,9 +31,8 @@ function DashboardReports() {
       const response = await axios.get(
         `http://61.47.81.110:3001/api/v1/reports`
       );
-      console.table(reports);
+      console.table(response);
       if (isMountedRef.current) {
-  
         setReports(response.data.data);
       }
     } catch (err) {

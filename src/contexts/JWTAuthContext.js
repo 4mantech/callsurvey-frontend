@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
+import authAPI from 'src/utils/api/auth';
 import { verify, JWT_SECRET } from 'src/utils/jwt';
 import PropTypes from 'prop-types';
 
@@ -118,6 +119,9 @@ export const AuthProvider = (props) => {
       email,
       password
     };
+    // const response = await authAPI.v1.logIn({...value})
+    // console.log("=======================")
+    // console.log(response);
     const response = await axios.post(
       'http://61.47.81.110:3001/api/V1/users/login',
       value,

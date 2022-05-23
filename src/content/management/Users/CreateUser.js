@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import { useState } from 'react';
 import * as Yup from 'yup';
-import { Formik } from 'formik';
+import { Formik, setIn } from 'formik';
 import { useTranslation } from 'react-i18next';
 // import { styled } from '@mui/material/styles';
 import wait from 'src/utils/wait';
@@ -28,6 +28,7 @@ import {
 } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useSnackbar } from 'notistack';
+import InputDnis from './InputDnis';
 // import CloudUploadTwoToneIcon from '@mui/icons-material/CloudUploadTwoTone';
 
 // const Input = styled('input')({
@@ -84,6 +85,7 @@ function CreateUser(props) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [inputDnis, setinputDnis] = useState()
   // const { user } = useAuth();
 
   // const [publicProfile, setPublicProfile] = useState({
@@ -171,7 +173,6 @@ function CreateUser(props) {
             lastName: '',
             password: '',
             confirmPassword: '',
-            dnis: []
           }}
           validationSchema={Yup.object().shape({
             firstName: Yup.string()
@@ -196,6 +197,9 @@ function CreateUser(props) {
             _values,
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
+            const dnisAccess = Object.keys(dnis)
+            console.log(dnisAccess)
+            const newData = {..._values,dnisAccess}
             const accessToken = window.localStorage.getItem('accessToken');
             const option = {
               headers: {
@@ -203,11 +207,12 @@ function CreateUser(props) {
                 Authorization: `Bearer ${accessToken}`
               }
             };
-            console.log(_values);
+            console.log(newData);
             // try {
             //   const response = await axios.post(
-            //     'http://61.47.81.110:3001/api/V1/users',
-            //     _values,
+            //     'http://localhost:4000/api/V1/users',
+            //     // 'http://61.47.81.110:3001/api/V1/users',
+            //     newData,
             //     option
             //   );
             //   console.log(response);
@@ -323,10 +328,13 @@ function CreateUser(props) {
                           multiple
                           fullWidth
                           limitTags={2}
-                          name="dnis"
+                          name="dnisInput"
                           options={dnis}
-                          onChange={(_, value) => {
-                            console.log(value);
+                          onChange={(_,value)=>{
+                            setinputDnis(value)
+                            console.log(value)
+                            console.log("state>>>>>",inputDnis)
+
                           }}
                           getOptionLabel={(option) => option.dnis}
                           renderInput={(params) => {
@@ -335,7 +343,6 @@ function CreateUser(props) {
                                 {...params}
                                 fullWidth
                                 onBlur={handleBlur}
-                                name="dnis"
                                 variant="outlined"
                                 label={t('Select Dnis')}
                                 placeholder={t('Select Dnis...')}
