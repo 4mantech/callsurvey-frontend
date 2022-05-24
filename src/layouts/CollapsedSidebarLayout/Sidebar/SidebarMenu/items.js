@@ -2,6 +2,7 @@
 import CallIcon from '@mui/icons-material/Call';
 import SettingsIcon from '@mui/icons-material/Settings';
 import GroupIcon from '@mui/icons-material/Group';
+
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const menuItems = [
@@ -64,7 +65,6 @@ const menuItems = [
             icon: GroupIcon,
             link: '/management/users/list' 
           }
-          
         ]
       },
       

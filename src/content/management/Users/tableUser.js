@@ -38,6 +38,7 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSnackbar } from 'notistack';
+import Users from 'src/utils/api/users';
 
 const DialogWrapper = styled(Dialog)(
   () => `
@@ -180,19 +181,19 @@ const DialogEdit = (props) => {
             _values,
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
-            const accessToken = window.localStorage.getItem('accessToken');
             const option = {
               headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
+                'Content-Type': 'application/json'
               }
             };
             try {
-              const response = await axios.patch(
-                `http://61.47.81.110:3001/api/V1/users/${id}`,
-                _values,
-                option
-              );
+              Users.v1.Update(id,_values);
+              // const response = await Users.v1.All();
+              // const response = await axios.patch(
+              //   `http://61.47.81.110:3001/api/V1/users/${id}`,
+              //   _values,
+              //   option
+              // );
               await wait(1000);
               resetForm();
               setStatus({ success: true });
@@ -350,10 +351,10 @@ const DialogDelete = (props) => {
 
   const handleDeleteCompleted = async () => {
     try {
-      const response = await axios.delete(
-        `http://61.47.81.110:3001/api/V1/users/${id}`
-      );
-      console.log(response.data);
+      Users.v1.Destroy(id);
+      // const response = await axios.delete(
+      //   `http://61.47.81.110:3001/api/V1/users/${id}`
+      // );
       getDataServer();
       setOpenConfirmDelete(false);
       enqueueSnackbar(t('Deleted User Successfully'), {

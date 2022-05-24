@@ -197,8 +197,8 @@ function CreateUser(props) {
             _values,
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
-            const dnisAccess = Object.keys(dnis)
-            console.log(dnisAccess)
+            const dnisAccess = dnis
+            // console.log(dnisAccess)
             const newData = {..._values,dnisAccess}
             const accessToken = window.localStorage.getItem('accessToken');
             const option = {
@@ -208,25 +208,25 @@ function CreateUser(props) {
               }
             };
             console.log(newData);
-            // try {
-            //   const response = await axios.post(
-            //     'http://localhost:4000/api/V1/users',
-            //     // 'http://61.47.81.110:3001/api/V1/users',
-            //     newData,
-            //     option
-            //   );
-            //   console.log(response);
-            //   resetForm();
-            //   setStatus({ success: true });
-            //   setSubmitting(false);
-            //   handleCreateUserSuccess();
-            //   getDataServer();
-            // } catch (err) {
-            //   console.error(err);
-            //   setStatus({ success: false });
-            //   setErrors({ submit: err.message });
-            //   setSubmitting(false);
-            // }
+            try {
+              const response = await axios.post(
+                'http://localhost:4000/api/V1/users',
+                // 'http://61.47.81.110:3001/api/V1/users',
+                newData,
+                option
+              );
+              console.log(response);
+              resetForm();
+              setStatus({ success: true });
+              setSubmitting(false);
+              handleCreateUserSuccess();
+              getDataServer();
+            } catch (err) {
+              console.error(err);
+              setStatus({ success: false });
+              setErrors({ submit: err.message });
+              setSubmitting(false);
+            }
           }}
         >
           {({
@@ -336,7 +336,7 @@ function CreateUser(props) {
                             console.log("state>>>>>",inputDnis)
 
                           }}
-                          getOptionLabel={(option) => option.dnis}
+                          getOptionLabel={(option) => option}
                           renderInput={(params) => {
                             return (
                               <TextField

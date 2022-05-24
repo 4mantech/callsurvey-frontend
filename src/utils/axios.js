@@ -25,10 +25,11 @@ const tokenPlugin = (token) => (config) => {
 
 const httpClient = (url) => {
   const instance = axios.create({
-    baseURL: 'http://61.47.81.110:3001'
+    baseURL: 'http://localhost:4000'
+    // baseURL: 'http://61.47.81.110:3001'
   });
 
-  const whitelistUrl = ['/api/V1/users/login'];
+  const whitelistUrl = ['/api/V1/auth/login'];
   if (!whitelistUrl.includes(url)) {
     const token = localStorage.getItem('accessToken');
     instance.interceptors.request.use(tokenPlugin(token));
@@ -37,13 +38,13 @@ const httpClient = (url) => {
 };
 
 const requests = {
-  get: (url, headers = {}, options = {}) =>
+  get: (url, headers = {}) =>
     httpClient(url)
-      .get(url, { headers, ...options })
-      .then(responseBody).catch(err=>err),
-  post: (url, body = {}, headers = {}, options = {}) =>
+      .get(url, { headers })
+      .then(responseBody),
+  post: (url, body = {}, headers = {}) =>
     httpClient(url)
-      .post(url, body, { headers, ...options })
+      .post(url, body, { headers })
       .then(responseBody),
   patch: (url, body = {}, headers = {}) =>
     httpClient(url)

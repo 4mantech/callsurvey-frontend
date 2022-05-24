@@ -17,6 +17,8 @@ import { useTranslation } from 'react-i18next';
 import KeyboardArrowDownTwoToneIcon from '@mui/icons-material/KeyboardArrowDownTwoTone';
 // import AddAlertTwoToneIcon from '@mui/icons-material/AddAlertTwoTone';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import Dashboard from 'src/utils/api/dashboard';
+
 // import LineAxisTwoToneIcon from '@mui/icons-material/LineAxisTwoTone';
 
 const AvatarPageTitle = styled(Avatar)(
@@ -80,18 +82,20 @@ function PageHeader(props) {
   ];
 
   const getDataServer = useCallback(async () => {
-    const accessToken = window.localStorage.getItem('accessToken');
+    // const accessToken = window.localStorage.getItem('accessToken');
     const option = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`
+        // Authorization: `Bearer ${accessToken}`
       }
     };
     try {
-      const response = await axios.get(
-        `http://61.47.81.110:3001/api/v1/dashboard/dnis2`
-      ,option);
-      const { dnis } = response.data;
+      const response = await Dashboard.v1.Dnis(option);
+      // const response = await axios.get(
+      //   `http://61.47.81.110:3001/api/v1/dashboard/dnis2`
+      // ,option);
+      const { dnis } = response;
+      console.log(response)
       if (isMountedRef.current) {
         let ans = dnis.map((data) => {
           return {

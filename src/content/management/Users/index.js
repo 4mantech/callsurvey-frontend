@@ -4,6 +4,7 @@ import * as React from 'react';
 import axios from 'axios';
 import useRefMounted from 'src/hooks/useRefMounted';
 import Users from 'src/utils/api/users';
+import Dashboard from 'src/utils/api/dashboard';
 
 import { Helmet } from 'react-helmet-async';
 import Footer from 'src/components/Footer';
@@ -20,7 +21,6 @@ import TableUser from './tableUser';
 import CreateUser from './CreateUser';
 import EditUser from './EditUser';
 
-
 function ManagementUsers() {
   const [users, setUsers] = React.useState([]);
   const [dnis, setDnis] = React.useState([]);
@@ -28,7 +28,6 @@ function ManagementUsers() {
   const isMountedRef = useRefMounted();
   const getDataServer = React.useCallback(async () => {
     try {
-      // const response = await axios.get(`http://61.47.81.110:3001/api/V1/users`);
       const response = await Users.v1.FindAll();
       if (isMountedRef.current) {
         setUsers(response.data);
@@ -40,9 +39,10 @@ function ManagementUsers() {
 
   const getDnis = React.useCallback(async () => {
     try {
-      const response = await axios.get(`http://61.47.81.110:3001/api/v1/dashboard/dnis`);
+      const response = await Users.v1.Dnis();
+      console.log(response)
       if (isMountedRef.current) {
-        setDnis(response.data.data);
+        setDnis(response.dnis);
       }
     } catch (err) {
       console.error(err);

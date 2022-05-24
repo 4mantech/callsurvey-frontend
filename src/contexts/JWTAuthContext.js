@@ -3,6 +3,7 @@ import axios from 'axios';
 import authAPI from 'src/utils/api/auth';
 import { verify, JWT_SECRET } from 'src/utils/jwt';
 import PropTypes from 'prop-types';
+import Users from 'src/utils/api/users'
 
 const initialAuthState = {
   isAuthenticated: false,
@@ -10,14 +11,13 @@ const initialAuthState = {
   user: null
 };
 
-const setSession = (accessToken) => {
+const setSession = (accessToken,user) => {
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    localStorage.setItem('user', user);
   } else {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('user');
-    delete axios.defaults.headers.common.Authorization;
   }
 };
 
@@ -77,9 +77,8 @@ export const AuthProvider = (props) => {
         const accessToken = window.localStorage.getItem('accessToken');
         if (accessToken && verify(accessToken, JWT_SECRET)) {
           setSession(accessToken);
-          const user = JSON.parse(window.localStorage.getItem('user'));
-          // const response = await axios.get('/api/account/personal');
-          // const { user } = response.data;
+          const response = await Users.v1.Profile();
+          const { user } = response;
           dispatch({
             type: 'INITIALIZE',
             payload: {
@@ -122,8 +121,7 @@ export const AuthProvider = (props) => {
 
     const response = await authAPI.v1.logIn(value, option);
     const { accessToken, user } = response;
-    localStorage.setItem('user', JSON.stringify(user));
-    setSession(accessToken);
+    setSession(accessToken, user);
     dispatch({
       type: 'LOGIN',
       payload: {
@@ -135,7 +133,7 @@ export const AuthProvider = (props) => {
   };
 
   const logout = async () => {
-    setSession(null);
+    setSession(null,null);
     dispatch({ type: 'LOGOUT' });
   };
 

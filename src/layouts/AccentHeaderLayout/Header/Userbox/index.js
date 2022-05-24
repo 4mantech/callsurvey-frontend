@@ -89,6 +89,8 @@ function HeaderUserbox() {
     }
   };
 
+  if(!!user.name) console.log(user.name)
+
   return (
     <Box
       component="span"

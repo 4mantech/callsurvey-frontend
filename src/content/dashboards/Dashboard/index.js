@@ -1,11 +1,10 @@
 import * as React from 'react';
-import axios from 'axios';
 import useRefMounted from 'src/hooks/useRefMounted';
 import Footer from 'src/components/Footer';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
-
+import Dashboard from 'src/utils/api/dashboard';
 import { Grid } from '@mui/material';
 
 // import SalesByCategory from 'src/content/dashboards/Commerce/SalesByCategory';
@@ -17,16 +16,7 @@ import ChartScore from './chartScore';
 // import Block11 from 'src/content/blocks/ListsSmall/Block8'; chartDashboard
 // import Block3 from './Commerce/SalesByCategory';
 import PageHeader from './PageHeader';
-// import Block1 from './totalScore';
-// import Block3 from './Block3';
-// import Block4 from './Block4';
-// import Block5 from './Block5';
-// import Block6 from './Block6';
-// import Block7 from './Block7';
-// import Block8 from './Block8';
-// import Block9 from './Block9';
-//  import Block12 from './Block12';
-// import Block13 from './Block13';
+
 
 function DashboardReports() {
   const [dataDashboard, setDataDashboard] = React.useState([]);
@@ -38,11 +28,11 @@ function DashboardReports() {
   
   const isMountedRef = useRefMounted();
   const getDataServer = React.useCallback(async () => {
-    const accessToken = window.localStorage.getItem('accessToken');
+    // const accessToken = window.localStorage.getItem('accessToken');
     const option = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`
+        // Authorization: `Bearer ${accessToken}`
       }
     };
     let date = searchParams.get('search')
@@ -50,10 +40,12 @@ function DashboardReports() {
       : 'today';
     let dnis = searchParams.get('dnis') ? searchParams.get('dnis') : 'all';
     try {
-      const response = await axios.get(
-        `http://61.47.81.110:3001/api/v1/dashboard?search=${date}&dnis=${dnis}`
-      ,option);
-      const { data, score1, score2, score3, totalScore } = response.data;
+      const response = await Dashboard.v1.index(date,dnis,option);
+      // const response = await axios.get(
+      //   `http://61.47.81.110:3001/api/v1/dashboard?search=${date}&dnis=${dnis}`
+      // ,option);
+      console.log(response)
+      const { data, score1, score2, score3, totalScore } = response;
       if (isMountedRef.current) {
         setDataDashboard(data);
         setDataScore1(score1);
