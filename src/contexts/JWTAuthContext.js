@@ -119,20 +119,9 @@ export const AuthProvider = (props) => {
       email,
       password
     };
-    // const response = await authAPI.v1.logIn({...value})
-    // console.log("=======================")
-    // console.log(response);
-    const response = await axios.post(
-      'http://61.47.81.110:3001/api/V1/users/login',
-      value,
-      option,
-    );
-    // const response = await axios.post('/api/account/login', {
-    //   email,
-    //   password
-    // });
-    const { accessToken , user } = response.data;
-    console.log(response)
+
+    const response = await authAPI.v1.logIn(value, option);
+    const { accessToken, user } = response;
     localStorage.setItem('user', JSON.stringify(user));
     setSession(accessToken);
     dispatch({
@@ -141,6 +130,8 @@ export const AuthProvider = (props) => {
         user
       }
     });
+    
+
   };
 
   const logout = async () => {

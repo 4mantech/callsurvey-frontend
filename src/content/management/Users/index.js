@@ -3,6 +3,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import useRefMounted from 'src/hooks/useRefMounted';
+import Users from 'src/utils/api/users';
 
 import { Helmet } from 'react-helmet-async';
 import Footer from 'src/components/Footer';
@@ -24,13 +25,13 @@ function ManagementUsers() {
   const [users, setUsers] = React.useState([]);
   const [dnis, setDnis] = React.useState([]);
 
-
   const isMountedRef = useRefMounted();
   const getDataServer = React.useCallback(async () => {
     try {
-      const response = await axios.get(`http://61.47.81.110:3001/api/V1/users`);
+      // const response = await axios.get(`http://61.47.81.110:3001/api/V1/users`);
+      const response = await Users.v1.FindAll();
       if (isMountedRef.current) {
-        setUsers(response.data.data);
+        setUsers(response.data);
       }
     } catch (err) {
       console.error(err);
