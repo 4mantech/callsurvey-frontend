@@ -76,9 +76,9 @@ export const AuthProvider = (props) => {
       try {
         const accessToken = window.localStorage.getItem('accessToken');
         if (accessToken && verify(accessToken, JWT_SECRET)) {
-          setSession(accessToken);
           const response = await Users.v1.Profile();
           const { user } = response;
+          setSession(accessToken, user);
           dispatch({
             type: 'INITIALIZE',
             payload: {

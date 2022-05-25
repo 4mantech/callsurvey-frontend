@@ -52,6 +52,7 @@ function ManagementUsers() {
   React.useEffect(() => {
     getDataServer();
     getDnis();
+    console.log(dnis)
   }, [getDataServer]);
 
 
@@ -74,7 +75,7 @@ function ManagementUsers() {
         spacing={4}
       >
         <Grid item xs={12}>
-          <TableUser users={users} getDataServer={getDataServer} />
+          <TableUser dnis={dnis} users={users} getDataServer={getDataServer} />
         </Grid>
       </Grid>
       <Footer />

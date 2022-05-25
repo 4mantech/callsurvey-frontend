@@ -4,8 +4,7 @@ import * as Yup from 'yup';
 import { Formik, setIn } from 'formik';
 import { useTranslation } from 'react-i18next';
 // import { styled } from '@mui/material/styles';
-import wait from 'src/utils/wait';
-import axios from 'axios';
+import Users from 'src/utils/api/users';
 // import useAuth from 'src/hooks/useAuth';
 
 import {
@@ -28,7 +27,6 @@ import {
 } from '@mui/material';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useSnackbar } from 'notistack';
-import InputDnis from './InputDnis';
 // import CloudUploadTwoToneIcon from '@mui/icons-material/CloudUploadTwoTone';
 
 // const Input = styled('input')({
@@ -119,6 +117,16 @@ function CreateUser(props) {
 
     setOpen(false);
   };
+  const handleCreateUserFailed = () => {
+    enqueueSnackbar(t('The user account cannot be created'), {
+      variant: 'error',
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'right'
+      },
+      TransitionComponent: Zoom
+    });
+  };
 
   return (
     <>
@@ -141,7 +149,7 @@ function CreateUser(props) {
             onClick={handleCreateUserOpen}
             variant="contained"
             startIcon={<AddTwoToneIcon fontSize="small" />}
-          >
+          > 
             {t('Create user')}
           </Button>
         </Grid>
@@ -197,32 +205,32 @@ function CreateUser(props) {
             _values,
             { resetForm, setErrors, setStatus, setSubmitting }
           ) => {
-            const dnisAccess = dnis
-            // console.log(dnisAccess)
+            const dnisAccess = inputDnis
             const newData = {..._values,dnisAccess}
-            const accessToken = window.localStorage.getItem('accessToken');
-            const option = {
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`
-              }
-            };
-            console.log(newData);
+            // const accessToken = window.localStorage.getItem('accessToken');
+            // const option = {
+            //   headers: {
+            //     'Content-Type': 'application/json',
+            //     Authorization: `Bearer ${accessToken}`
+            //   }
+            // };
+            // console.log(newData);
             try {
-              const response = await axios.post(
-                'http://localhost:4000/api/V1/users',
-                // 'http://61.47.81.110:3001/api/V1/users',
-                newData,
-                option
-              );
-              console.log(response);
+            //   const response = await axios.post(
+            //     'http://localhost:4000/api/V1/users',
+            //     // 'http://61.47.81.110:3001/api/V1/users',
+            //     newData,
+            //     option
+            //   );
+              const response = await Users.v1.Create(newData) 
               resetForm();
               setStatus({ success: true });
               setSubmitting(false);
               handleCreateUserSuccess();
               getDataServer();
             } catch (err) {
-              console.error(err);
+              console.log(err);
+              handleCreateUserFailed();
               setStatus({ success: false });
               setErrors({ submit: err.message });
               setSubmitting(false);
@@ -332,9 +340,6 @@ function CreateUser(props) {
                           options={dnis}
                           onChange={(_,value)=>{
                             setinputDnis(value)
-                            console.log(value)
-                            console.log("state>>>>>",inputDnis)
-
                           }}
                           getOptionLabel={(option) => option}
                           renderInput={(params) => {

@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
+  Autocomplete,
   Box,
   Typography,
   TextField,
@@ -93,9 +94,16 @@ const getUserRoleLabel = (userRole) => {
 const DialogEdit = (props) => {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
-  const { getDataServer } = props;
-  const { id, firstName, lastName, password, Confirmpassword, email } =
-    props.row;
+  const { getDataServer, dnis } = props;
+  const {
+    id,
+    firstName,
+    lastName,
+    password,
+    Confirmpassword,
+    email,
+    dnisAccess
+  } = props.row;
   const [ModalEdit, setModalEdit] = useState(false);
   const [InputFirstName, setInputFirstName] = useState(firstName);
   const [InputLastName, setInputLastName] = useState(lastName);
@@ -103,9 +111,12 @@ const DialogEdit = (props) => {
   const [InputConfirmPassword, setInputConfirmPassword] =
     useState(Confirmpassword);
   const [InputEmail, setInputEmail] = useState(email);
+  const [inputDnis, setinputDnis] = useState([]);
 
   const openModalEdit = () => {
-    console.log(firstName);
+    let input = JSON.parse(dnisAccess);
+    setinputDnis(input);
+    console.log(input);
     setModalEdit(true);
   };
 
@@ -122,7 +133,6 @@ const DialogEdit = (props) => {
       },
       TransitionComponent: Zoom
     });
-
     setModalEdit(false);
   };
 
@@ -175,7 +185,7 @@ const DialogEdit = (props) => {
             confirmPassword: Yup.string()
               .max(255)
               // .required(t('The Confirm Password field is required'))
-              .oneOf([Yup.ref('password')], t('Your passwords do not match'))
+              .oneOf([Yup.ref('password')], t('Your passwords do not match')),
           })}
           onSubmit={async (
             _values,
@@ -187,7 +197,15 @@ const DialogEdit = (props) => {
               }
             };
             try {
-              Users.v1.Update(id,_values);
+              const dnisAccess = inputDnis;
+              const newData = {
+                updateFirstName: _values.firstName,
+                updateLastName: _values.lastName,
+                updatePassword: _values.password,
+                updateConfirmPassword: _values.confirmPassword,
+                dnisAccess
+              };
+              Users.v1.Update(id, newData);
               // const response = await Users.v1.All();
               // const response = await axios.patch(
               //   `http://61.47.81.110:3001/api/V1/users/${id}`,
@@ -302,6 +320,34 @@ const DialogEdit = (props) => {
                           type="password"
                           value={values.confirmPassword}
                           variant="outlined"
+                        />
+                      </Grid>
+
+                      <Grid item xs={12}>
+                        <Autocomplete
+                          multiple
+                          fullWidth
+                          limitTags={3}
+                          name="dnisInput"
+                          options={dnis}
+                          defaultValue={inputDnis}
+                          onChange={(e, value) => {
+                            setinputDnis(value);
+                            console.log(value);
+                          }}
+                          getOptionLabel={(option) => option}
+                          renderInput={(params) => {
+                            return (
+                              <TextField
+                                {...params}
+                                fullWidth
+                                onBlur={handleBlur}
+                                variant="outlined"
+                                label={t('Select Dnis')}
+                                placeholder={t('Select Dnis...')}
+                              />
+                            );
+                          }}
                         />
                       </Grid>
                     </Grid>
@@ -447,26 +493,29 @@ const DialogDelete = (props) => {
 };
 
 export default function usersTable(props) {
-  const { users, getDataServer } = props;
+  const { users, getDataServer, dnis } = props;
   const rows = users;
+  rows.forEach((element,index) => {
+    element.index = ++index
+  });
 
   const columns = [
-    { field: 'id', headerName: '#', minWidth: 20, flex: 1, hide: true },
+    { field: 'index', headerName: '#', minWidth: 10},
+    { field: 'id', headerName: '#', minWidth: 10,  hide: true },
     {
       field: 'fullName',
       headerName: 'Name',
-      minWidth: 400,
-      flex: 1,
+      minWidth: 520,
       valueGetter: (params) =>
         `${params.row.firstName || ''} ${params.row.lastName || ''}`
     },
-    { field: 'email', headerName: 'Email', minWidth: 450, flex: 2 },
-    { field: 'role', headerName: 'Role', minWidth: 380, flex: 2 },
+    { field: 'email', headerName: 'Email', minWidth: 530},
+    { field: 'role', headerName: 'Role', minWidth: 380},
     {
       field: 'action',
       headerName: 'Action',
-      minWidth: 10,
-      flex: 1,
+      minWidth: 80,
+      // flex: 1,
       sortable: false,
       renderCell: (params) => {
         const onClick = (e) => {
@@ -485,7 +534,11 @@ export default function usersTable(props) {
 
         return (
           <>
-            <DialogEdit row={params.row} getDataServer={getDataServer} />
+            <DialogEdit
+              dnis={dnis}
+              row={params.row}
+              getDataServer={getDataServer}
+            />
             <DialogDelete getDataServer={getDataServer} id={params.id} />
             {/* <Button onClick={onClick}>Click</Button> */}
           </>
@@ -497,10 +550,12 @@ export default function usersTable(props) {
   const [pageSize, setPageSize] = React.useState(10);
   return (
     <>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <div style={{ width: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2, }}>
+        {/* <div style={{ width: '100%' }}> */}
+        <TableContainer  component={Paper}>
           <DataGrid
-            alignItems="flex-center"
+            // alignItems="flex-center"
+
             rows={rows}
             columns={columns}
             pageSize={pageSize}
@@ -509,7 +564,8 @@ export default function usersTable(props) {
             autoHeight
             disableSelectionOnClick
           />
-        </div>
+          {/* </div> */}
+        </TableContainer>
       </Paper>
     </>
   );

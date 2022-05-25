@@ -316,6 +316,32 @@ function EditUser(props) {
                           variant="outlined"
                         />
                       </Grid>
+                      {/* <Grid item xs={12}>
+                        <Autocomplete
+                          multiple
+                          fullWidth
+                          limitTags={2}
+                          name="dnisInput"
+                          options={dnis}
+                          onChange={(_,value)=>{
+                            setinputDnis(value)
+                            console.log(value)
+                          }}
+                          getOptionLabel={(option) => option}
+                          renderInput={(params) => {
+                            return (
+                              <TextField
+                                {...params}
+                                fullWidth
+                                onBlur={handleBlur}
+                                variant="outlined"
+                                label={t('Select Dnis')}
+                                placeholder={t('Select Dnis...')}
+                              />
+                            );
+                          }}
+                        />
+                      </Grid> */}
                       <Grid item xs={12}>
                         <InputDnis/>
                       </Grid>
