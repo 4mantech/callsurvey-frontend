@@ -80,21 +80,6 @@ function HeaderMenu(props) {
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
 
-  let userButton = null;
-  if(role !== 1){
-    userButton = (<ListItem
-    classes={{ root: 'MuiListItem-indicators' }}
-    button
-    component={NavLink}
-    to={`/${location.pathname.split('/')[0]}management/users/list`} 
-  >
-    <ListItemText
-      primaryTypographyProps={{ noWrap: true }}
-      primary={t('Users')}
-    />
-  </ListItem>)
-}
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -102,7 +87,19 @@ function HeaderMenu(props) {
     <>
       <ListWrapper>
         <List disablePadding component={Box} display="flex">
-          {userButton}
+          {role !== 1 &&
+            <ListItem
+              classes={{ root: 'MuiListItem-indicators' }}
+              button
+              component={NavLink}
+              to={`/${location.pathname.split('/')[0]}management/users/list`}
+            >
+              <ListItemText
+                primaryTypographyProps={{ noWrap: true }}
+                primary={t('Users')}
+              />
+            </ListItem>
+          }
           {/* <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
