@@ -89,6 +89,7 @@ const getUserRoleLabel = (userRole) => {
   };
 
   const { text, color } = map[userRole];
+
   return <Label color={color}>{text}</Label>;
 };
 const DialogEdit = (props) => {
@@ -495,13 +496,14 @@ const DialogDelete = (props) => {
 export default function usersTable(props) {
   const { users, getDataServer, dnis } = props;
   const rows = users;
-  rows.forEach((element,index) => {
+  rows.forEach((element, index) => {
     element.index = ++index
+    console.log(element.role)
   });
 
   const columns = [
-    { field: 'index', headerName: '#', minWidth: 10},
-    { field: 'id', headerName: '#', minWidth: 10,  hide: true },
+    { field: 'index', headerName: '#', minWidth: 10 },
+    { field: 'id', headerName: '#', minWidth: 10, hide: true },
     {
       field: 'fullName',
       headerName: 'Name',
@@ -509,8 +511,17 @@ export default function usersTable(props) {
       valueGetter: (params) =>
         `${params.row.firstName || ''} ${params.row.lastName || ''}`
     },
-    { field: 'email', headerName: 'Email', minWidth: 530},
-    { field: 'role', headerName: 'Role', minWidth: 380},
+    { field: 'email', headerName: 'Email', minWidth: 530 },
+    {
+      field: 'role', headerName: 'Role', minWidth: 380,
+      renderCell: (params) => {
+        return (
+          <>
+            {getUserRoleLabel(params.row.role)}
+          </>
+        );
+      }
+    },
     {
       field: 'action',
       headerName: 'Action',
@@ -552,7 +563,7 @@ export default function usersTable(props) {
     <>
       <Paper sx={{ width: '100%', mb: 2, }}>
         {/* <div style={{ width: '100%' }}> */}
-        <TableContainer  component={Paper}>
+        <TableContainer component={Paper}>
           <DataGrid
             // alignItems="flex-center"
 
