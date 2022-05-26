@@ -10,8 +10,11 @@ import {
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+
 import { NavLink, useLocation } from 'react-router-dom';
 // import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+// import SidebarMenuItem from '../../Sidebar/SidebarMenu/item';
+import menuItems from '../../Sidebar/SidebarMenu/items';
 
 const ListWrapper = styled(Box)(
   ({ theme }) => `
@@ -64,16 +67,33 @@ const ListWrapper = styled(Box)(
 `
 );
 
-function HeaderMenu() {
+function HeaderMenu(props) {
   const { t } = useTranslation();
   const location = useLocation();
+  const user = window.localStorage.getItem('user');
+
+  let role = 99;
+  if (user) {
+    role = JSON.parse(user).role;
+  }
 
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
+  let userButton = null;
+  if(role !== 1){
+    userButton = (<ListItem
+    classes={{ root: 'MuiListItem-indicators' }}
+    button
+    component={NavLink}
+    to={`/${location.pathname.split('/')[0]}management/users/list`} 
+  >
+    <ListItemText
+      primaryTypographyProps={{ noWrap: true }}
+      primary={t('Users')}
+    />
+  </ListItem>)
+}
 
   const handleClose = () => {
     setOpen(false);
@@ -82,46 +102,18 @@ function HeaderMenu() {
     <>
       <ListWrapper>
         <List disablePadding component={Box} display="flex">
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            component={NavLink}
-            to={`/${location.pathname.split('/')[0]}management/users/list`} 
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary={t('Users')}
-            />
-          </ListItem>
+          {userButton}
           {/* <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={NavLink}
-            to={`/${location.pathname.split('/')[1]}/dashboards/`}
+            to={`/${location.pathname.split('/')[1]}/dashboard`}
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
               primary={t('Dashboard')}
             />
           </ListItem> */}
-          {/* <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
-            ref={ref}
-            onClick={handleOpen}
-          > */}
-            {/* <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary={
-                <Box display="flex" alignItems="center">
-                  {t('Help')}
-                  <Box display="flex" alignItems="center" pl={0.3}>
-                    <ExpandMoreTwoToneIcon fontSize="small" />
-                  </Box>
-                </Box>
-              }
-            /> */}
-          {/* </ListItem> */}
         </List>
       </ListWrapper>
       <Menu

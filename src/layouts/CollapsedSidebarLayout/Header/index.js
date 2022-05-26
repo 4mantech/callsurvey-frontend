@@ -30,7 +30,8 @@ const HeaderWrapper = styled(Box)(
 `
 );
 
-function Header() {
+function Header(props) {
+  const {role} = props;
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
 
   return (
@@ -50,7 +51,7 @@ function Header() {
             display: { xs: 'none', md: 'inline-block' }
           }}
         >
-          <HeaderMenu />
+          <HeaderMenu role = {role} />
         </Box>
       </Box>
       <Box display="flex" alignItems="center">

@@ -26,7 +26,7 @@ const CollapsedSidebarLayout = () => {
           }
         }}
       >
-        <Header />
+        <Header role={role} />
         <Sidebar role={role} />
         <Box
           sx={{
