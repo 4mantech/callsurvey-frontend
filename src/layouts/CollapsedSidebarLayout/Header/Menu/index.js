@@ -97,11 +97,11 @@ function HeaderMenu() {
             classes={{ root: 'MuiListItem-indicators' }}
             button
             component={NavLink}
-            to={`/${location.pathname.split('/')[1]}/dashboards/banking`}
+            to={`/${location.pathname.split('/')[1]}/dashboards/`}
           >
             <ListItemText
               primaryTypographyProps={{ noWrap: true }}
-              primary={t('Banking')}
+              primary={t('Dashboard')}
             />
           </ListItem> */}
           {/* <ListItem

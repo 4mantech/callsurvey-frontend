@@ -1,9 +1,11 @@
+import useAuth from 'src/hooks/useAuth';
+import { useState , Fragment } from 'react';
 import { Box, List, Divider, styled } from '@mui/material';
 import { useLocation, matchPath } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { Fragment } from 'react';
 import SidebarMenuItem from './item';
 import menuItems from './items';
+
 
 const DividerWrapper = styled(Divider)(
   ({ theme }) => `
@@ -165,12 +167,21 @@ const reduceChildRoutes = ({ ev, path, item }) => {
   return ev;
 };
 
-function SidebarMenu() {
+function SidebarMenu(props) {
   const location = useLocation();
+  const user = window.localStorage.getItem('user');
+  let menu = [...menuItems];
+  let role = 99;
+  if (user) {
+    role = JSON.parse(user).role;
+    if (role === 1) {
+      menu = menu.filter((menu) => menu.heading !== 'Foundation');
+    }
+  }
 
   return (
     <>
-      {menuItems.map((section) => (
+      {menu.map((section) => (
         <Fragment key={uuidv4()}>
           <MenuWrapper>
             <List component="div">

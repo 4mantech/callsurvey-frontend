@@ -4,6 +4,8 @@ import authAPI from 'src/utils/api/auth';
 import { verify, JWT_SECRET } from 'src/utils/jwt';
 import PropTypes from 'prop-types';
 import Users from 'src/utils/api/users'
+import { useNavigate } from 'react-router-dom';
+
 
 const initialAuthState = {
   isAuthenticated: false,
@@ -14,10 +16,10 @@ const initialAuthState = {
 const setSession = (accessToken,user) => {
   if (accessToken) {
     localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('user', user);
+    localStorage.setItem('user', JSON.stringify(user));
   } else {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('user');
+    window.localStorage.removeItem('accessToken');
+    window.localStorage.removeItem('user');
   }
 };
 
@@ -128,12 +130,10 @@ export const AuthProvider = (props) => {
         user
       }
     });
-    
-
   };
 
   const logout = async () => {
-    setSession(null,null);
+    setSession();
     dispatch({ type: 'LOGOUT' });
   };
 

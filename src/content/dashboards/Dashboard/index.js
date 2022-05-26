@@ -44,7 +44,6 @@ function DashboardReports() {
       // const response = await axios.get(
       //   `http://61.47.81.110:3001/api/v1/dashboard?search=${date}&dnis=${dnis}`
       // ,option);
-      console.log(response)
       const { data, score1, score2, score3, totalScore } = response;
       if (isMountedRef.current) {
         setDataDashboard(data);

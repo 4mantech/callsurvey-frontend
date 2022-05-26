@@ -95,7 +95,6 @@ function PageHeader(props) {
       //   `http://61.47.81.110:3001/api/v1/dashboard/dnis2`
       // ,option);
       const { dnis } = response;
-      console.log(response)
       if (isMountedRef.current) {
         let ans = dnis.map((data) => {
           return {
@@ -224,7 +223,6 @@ function PageHeader(props) {
                     : 'all',
                   search: _period.value
                 });
-                // console.log(_period.value)
               }}
             >
               {_period.text}

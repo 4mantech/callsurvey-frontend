@@ -36,7 +36,8 @@ const TopSection = styled(Box)(
 `
 );
 
-function Sidebar() {
+function Sidebar(props) {
+  const {role} = props
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const closeSidebar = () => toggleSidebar();
   const theme = useTheme();
@@ -57,7 +58,7 @@ function Sidebar() {
           }}
         >
           <Scrollbar>
-            <SidebarMenu />
+            <SidebarMenu role={role} />
           </Scrollbar>
         </Box>
       </SidebarWrapper>
@@ -76,7 +77,7 @@ function Sidebar() {
             <TopSection>
               <Logo />
             </TopSection>
-            <SidebarMenu />
+            <SidebarMenu role={role} />
           </Scrollbar>
         </SidebarWrapper>
       </Drawer>

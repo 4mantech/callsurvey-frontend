@@ -5,7 +5,10 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 
 const CollapsedSidebarLayout = () => {
+  const user = window.localStorage.getItem('user');
   const theme = useTheme();
+  const { role } = JSON.parse(user);
+
 
   return (
     <>
@@ -24,7 +27,7 @@ const CollapsedSidebarLayout = () => {
         }}
       >
         <Header />
-        <Sidebar />
+        <Sidebar role={role} />
         <Box
           sx={{
             position: 'relative',

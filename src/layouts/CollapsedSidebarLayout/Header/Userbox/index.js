@@ -96,11 +96,8 @@ function HeaderUserbox() {
     />;
   }
   
-
   return (
     <>
-
-
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
         <LogoImage2  />
         <Box
