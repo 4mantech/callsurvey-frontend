@@ -40,7 +40,6 @@ function ManagementUsers() {
   const getDnis = React.useCallback(async () => {
     try {
       const response = await Users.v1.Dnis();
-      console.log(response)
       if (isMountedRef.current) {
         setDnis(response.dnis);
       }
@@ -52,7 +51,6 @@ function ManagementUsers() {
   React.useEffect(() => {
     getDataServer();
     getDnis();
-    console.log(dnis)
   }, [getDataServer]);
 
 

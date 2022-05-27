@@ -117,7 +117,6 @@ const DialogEdit = (props) => {
   const openModalEdit = () => {
     let input = JSON.parse(dnisAccess);
     setinputDnis(input);
-    console.log(input);
     setModalEdit(true);
   };
 
@@ -334,7 +333,6 @@ const DialogEdit = (props) => {
                           defaultValue={inputDnis}
                           onChange={(e, value) => {
                             setinputDnis(value);
-                            console.log(value);
                           }}
                           getOptionLabel={(option) => option}
                           renderInput={(params) => {
@@ -498,7 +496,7 @@ export default function usersTable(props) {
   const rows = users;
   rows.forEach((element, index) => {
     element.index = ++index
-    console.log(element.role)
+
   });
 
   const columns = [

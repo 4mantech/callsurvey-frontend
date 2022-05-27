@@ -30,7 +30,8 @@ const thJSON = {
    'name': 'ชื่อ - สกุล',
    'email': 'อีเมล',
    'role' : 'ตำแหน่ง',
-   'action' : 'จัดการ'
+   'action' : 'จัดการ',
+   'No Score':'ไม่มีคะแนน'
   //  'TABLEUSER': {
   //   'NAME': 'ชื่อ - นามสกุล',
   //  }

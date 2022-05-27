@@ -66,7 +66,6 @@ export const AuthProvider = (props) => {
 
         if (isAuthenticated) {
           const user = await auth0Client.getUser();
-          console.log(user)
 
           dispatch({
             type: 'INITIALIZE',

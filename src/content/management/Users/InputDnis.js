@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next';
 
 function InputDnis(props) {
   const { dnis } = props
-  console.log(dnis)
   const { t } = useTranslation();
 
 

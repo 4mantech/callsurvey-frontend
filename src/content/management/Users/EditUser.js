@@ -198,7 +198,6 @@ function EditUser(props) {
             }
             try{
               const response = await axios.post('http://61.47.81.110:3001/api/V1/users',_values, option);
-              console.log(response);
               resetForm();
               setStatus({ success: true });
               setSubmitting(false);

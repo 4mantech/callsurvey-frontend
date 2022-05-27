@@ -450,7 +450,6 @@ export default function EnhancedTable(props) {
   reports.forEach((element, index) => {
     element.id = ++index;
   });
-  console.log(reports);
   return (
     <Paper sx={{ width: '100%', mb: 2 }}>
       <TableContainer component={Paper}>
