@@ -91,6 +91,7 @@ function SalesByCategory(props) {
     ]
   };
   
+
   const sales = {
     datasets: [
       {
@@ -111,6 +112,68 @@ function SalesByCategory(props) {
       t('Point 5')
     ]
   };
+
+  const scoreSelect = {
+    labels: [
+      t('Score'),
+    ]
+  };
+
+
+  const chartOptions2 = {
+    series: [{
+      name: 'No Score',
+      data: [44]
+    }, {
+      name: 'Score',
+      data: [53]
+    }],
+    chart: {
+      type: 'bar',
+      stacked: true,
+      stackType: '100%',
+      background: 'transparent',
+      toolbar: {
+        show: false
+      }
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+      },
+    },
+    colors: [
+      theme.palette.error.main,
+      theme.palette.success.main
+    ],
+    dataLabels: {
+      enabled: true,
+      formatter(val) {
+        return `${val.toFixed(2)}%`;
+      },
+    },
+    fill: {
+      opacity: 1
+    },
+    labels: scoreSelect.labels,
+    // legend: {
+    //   labels: {
+    //     colors: theme.colors.alpha.trueWhite[100]
+    //   },
+    //   show: false
+    // },
+    // stroke: {
+    //   width: 0
+    // },
+    theme: {
+      mode: theme.palette.mode
+    },
+    // legend: {
+    //   horizontalAlign: 'left',
+    //   offsetX: 80
+    // }
+  };
+
 
   const chartOptions = {
     chart: {
@@ -167,6 +230,7 @@ function SalesByCategory(props) {
   };
   
   const chartOptionTotal = {...chartOptions}
+  const chartOptionTotal2 = {...chartOptions2}
   chartOptionTotal.labels = total.labels;
   
 
@@ -177,11 +241,9 @@ function SalesByCategory(props) {
 
 
   return (
-
-    
     
     <Grid container spacing={4}>
-      <Grid item xs={12} sm={6}>
+      {/* <Grid item xs={12} sm={6}>
         <CardBorderBottom
           sx={{
             borderBottomColor: `${theme.colors.error.main}`,
@@ -219,10 +281,10 @@ function SalesByCategory(props) {
                   color: `${theme.colors.success.main}`
                 }}
               />
-              <span>37,594</span>
+              <span>94</span>
             </Typography>
           </Box>
-          {/* <Box display="inline-flex" position="relative">
+          <Box display="inline-flex" position="relative">
             <Box
               sx={{
                 animationDuration: '550ms',
@@ -270,7 +332,7 @@ function SalesByCategory(props) {
               variant="determinate"
               value={43}
             />
-          </Box> */}
+          </Box>
         </CardBorderBottom>
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -305,12 +367,12 @@ function SalesByCategory(props) {
               }}
               variant="h2"
             >
-              {/* <AddTwoToneIcon
+              <AddTwoToneIcon
                 sx={{
                   mr: 0.5,
                   color: `${theme.colors.success.main}`
                 }}
-              /> */}
+              />
               <span>545</span>
               <Typography
                 sx={{
@@ -325,7 +387,7 @@ function SalesByCategory(props) {
               </Typography>
             </Typography>
           </Box>
-          {/* <Box display="inline-flex" position="relative">
+          <Box display="inline-flex" position="relative">
             <Box
               sx={{
                 animationDuration: '550ms',
@@ -373,9 +435,71 @@ function SalesByCategory(props) {
               variant="determinate"
               value={70}
             />
-          </Box> */}
+          </Box>
         </CardBorderBottom>
+      </Grid> */}
+        <Grid item xs={12} >
+        <Card
+          sx={{
+            px: 3,
+            pb: 4,
+            pt: 3
+          }}
+        >
+          <Box display="flex" alignItems="center">
+            <AvatarWrapper
+              sx={{
+                background: `${theme.colors.gradients.blue4}`
+              }}
+            >
+              <FunctionsIcon fontSize="small" />
+            </AvatarWrapper>
+            <Typography
+              sx={{
+                ml: 1.5,
+                fontSize: `${theme.typography.pxToRem(16)}`,
+                fontWeight: 'bold'
+              }}
+              variant="subtitle2"
+              component="div"
+            >
+              {t('Scors test')}
+            </Typography>
+          </Box>
+          <Grid
+            md={12}
+            item
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+              {reDucer(chartSeries4) ? (
+              <Typography
+                sx={{
+                  ml: 1.5,
+                  fontSize: `${theme.typography.pxToRem(30)}`,
+                  pt: 8,
+                  fontWeight: 'bold'
+                }}
+                variant="subtitle2"
+                component="div"
+                height={192}
+              >
+                {t('No Score')}
+              </Typography>
+            ) : (
+              <Chart
+                height={150}
+                width={800}
+                series={chartOptions2.series}
+                options={chartOptionTotal2}
+                type="bar"
+              />
+            )}
+          </Grid>
+        </Card>
       </Grid>
+
 
       <Grid item xs={12} sm={6} lg={3}>
         <Card
@@ -437,6 +561,7 @@ function SalesByCategory(props) {
           </Grid>
         </Card>
       </Grid>
+
       <Grid item xs={12} sm={6} lg={3}>
         <Card
           sx={{
