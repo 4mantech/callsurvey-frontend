@@ -24,6 +24,8 @@ function DashboardReports() {
   const [dataScore1, setDataScore1] = React.useState([]);
   const [dataScore2, setDataScore2] = React.useState([]);
   const [dataScore3, setDataScore3] = React.useState([]);
+  const [totalGivenScore, setTotalGivenScore] = React.useState([]);
+  const [totalNotGiven, setTotalNotGiven] = React.useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   
   const isMountedRef = useRefMounted();
@@ -41,16 +43,19 @@ function DashboardReports() {
     let dnis = searchParams.get('dnis') ? searchParams.get('dnis') : 'all';
     try {
       const response = await Dashboard.v1.index(date,dnis,option);
+      console.log(response)
       // const response = await axios.get(
       //   `http://61.47.81.110:3001/api/v1/dashboard?search=${date}&dnis=${dnis}`
       // ,option);
-      const { data, score1, score2, score3, totalScore } = response;
+      const { data, score1, score2, score3, totalScore, totalGivenScore, totalNotGiven } = response;
       if (isMountedRef.current) {
         setDataDashboard(data);
         setDataScore1(score1);
         setDataScore2(score2);
         setDataScore3(score3);
         setDataTotalScore(totalScore);
+        setTotalNotGiven(totalNotGiven);
+        setTotalGivenScore(totalGivenScore);
       }
     } catch (err) {
       console.error(err);
@@ -89,6 +94,8 @@ function DashboardReports() {
 
         <Grid item xs={12}>
           <ChartScore
+          totalGivenScore={totalGivenScore}
+          totalNotGiven={totalNotGiven}
             data1={dataScore1}
             data2={dataScore2}
             data3={dataScore3}

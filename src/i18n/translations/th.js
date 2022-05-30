@@ -31,10 +31,11 @@ const thJSON = {
    'email': 'อีเมล',
    'role' : 'ตำแหน่ง',
    'action' : 'จัดการ',
-   'No Score':'ไม่มีคะแนน'
-  //  'TABLEUSER': {
-  //   'NAME': 'ชื่อ - นามสกุล',
-  //  }
+   'No Score':'ไม่มีคะแนน',
+   'Score' : 'คะแนน',
+   'All' : 'ทั้งหมด',
+   'Given Score' : 'ที่ให้คะแนน',
+   'Not Given Score' : 'ที่ไม่ให้คะแนน'
   };
 
 export default thJSON;

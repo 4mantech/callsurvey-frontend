@@ -8,7 +8,7 @@ import {
   styled,
   Avatar,
   Grid,
-  useTheme,
+  useTheme
   // styled
 } from '@mui/material';
 
@@ -20,7 +20,6 @@ import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
 import FunctionsIcon from '@mui/icons-material/Functions';
 
-
 // import ArrowUpwardTwoToneIcon from '@mui/icons-material/ArrowUpwardTwoTone';
 // import SupportTwoToneIcon from '@mui/icons-material/SupportTwoTone';
 // import YardTwoToneIcon from '@mui/icons-material/YardTwoTone';
@@ -28,6 +27,7 @@ import FunctionsIcon from '@mui/icons-material/Functions';
 import Chart from 'react-apexcharts';
 import KeyboardArrowUpTwoToneIcon from '@mui/icons-material/KeyboardArrowUpTwoTone';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
+import CallIcon from '@mui/icons-material/Call';
 
 const CardBorderBottom = styled(Card)(
   () => `
@@ -60,10 +60,10 @@ const AvatarWrapper = styled(Avatar)(
 // );
 
 function SalesByCategory(props) {
-  const { data1, data2, data3 ,dataTotal} = props;
+  const { data1, data2, data3, dataTotal, totalGivenScore, totalNotGiven } =
+    props;
   const { t } = useTranslation();
   const theme = useTheme();
-
   const reDucer = (data) => {
     return (
       data.reduce((a, b) => {
@@ -84,13 +84,8 @@ function SalesByCategory(props) {
         ]
       }
     ],
-    labels: [
-      t('Score 1'),
-      t('Score 2'),
-      t('Score 3'),
-    ]
+    labels: [t('Score 1'), t('Score 2'), t('Score 3')]
   };
-  
 
   const sales = {
     datasets: [
@@ -114,43 +109,59 @@ function SalesByCategory(props) {
   };
 
   const scoreSelect = {
-    labels: [
-      t('Score'),
-    ]
+    labels: [t('Score')]
   };
 
-
   const chartOptions2 = {
-    series: [{
-      name: 'No Score',
-      data: [44]
-    }, {
-      name: 'Score',
-      data: [53]
-    }],
+    series: [
+      {
+        name: t('Given Score'),
+        data: [totalGivenScore]
+      },
+      {
+        name: t('Not Given Score'),
+        data: [totalNotGiven]
+      }
+    ],
     chart: {
       type: 'bar',
       stacked: true,
       stackType: '100%',
       background: 'transparent',
       toolbar: {
-        show: false
+        show: false,
+        download: false
+      },
+      animations: {
+        enabled: true,
+        easing: 'easeinout',
+        speed: 500,
+        animateGradually: {
+          enabled: true,
+          delay: 150
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 1000
+        }
       }
+    },
+    stroke: {
+      width: 2,
+      colors: ['#fff']
     },
     plotOptions: {
       bar: {
         horizontal: true,
-      },
+        borderRadius: 5
+      }
     },
-    colors: [
-      theme.palette.error.main,
-      theme.palette.success.main
-    ],
+    colors: [theme.palette.success.main, theme.palette.error.main],
     dataLabels: {
       enabled: true,
       formatter(val) {
         return `${val.toFixed(2)}%`;
-      },
+      }
     },
     fill: {
       opacity: 1
@@ -163,20 +174,20 @@ function SalesByCategory(props) {
     //   show: false
     // },
     // stroke: {
-    //   width: 0
+    //   width: 1
     // },
     theme: {
       mode: theme.palette.mode
-    },
+    }
     // legend: {
     //   horizontalAlign: 'left',
     //   offsetX: 80
     // }
   };
 
-
   const chartOptions = {
     chart: {
+      width: '100%',
       background: 'transparent',
       stacked: false,
       toolbar: {
@@ -228,20 +239,17 @@ function SalesByCategory(props) {
       mode: theme.palette.mode
     }
   };
-  
-  const chartOptionTotal = {...chartOptions}
-  const chartOptionTotal2 = {...chartOptions2}
+
+  const chartOptionTotal = { ...chartOptions };
+  const chartOptionTotal2 = { ...chartOptions2 };
   chartOptionTotal.labels = total.labels;
-  
 
   const chartSeries1 = data1;
   const chartSeries2 = data2;
   const chartSeries3 = data3;
   const chartSeries4 = dataTotal;
 
-
   return (
-    
     <Grid container spacing={4}>
       {/* <Grid item xs={12} sm={6}>
         <CardBorderBottom
@@ -438,7 +446,7 @@ function SalesByCategory(props) {
           </Box>
         </CardBorderBottom>
       </Grid> */}
-        <Grid item xs={12} >
+      <Grid item xs={12}>
         <Card
           sx={{
             px: 3,
@@ -452,7 +460,7 @@ function SalesByCategory(props) {
                 background: `${theme.colors.gradients.blue4}`
               }}
             >
-              <FunctionsIcon fontSize="small" />
+              <CallIcon fontSize="small" />
             </AvatarWrapper>
             <Typography
               sx={{
@@ -463,43 +471,36 @@ function SalesByCategory(props) {
               variant="subtitle2"
               component="div"
             >
-              {t('Scors test')}
+              {t('All Score')}
             </Typography>
           </Box>
-          <Grid
-            md={12}
-            item
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-              {reDucer(chartSeries4) ? (
-              <Typography
-                sx={{
-                  ml: 1.5,
-                  fontSize: `${theme.typography.pxToRem(30)}`,
-                  pt: 8,
-                  fontWeight: 'bold'
-                }}
-                variant="subtitle2"
-                component="div"
-                height={192}
-              >
-                {t('No Score')}
-              </Typography>
-            ) : (
-              <Chart
-                height={150}
-                width={800}
-                series={chartOptions2.series}
-                options={chartOptionTotal2}
-                type="bar"
-              />
-            )}
-          </Grid>
+          {!totalNotGiven && !totalGivenScore ? (
+            
+            <Typography
+            sx={{
+              ml: 1.5,
+              fontSize: `${theme.typography.pxToRem(30)}`,
+              pt: 8,
+              fontWeight: 'bold',
+            }}
+              align="center"
+              variant="subtitle2"
+              component="div"
+              height={192}
+            >
+              {t('No Score')}
+            </Typography>
+          ) : (
+            <Chart
+              height={150}
+              // width={1000}
+              series={chartOptions2.series}
+              options={chartOptionTotal2}
+              type="bar"
+            />
+          )}
         </Card>
       </Grid>
-
 
       <Grid item xs={12} sm={6} lg={3}>
         <Card
@@ -536,7 +537,7 @@ function SalesByCategory(props) {
             justifyContent="center"
             alignItems="center"
           >
-              {reDucer(chartSeries4) ? (
+            {reDucer(chartSeries4) ? (
               <Typography
                 sx={{
                   ml: 1.5,
