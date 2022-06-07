@@ -27,6 +27,7 @@ const httpClient = (url) => {
   const instance = axios.create({
     // baseURL: 'http://localhost:4000'
     baseURL: 'http://61.47.81.110:3001'
+    // baseURL: 'http://115.31.155.70:3001'
   });
 
   const whitelistUrl = ['/api/V1/auth/login'];
